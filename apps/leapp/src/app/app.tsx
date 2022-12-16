@@ -1,12 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
+import "./app.module.scss";
+import { SharedUi } from "@dude/shared/ui";
+import { Cart } from "@dude/cart";
+import { Pbi } from "@dude/pbi";
 
 export function App() {
   return (
     <>
-      <NxWelcome title="leapp" />
-      <div />
+      <SharedUi></SharedUi>
+      <Cart></Cart>
+      <Pbi></Pbi>
+      <div/>
     </>
   );
 }

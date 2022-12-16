@@ -5,7 +5,10 @@
       {
         "runtime": "automatic"
       }
-    ]
+    ],
+    "@babel/preset-flow"
   ],
-  "plugins": []
+  "plugins": [
+    "@babel/plugin-syntax-flow"
+  ]
 }
