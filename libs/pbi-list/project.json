@@ -1,29 +1,23 @@
 {
-  "name": "pbi",
+  "name": "pbi-list",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/pbi/src",
+  "sourceRoot": "libs/pbi-list/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/pbi/**/*.{ts,tsx,js,jsx}"
-        ]
+        "lintFilePatterns": ["libs/pbi-list/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "build": {
       "executor": "@nrwl/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/PbiCreate"
+        "outputPath": "dist/libs/pbi-list"
       },
       "configurations": {
         "development": {},
@@ -32,9 +26,7 @@
     },
     "test": {
       "executor": "@nrwl/vite:test",
-      "outputs": [
-        "{projectRoot}/coverage"
-      ],
+      "outputs": ["{projectRoot}/coverage"],
       "options": {
         "passWithNoTests": true
       }

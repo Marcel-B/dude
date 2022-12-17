@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import SharedUi from './shared-ui';
+import PbiCreate from './PbiCreate';
 
-describe('SharedUi', () => {
+describe('Pbi', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<SharedUi />);
+    const { baseElement } = render(<PbiCreate />);
     expect(baseElement).toBeTruthy();
   });
 });

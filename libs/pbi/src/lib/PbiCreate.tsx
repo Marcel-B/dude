@@ -1,7 +1,7 @@
-import styles from './pbi.module.scss';
-import SaveIcon from '@mui/icons-material/Save';
+import styles from "./pbi.module.scss";
+import SaveIcon from "@mui/icons-material/Save";
 import {
-  Button, Divider,
+  Divider,
   FormControl,
   Grid,
   IconButton,
@@ -11,7 +11,7 @@ import {
   OutlinedInput,
   Select,
   SelectChangeEvent,
-  TextField, Typography
+  Typography
 } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 
@@ -19,32 +19,42 @@ import React, { ChangeEvent, useState } from "react";
 export interface PbiProps {
 }
 
-export const Pbi = (props: PbiProps) => {
-  const [pbi, setPbi] = useState('');
-  const [project, setProject] = useState('');
+export const PbiCreate = (props: PbiProps) => {
+  const [pbi, setPbi] = useState("");
+  const [project, setProject] = useState("");
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     const re = new RegExp(/Product Backlog Item /);
     if (text.match(re)) {
-      const newTest = text.trim().replace(re, '#').replace(/:/, '');
+      const newTest = text.trim().replace(re, "#").replace(/:/, "");
       setPbi(newTest);
     } else {
       setPbi(text);
     }
 
-  }
+  };
   const handleSelectChange = (event: SelectChangeEvent) => {
     setProject(event.target.value as string);
-  }
+  };
 
   const handleSave = () => {
     console.log("Save", pbi, project);
-  }
+    fetch("http://localhost:3333/api/pbi", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ pbi, project })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  };
 
   return (
     <>
       <Typography variant="subtitle2">Product Backlog Item Erfasser&trade;</Typography>
-      <Divider light sx={{mb: 3}}/>
+      <Divider light sx={{ mb: 3 }} />
       <Grid container spacing={2}>
         <Grid item xs={7}>
           <FormControl fullWidth>
@@ -53,7 +63,7 @@ export const Pbi = (props: PbiProps) => {
               label="Product Backlog Item"
               onChange={handleChange}
               value={pbi}
-              startAdornment={<InputAdornment position="start">Paste</InputAdornment>}/>
+              startAdornment={<InputAdornment position="start">Paste</InputAdornment>} />
           </FormControl>
         </Grid>
         <Grid item xs={4}>
@@ -72,12 +82,12 @@ export const Pbi = (props: PbiProps) => {
         </Grid>
         <Grid item xs={1}>
           <IconButton onClick={handleSave}>
-            <SaveIcon/>
+            <SaveIcon />
           </IconButton>
         </Grid>
       </Grid>
     </>
   );
-}
+};
 
-export default Pbi;
+export default PbiCreate;

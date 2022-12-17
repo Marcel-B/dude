@@ -1,1 +1,1 @@
-export * from './lib/pbi';
+export * from './lib/PbiCreate';

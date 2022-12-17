@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Pbi from './pbi';
+import PbiList from './pbi-list';
 
-describe('Pbi', () => {
+describe('PbiList', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Pbi />);
+    const { baseElement } = render(<PbiList />);
     expect(baseElement).toBeTruthy();
   });
 });
