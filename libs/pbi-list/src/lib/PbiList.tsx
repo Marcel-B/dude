@@ -12,13 +12,13 @@ export const PbiList = ({ projects }: PbiListProps) => {
 
   const cols: GridColumns = [
     { field: "id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "P.B.I.", width: 444 },
-    { field: "description", headerName: "Beschreibung", editable: true, width: 220 },
-    { field: "project", headerName: "Projekt", width: 300 },
+    { field: "name", headerName: "P.B.I.", width: 480 },
+    { field: "description", headerName: "Beschreibung", editable: true, width: 300 },
+    { field: "project", headerName: "Projekt", width: 240 },
     {
       field: "copy",
       type: "actions",
-      width: 80,
+      width: 40,
       getActions: (params: GridRowParams<Pbi>) => [
         <GridActionsCellItem label="Copy" icon={<ContentCopyIcon />} onClick={() => {
           console.log("Copy", params.row, params.row.id);
@@ -58,10 +58,18 @@ export const PbiList = ({ projects }: PbiListProps) => {
   return (
     <DataGrid
       rows={rows}
+      initialState={{
+        columns: {
+          columnVisibilityModel: {
+            id: false
+          }
+        }
+      }
+      }
       autoHeight
       columns={cols}
-      pageSize={5}
-      rowsPerPageOptions={[5]}
+      pageSize={10}
+      rowsPerPageOptions={[10, 50, 110]}
       disableSelectionOnClick
       experimentalFeatures={{ newEditingApi: true }}
     />
