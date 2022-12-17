@@ -1,4 +1,3 @@
-import styles from "./pbi.module.scss";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Divider,
@@ -14,14 +13,16 @@ import {
   Typography
 } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
+import { Project } from "@dude/pbi-shared";
 
-/* eslint-disable-next-line */
 export interface PbiProps {
+  projects: Project[];
 }
 
-export const PbiCreate = (props: PbiProps) => {
+export const PbiCreate = ({ projects }: PbiProps) => {
   const [pbi, setPbi] = useState("");
   const [project, setProject] = useState("");
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
     const re = new RegExp(/Product Backlog Item /);
@@ -75,8 +76,8 @@ export const PbiCreate = (props: PbiProps) => {
               value={project}
               label="Projekte"
               onChange={handleSelectChange}>
-              <MenuItem value="P22002">NCP / DC-Kampagnen-SST</MenuItem>
-              <MenuItem value="P22001">NCP / DC-Echtzeitpunktevbg.</MenuItem>
+              {projects.map((project) => (
+                <MenuItem key={project.projectId} value={project.projectId}>{project.name}</MenuItem>))}
             </Select>
           </FormControl>
         </Grid>

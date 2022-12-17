@@ -1,23 +1,48 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Pbi } from "@dude/pbi-shared";
+import { Pbi, Project } from "@dude/pbi-shared";
+import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
 
-/* eslint-disable-next-line */
 export interface PbiListProps {
+  projects: Project[];
 }
 
-export const PbiList = (props: PbiListProps) => {
-  const [pbiList, setPbiList] = useState<Pbi[]>([]);
+export const PbiList = ({ projects }: PbiListProps) => {
+  const [rows, setRows] = useState<Pbi[]>([]);
+
+  const cols: GridColumns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "name", headerName: "P.B.I.", width: 444 },
+    { field: "description", headerName: "Beschreibung", editable: true, width: 220 },
+    { field: "project", headerName: "Projekt", width: 300 },
+    {
+      field: "copy",
+      type: "actions",
+      width: 80,
+      getActions: (params: GridRowParams<Pbi>) => [
+        <GridActionsCellItem label="Copy" icon={<ContentCopyIcon />} onClick={() => {
+          console.log("Copy", params.row, params.row.id);
+          const forClipboard = `${params.row.name} (${params.row.description})`;
+          navigator.clipboard.writeText(forClipboard).then(() => {
+            params.row.description = "";
+          });
+        }}
+        />
+      ]
+    }
+  ];
+
 
   useEffect(() => {
-    console.log("PbiList mounted");
+    console.log("ProjektbiList mounted");
     fetch("http://localhost:3333/api/pbi")
       .then((response) => response.json())
       .then((data: Pbi[]) => {
-        setPbiList(data.map(i => {
+        setRows(data.map(i => {
           return {
-            ...i,
+            id: i.id,
+            name: i.name,
+            project: projects.find(p => p.projectId === i.project)?.name ?? "",
             description: ""
           };
         }));
@@ -28,57 +53,17 @@ export const PbiList = (props: PbiListProps) => {
     return () => {
       console.log("PbiList unmounted");
     };
-  }, []);
-
-  const handleCopy = async (id: number) => {
-    const pbi = pbiList.find(p => p.id === id);
-    if (pbi) {
-      const forClipboard = `${pbi.name} (${pbi.description})`;
-      await navigator.clipboard.writeText(forClipboard);
-      setPbiList(pbiList.map(p => {
-        return p.id === id ? {
-          ...p,
-          description: ""
-        } : p;
-      }));
-    } else {
-      console.error("Pbi not found");
-    }
-  };
-
-  const handleDescritionChange = (id: number, description: string) => {
-    setPbiList(pbiList.map(p => {
-      if (p.id === id) {
-        return { ...p, description };
-      } else {
-        return p;
-      }
-    }));
-  };
+  }, [projects]);
 
   return (
-    <>
-      {pbiList && pbiList.map((pbi) => (
-        <Grid container spacing={2} sx={{ mt: 2 }} key={pbi.id}>
-          <Grid item xs={8}>
-            <Typography variant="body2">{pbi.name}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <TextField
-              variant="standard"
-              label="Beschreibung"
-              value={pbi.description}
-              onChange={(v) => handleDescritionChange(pbi.id, v.target.value)} />
-          </Grid>
-          <Grid item xs={2}>
-            <IconButton edge="end" aria-label="copy" onClick={() => handleCopy(pbi.id)}>
-              <ContentCopyIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
-      ))}
-    </>
+    <DataGrid
+      rows={rows}
+      autoHeight
+      columns={cols}
+      pageSize={5}
+      rowsPerPageOptions={[5]}
+      disableSelectionOnClick
+      experimentalFeatures={{ newEditingApi: true }}
+    />
   );
 };
-
-export default PbiList;
