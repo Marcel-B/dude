@@ -36,13 +36,25 @@ app.get("/api/pbi", (req, res) => {
   });
 });
 
+app.delete("/api/pbi/:id", (req, res) => {
+  db.run(`DELETE FROM main.pbi WHERE id = ?`, [req.params.id], (err) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      res.send("ok");
+    }
+  });
+});
+
 app.post("/api/pbi", (req, res) => {
   const pbi: Pbi = req.body;
   console.log("Body", pbi);
   const command = `INSERT INTO pbi(name, project) VALUES('${pbi.name}', '${pbi.project}')`;
   console.debug(command);
   db.run(command);
-  res.sendStatus(201);
+  db.get(`SELECT * FROM pbi WHERE id = last_insert_rowid()`, (err, row: Pbi) => {
+    res.send(row);
+  });
 });
 
 app.get("/api/project", (req, res) => {

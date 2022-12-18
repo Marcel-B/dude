@@ -1,9 +1,9 @@
 import SaveIcon from "@mui/icons-material/Save";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
   Divider,
   FormControl,
   Grid,
-  IconButton,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -13,15 +13,18 @@ import {
   Typography
 } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
-import { Project } from "@dude/pbi-shared";
+import { Pbi, Project } from "@dude/pbi-shared";
+import { LoadingButton } from "@mui/lab";
 
 export interface PbiProps {
   projects: Project[];
+  addPbi: (pbi: Pbi) => void;
 }
 
-export const PbiCreate = ({ projects }: PbiProps) => {
+export const PbiCreate = ({ projects, addPbi }: PbiProps) => {
   const [pbi, setPbi] = useState("");
   const [project, setProject] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const text = event.target.value;
@@ -39,35 +42,43 @@ export const PbiCreate = ({ projects }: PbiProps) => {
   };
 
   const handleSave = () => {
-    console.log("Save", pbi, project);
+    setLoading(true);
+    const newPbi: Pbi = {
+      id: 0,
+      name: pbi,
+      project: project
+    };
     fetch("http://localhost:3333/api/pbi", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ pbi, project })
+      body: JSON.stringify(newPbi)
     })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.error(err));
+      .then(res => res.json() as Promise<Pbi>)
+      .then((data) => {
+        addPbi({ ...data, project: projects.find((p) => p.projectId === data.project)?.name ?? "n/a" });
+        setPbi("");
+        setProject("");
+      })
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
   };
 
   return (
     <>
-      <Typography variant="subtitle2">Product Backlog Item Erfasser&trade;</Typography>
-      <Divider light sx={{ mb: 3 }} />
       <Grid container spacing={2}>
         <Grid item xs={7}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="pbi">Product Backlog Item</InputLabel>
+            <InputLabel htmlFor="pbi">Product Backlog Item hier einfügen</InputLabel>
             <OutlinedInput
-              label="Product Backlog Item"
+              label="Product Backlog Item hier einfügen"
               onChange={handleChange}
               value={pbi}
-              startAdornment={<InputAdornment position="start">Paste</InputAdornment>} />
+              startAdornment={<InputAdornment position="start"><ContentCopyIcon color="action" /></InputAdornment>} />
           </FormControl>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <FormControl fullWidth>
             <InputLabel id="select-label">Projekt</InputLabel>
             <Select
@@ -81,10 +92,19 @@ export const PbiCreate = ({ projects }: PbiProps) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={1}>
-          <IconButton onClick={handleSave}>
-            <SaveIcon />
-          </IconButton>
+        <Grid item xs={2}>
+          <LoadingButton
+            sx={{height: "100%"}}
+            onClick={handleSave}
+            loading={loading}
+            loadingPosition={"start"}
+            variant="contained"
+            startIcon={
+              <SaveIcon fontSize="inherit" />
+            }
+            size="large">
+            Speichern
+          </LoadingButton>
         </Grid>
       </Grid>
     </>

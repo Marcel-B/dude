@@ -1,15 +1,16 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import React, { useEffect, useState } from "react";
-import { Pbi, Project } from "@dude/pbi-shared";
+import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
+import { Pbi } from "@dude/pbi-shared";
 import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
 
 export interface PbiListProps {
-  projects: Project[];
+  pbis: Pbi[];
+  deletePbi: (pbi: Pbi) => void;
+  triggerSnackbar?: (message: string, severity: "success" | "error" | "info") => void;
 }
 
-export const PbiList = ({ projects }: PbiListProps) => {
-  const [rows, setRows] = useState<Pbi[]>([]);
-
+export const PbiList = ({ pbis, deletePbi, triggerSnackbar }: PbiListProps) => {
   const cols: GridColumns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "P.B.I.", width: 480 },
@@ -18,46 +19,35 @@ export const PbiList = ({ projects }: PbiListProps) => {
     {
       field: "copy",
       type: "actions",
-      width: 40,
+      width: 60,
       getActions: (params: GridRowParams<Pbi>) => [
-        <GridActionsCellItem label="Copy" icon={<ContentCopyIcon />} onClick={() => {
-          console.log("Copy", params.row, params.row.id);
+        <GridActionsCellItem label="Copy" icon={<ContentCopyIcon color="info" />} onClick={() => {
           const forClipboard = `${params.row.name} (${params.row.description})`;
-          navigator.clipboard.writeText(forClipboard).then(() => {
-            params.row.description = "";
-          });
+          if (triggerSnackbar) {
+            triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
+          }
+          navigator.clipboard
+            .writeText(forClipboard)
+            .then(() => {
+              params.row.description = "";
+            });
+        }}
+        />,
+        <GridActionsCellItem label="Löschen" showInMenu icon={<DeleteIcon color="warning" />} onClick={() => {
+          fetch(`http://localhost:3333/api/pbi/${params.row.id}`, {
+            method: "DELETE"
+          }).then(() => {
+              deletePbi(params.row);
+            }
+          );
         }}
         />
       ]
-    }
-  ];
-
-
-  useEffect(() => {
-    console.log("ProjektbiList mounted");
-    fetch("http://localhost:3333/api/pbi")
-      .then((response) => response.json())
-      .then((data: Pbi[]) => {
-        setRows(data.map(i => {
-          return {
-            id: i.id,
-            name: i.name,
-            project: projects.find(p => p.projectId === i.project)?.name ?? "",
-            description: ""
-          };
-        }));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    return () => {
-      console.log("PbiList unmounted");
-    };
-  }, [projects]);
+    }];
 
   return (
     <DataGrid
-      rows={rows}
+      rows={pbis}
       initialState={{
         columns: {
           columnVisibilityModel: {
