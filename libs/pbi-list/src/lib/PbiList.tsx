@@ -3,6 +3,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 import { Pbi } from "@dude/pbi-shared";
 import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
+import AltRouteIcon from "@mui/icons-material/AltRoute";
+import { toBranch } from "./utils";
 
 export interface PbiListProps {
   pbis: Pbi[];
@@ -12,17 +14,29 @@ export interface PbiListProps {
 
 export const PbiList = ({ pbis, deletePbi, triggerSnackbar }: PbiListProps) => {
   const cols: GridColumns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "name", headerName: "P.B.I.", width: 480 },
+    { field: "id", headerName: "ID", width: 10 },
+    { field: "name", headerName: "P.B.I.", width: 430 },
     { field: "description", headerName: "Beschreibung", editable: true, width: 300 },
     { field: "project", headerName: "Projekt", width: 240 },
     {
       field: "copy",
       type: "actions",
-      width: 60,
+      width: 120,
       getActions: (params: GridRowParams<Pbi>) => [
         <GridActionsCellItem label="Copy" icon={<ContentCopyIcon color="info" />} onClick={() => {
           const forClipboard = `${params.row.name} (${params.row.description})`;
+          if (triggerSnackbar) {
+            triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
+          }
+          navigator.clipboard
+            .writeText(forClipboard)
+            .then(() => {
+              params.row.description = "";
+            });
+        }}
+        />,
+        <GridActionsCellItem label="Branch" icon={<AltRouteIcon color="primary" />} onClick={() => {
+          const forClipboard = toBranch(params.row.name);
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }

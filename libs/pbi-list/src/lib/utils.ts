@@ -1,11 +1,14 @@
 export const toBranch = (name: string): string => {
 
 
-  const regexSpace = /\b \b/g;
-  const regexDash = /\//g;
+  //const regexSpace = /\b \b/g;
+  const regexFalseChars = /[/:]/g;
+  const regexDoubleSpace = /\s+/g;
 
-  //const regex = / /g;
-  //const regex = /\\s{2,}/;
-  const strPerfect = name.replace(regexDash, "").replace(/\s+/g, " ").trim();
-  return strPerfect.replace(regexSpace, "-");
+  const strPerfect = name
+    .replace(regexFalseChars, " ")
+    .replace(regexDoubleSpace, "-")
+    .trim();
+  return strPerfect;
+  // return strPerfect.replace(regexSpace, "-");
 };

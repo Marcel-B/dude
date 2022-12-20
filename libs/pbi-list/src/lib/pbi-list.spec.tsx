@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react';
+import { render } from "@testing-library/react";
 
-import PbiList from './pbi-list';
+import { PbiList } from "./PbiList";
 
-describe('PbiList', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(<PbiList />);
+describe("PbiList", () => {
+  it("should render successfully", () => {
+    const { baseElement } = render(<PbiList pbis={[]} deletePbi={() => null} triggerSnackbar={() => null} />);
     expect(baseElement).toBeTruthy();
   });
 });
