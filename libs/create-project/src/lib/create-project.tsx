@@ -43,7 +43,7 @@ export const CreateProject = ({ addProject, triggerSnackbar }: CreateProjectProp
           <FormControl fullWidth>
             <InputLabel htmlFor="project">Projekt ID</InputLabel>
             <OutlinedInput
-              label="Name"
+              label="Project ID"
               onChange={(event) => setProject({ ...project, projectId: event.target.value })}
               value={project.projectId} />
           </FormControl>
