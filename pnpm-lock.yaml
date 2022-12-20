@@ -14,7 +14,7 @@ specifiers:
   '@nrwl/cypress': 15.3.0
   '@nrwl/eslint-plugin-nx': 15.3.0
   '@nrwl/express': 15.3.3
-  '@nrwl/jest': 15.3.3
+  '@nrwl/jest': 15.3.0
   '@nrwl/js': ^15.3.3
   '@nrwl/linter': 15.3.0
   '@nrwl/node': 15.3.3
@@ -22,6 +22,7 @@ specifiers:
   '@nrwl/react': 15.3.0
   '@nrwl/vite': 15.3.0
   '@nrwl/web': 15.3.0
+  '@nrwl/webpack': 15.3.0
   '@nrwl/workspace': 15.3.0
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.7
   '@svgr/webpack': ^6.1.2
@@ -31,6 +32,7 @@ specifiers:
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
+  '@types/react-router-dom': 5.3.3
   '@typescript-eslint/eslint-plugin': ^5.36.1
   '@typescript-eslint/parser': ^5.36.1
   '@vitejs/plugin-react': ^2.2.0
@@ -57,6 +59,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-refresh: ^0.10.0
+  react-router-dom: 6.4.3
   react-test-renderer: 18.2.0
   regenerator-runtime: 0.13.7
   sass: ^1.55.0
@@ -87,6 +90,7 @@ dependencies:
   express: 4.18.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
   regenerator-runtime: 0.13.7
   sqlite3: 5.1.4
   styled-components: 5.3.6_7i5myeigehqah43i5u7wbekgba
@@ -99,7 +103,7 @@ devDependencies:
   '@nrwl/cypress': 15.3.0_dsqkkr2l25ylqczwowrfdfi3nm
   '@nrwl/eslint-plugin-nx': 15.3.0_6kagsv3wk4eaoifmky67smw36u
   '@nrwl/express': 15.3.3_rvzi2xvjqeib42sn75kkvspdoe
-  '@nrwl/jest': 15.3.3_y4z5zo3e324uskgmzm64q7iaum
+  '@nrwl/jest': 15.3.0_y4z5zo3e324uskgmzm64q7iaum
   '@nrwl/js': 15.3.3_tyc4nll2gfj7gdt7bsks7otarm
   '@nrwl/linter': 15.3.0_d43evfs7jiv5njt4irji6gdwke
   '@nrwl/node': 15.3.3_2fyciq562fdr2abmt37xsptdby
@@ -107,6 +111,7 @@ devDependencies:
   '@nrwl/react': 15.3.0_tyc4nll2gfj7gdt7bsks7otarm
   '@nrwl/vite': 15.3.0_axqm5z2bjfs2iifgwnldkub5ym
   '@nrwl/web': 15.3.0_bl6w6ooi5r67spbnnlhmqxf6rm
+  '@nrwl/webpack': 15.3.0_3sk6h2nss76kd3lqh2ixlcqmj4
   '@nrwl/workspace': 15.3.0_324d72diffomyyym6tiz4paiyq
   '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_jkre2yzuu2vrmppyq24moxj63u
   '@svgr/webpack': 6.5.1
@@ -116,6 +121,7 @@ devDependencies:
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.9
+  '@types/react-router-dom': 5.3.3
   '@typescript-eslint/eslint-plugin': 5.46.0_6rgzson3fshdb2n3fd4tg5bhce
   '@typescript-eslint/parser': 5.46.0_oy7hgmlo6357d5kkcjbkfgtg4q
   '@vitejs/plugin-react': 2.2.0_vite@3.2.5
@@ -3313,6 +3319,11 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
+  /@remix-run/router/1.0.3:
+    resolution: {integrity: sha512-ceuyTSs7PZ/tQqi19YZNBc5X7kj1f8p+4DIyrcIYFY9h+hd1OKm4RqtiWldR9eGEvIiJfsqwM4BsuCtRIuEw6Q==}
+    engines: {node: '>=14'}
+    dev: false
+
   /@rollup/plugin-babel/5.3.1_opjstonlpkhafnz76jsxdwq25a:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
     engines: {node: '>= 10.0.0'}
@@ -3833,6 +3844,10 @@ packages:
       '@types/node': 18.11.12
     dev: true
 
+  /@types/history/4.7.11:
+    resolution: {integrity: sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==}
+    dev: true
+
   /@types/http-proxy/1.17.9:
     resolution: {integrity: sha512-QsbSjA/fSk7xB+UXlCT3wHBy5ai9wOcNDWwZAtud+jXhwOM3l+EYZh8Lng4+/6n8uar0J7xILzqftJdJ/Wdfkw==}
     dependencies:
@@ -3935,6 +3950,21 @@ packages:
     dependencies:
       '@types/react': 18.0.25
     dev: false
+
+  /@types/react-router-dom/5.3.3:
+    resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
+    dependencies:
+      '@types/history': 4.7.11
+      '@types/react': 18.0.25
+      '@types/react-router': 5.1.19
+    dev: true
+
+  /@types/react-router/5.1.19:
+    resolution: {integrity: sha512-Fv/5kb2STAEMT3wHzdKQK2z8xKq38EDIGVrutYLmQVVLe+4orDFquU52hQrULnEHinMKv9FSA6lf9+uNT1ITtA==}
+    dependencies:
+      '@types/history': 4.7.11
+      '@types/react': 18.0.25
+    dev: true
 
   /@types/react-transition-group/4.4.5:
     resolution: {integrity: sha512-juKD/eiSM3/xZYzjuzH6ZwpP+/lejltmiS3QEzV/vmb/Q8+HfDmxu+Baga8UEMGBqV88Nbg4l2hY/K2DkyaLLA==}
@@ -10689,6 +10719,29 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-router-dom/6.4.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-MiaYQU8CwVCaOfJdYvt84KQNjT78VF0TJrA17SIQgNHRvLnXDJO6qsFqq8F/zzB1BWZjCFIrQpu4QxcshitziQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.0.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-router: 6.4.3_react@18.2.0
+    dev: false
+
+  /react-router/6.4.3_react@18.2.0:
+    resolution: {integrity: sha512-BT6DoGn6aV1FVP5yfODMOiieakp3z46P1Fk0RNzJMACzE7C339sFuHebfvWtnB4pzBvXXkHP2vscJzWRuUjTtA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.0.3
+      react: 18.2.0
+    dev: false
 
   /react-shallow-renderer/16.15.0_react@18.2.0:
     resolution: {integrity: sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA==}

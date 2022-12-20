@@ -16,6 +16,7 @@ import {
   Typography
 } from "@mui/material";
 import { Pbi, Project } from "@dude/pbi-shared";
+import { CreateProject } from "@dude/create-project";
 
 const theme = createTheme({
   typography: {
@@ -95,6 +96,10 @@ export function App() {
     setOpenSnackbar(false);
   };
 
+  const handleAddProject = (p: Project) => {
+    setProject([...projects, p]);
+  }
+
   const triggerSnackbar = (message: string, severity: "success" | "error" | "info") => {
     setSnackbarMessage(message);
     setSnackbarSeverity(severity);
@@ -113,6 +118,16 @@ export function App() {
           <AccordionDetails>
             <Box sx={{ p: 2 }}>
               <PbiCreate projects={projects} addPbi={handleAddPbi}></PbiCreate>
+            </Box>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h2">Projekt erfassen</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box sx={{ p: 2 }}>
+              <CreateProject addProject={handleAddProject} triggerSnackbar={triggerSnackbar}></CreateProject>
             </Box>
           </AccordionDetails>
         </Accordion>

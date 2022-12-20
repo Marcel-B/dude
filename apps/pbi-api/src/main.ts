@@ -18,8 +18,8 @@ const db = new sqlite3.Database("./Times.db", sqlite3.OPEN_CREATE | sqlite3.OPEN
 });
 
 // db.run("DROP TABLE pbi");
-// db.run(`create table if not exists pbi(id integer not null primary key, name text, project text)`);
-// db.run(`create table if not exists project(projectid text not null primary key, name text)`);
+ db.run(`create table if not exists pbi(id integer not null primary key, name text, project text)`);
+ db.run(`create table if not exists project(projectId text not null primary key, name text)`);
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
