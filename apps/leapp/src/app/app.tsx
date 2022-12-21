@@ -20,7 +20,7 @@ import { CreateProject } from "@dude/create-project";
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Gloria Hallelujah"].join(",")
+    fontFamily: ["Ubuntu"].join(",")
   }
 });
 theme.palette.primary.main = "#686de0";
@@ -44,7 +44,8 @@ theme.typography.h1 = {
 theme.typography.h2 = {
   fontSize: "1.2rem",
   color: "#be2edd",
-  fontFamily: "Gloria Hallelujah"
+  fontFamily: "Roboto Condensed"
+  // fontFamily: "Gloria Hallelujah"
 };
 
 export function App() {
