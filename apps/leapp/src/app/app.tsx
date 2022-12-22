@@ -16,7 +16,7 @@ import {
   Typography
 } from "@mui/material";
 import { Pbi, Project } from "@dude/pbi-shared";
-import { CreateProject } from "@dude/create-project";
+import { CreateProject, Projects } from "@dude/create-project";
 
 const theme = createTheme({
   typography: {
@@ -130,6 +130,14 @@ export function App() {
             <Box sx={{ p: 2 }}>
               <CreateProject addProject={handleAddProject} triggerSnackbar={triggerSnackbar}></CreateProject>
             </Box>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h2">Projekte</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Projects triggerSnackbar={triggerSnackbar}></Projects>
           </AccordionDetails>
         </Accordion>
         <Accordion>

@@ -10,7 +10,6 @@ import { LoadingButton } from "@mui/lab";
 import SaveIcon from "@mui/icons-material/Save";
 import React from "react";
 
-/* eslint-disable-next-line */
 export interface CreateProjectProps {
   addProject: (project: Project) => void;
   triggerSnackbar: (message: string, severity: "success" | "error" | "info") => void;
