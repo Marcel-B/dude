@@ -6,7 +6,6 @@ export function App() {
   return (
     <>
       <NxWelcome title="carto" />
-      <div />
     </>
   );
 }

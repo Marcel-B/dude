@@ -6,6 +6,9 @@ specifiers:
   '@babel/preset-react': ^7.14.5
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@fullcalendar/core': ^6.0.1
+  '@fullcalendar/daygrid': ^6.0.1
+  '@fullcalendar/react': ^6.0.1
   '@mui/icons-material': ^5.11.0
   '@mui/lab': 5.0.0-alpha.112
   '@mui/material': ^5.11.0
@@ -43,6 +46,7 @@ specifiers:
   core-js: ^3.6.5
   cors: ^2.8.5
   cypress: ^11.0.0
+  date-fns: ^2.29.3
   eslint: ~8.15.0
   eslint-config-prettier: 8.1.0
   eslint-plugin-cypress: ^2.10.3
@@ -79,6 +83,9 @@ specifiers:
 dependencies:
   '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
   '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
+  '@fullcalendar/core': 6.0.1
+  '@fullcalendar/daygrid': 6.0.1_@fullcalendar+core@6.0.1
+  '@fullcalendar/react': 6.0.1_mpjphk4szbq3y243ec3bwrzbdi
   '@mui/icons-material': 5.11.0_ccojmae2dyewdtsihvvcvpmtwe
   '@mui/lab': 5.0.0-alpha.112_ke63g543lvkeilhsjybqyvxqnu
   '@mui/material': 5.11.0_thp4wrxo45nyllusrnt46mid4u
@@ -87,6 +94,7 @@ dependencies:
   body-parser: 1.20.1
   core-js: 3.26.1
   cors: 2.8.5
+  date-fns: 2.29.3
   express: 4.18.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1791,6 +1799,32 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@fullcalendar/core/6.0.1:
+    resolution: {integrity: sha512-JMBRbWrez8hKhS1wvqAW3TBSo58/xRmDHUu07x/lywdct4gD7Z9QphC/VDNqbRQpTknHHmOjMqSmauEwQ6wbaA==}
+    dependencies:
+      preact: 10.11.3
+    dev: false
+
+  /@fullcalendar/daygrid/6.0.1_@fullcalendar+core@6.0.1:
+    resolution: {integrity: sha512-QKbZZhJ2LCvHjc0E7bbos5kGRZJ024i0JliTr2H+0zgaSORHp4kzbk+w+XJpRc2v/DbGKMrlFSDVLKNE99BLSQ==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.0.1
+    dependencies:
+      '@fullcalendar/core': 6.0.1
+    dev: false
+
+  /@fullcalendar/react/6.0.1_mpjphk4szbq3y243ec3bwrzbdi:
+    resolution: {integrity: sha512-BxM6CAdBQtFTdrsreksdkkD7WuJEdjyOeV9k8xG7z7OH72Pit6ZtQ90zdzkVXm1il/gvc+asPQpgyZvhuSVl6A==}
+    peerDependencies:
+      '@fullcalendar/core': ~6.0.1
+      react: ^16.7.0 || ^17 || ^18
+      react-dom: ^16.7.0 || ^17 || ^18
+    dependencies:
+      '@fullcalendar/core': 6.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@gar/promisify/1.1.3:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
@@ -5881,6 +5915,11 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /dayjs/1.11.7:
     resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
@@ -10522,6 +10561,10 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /preact/10.11.3:
+    resolution: {integrity: sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==}
+    dev: false
 
   /prelude-ls/1.1.2:
     resolution: {integrity: sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==}
