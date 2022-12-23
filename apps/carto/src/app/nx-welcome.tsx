@@ -125,13 +125,13 @@ export function NxWelcome({ title }: { title: string }) {
     const freitag = subDays(sonntag, 2);
     const samstag = subDays(sonntag, 1);
     const eintraege: Eintrag[] = [
-      { text: "Kungfu", stunden: 2, datum: montag },
-      { text: "Solverest", stunden: 8, datum: montag },
-      { text: "Büro", stunden: 1.25, datum: montag },
-      { text: "Solverest", stunden: 8, datum: dienstag },
+      { text: "Buchhaltung", stunden: 2, datum: montag },
+      { text: "Kunde 1", stunden: 8, datum: montag },
+      { text: "Buchhaltung", stunden: 1.25, datum: montag },
+      { text: "Kunde 1", stunden: 8, datum: dienstag },
       //{ text: "Am Mittwoch", stunden: 8, datum: mittwoch },
-      { text: "Solverest Donnerstag", stunden: 8, datum: donnerstag },
-      { text: "Yey, Friday", stunden: 8, datum: freitag },
+      { text: "Kunde 3", stunden: 8, datum: donnerstag },
+      { text: "Orga", stunden: 8, datum: freitag },
       { text: "Arbeit", stunden: 8, datum: samstag }
     ];
     setEintrage(eintraege);
