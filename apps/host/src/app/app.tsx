@@ -2,6 +2,8 @@ import * as React from 'react';
 import NxWelcome from './nx-welcome';
 import { Link, Route, Routes } from 'react-router-dom';
 
+const Stunden = React.lazy(() => import('stunden/Module'));
+
 const Shop = React.lazy(() => import('shop/Module'));
 
 const Carto = React.lazy(() => import('carto/Module'));
@@ -14,6 +16,9 @@ export function App() {
       <ul>
         <li>
           <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/stunden">Stunden</Link>
         </li>
 
         <li>
@@ -30,6 +35,7 @@ export function App() {
       </ul>
       <Routes>
         <Route path="/" element={<NxWelcome title="host" />} />
+        <Route path="/stunden" element={<Stunden />} />
 
         <Route path="/shop" element={<Shop />} />
 

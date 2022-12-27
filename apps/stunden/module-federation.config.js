@@ -4,8 +4,10 @@
  * @type {import('@nrwl/devkit').ModuleFederationConfig}
  **/
 const moduleFederationConfig = {
-  name: 'host',
-  remotes: ['shop', 'carto', 'about', 'stunden'],
+  name: 'stunden',
+  exposes: {
+    './Module': './src/remote-entry.ts',
+  },
 };
 
 module.exports = moduleFederationConfig;
