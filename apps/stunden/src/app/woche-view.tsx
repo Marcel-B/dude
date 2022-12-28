@@ -1,23 +1,29 @@
-import { Container, Divider, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react"; // a plugin!
+import { Container, Divider, Grid, IconButton, Typography } from "@mui/material";
+import React, { useEffect } from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { lastDayOfWeek, subDays } from "date-fns";
+import { addWeeks, lastDayOfWeek, subDays } from "date-fns";
 import { eineWoche, Eintrag, Wochentag } from "@dude/stunden-domain";
 import { TagItem } from "./tag-item";
 import { EintragItem } from "./eintrag-item";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setDatum } from "@dude/stunden-store";
 
 const getDaDay = (date: Date, day: Day) => {
   const sonntag = lastDayOfWeek(date, { weekStartsOn: 1 });
   return subDays(sonntag, day).getDate();
 };
 
-export const WocheView = ({ title }: { title: string }) => {
-  const [date, setDate] = React.useState(new Date());
+interface IProps {
+  titel: string;
+}
+
+export const WocheView = ({ titel }: IProps) => {
   const [eintraege, setEintrage] = React.useState<Eintrag[]>();
+  const dispatch = useDispatch();
+  const datum = useSelector((state: RootState) => state.datum.datum);
 
   useEffect(() => {
-    setDate(new Date());
     const sonntag = lastDayOfWeek(new Date(), { weekStartsOn: 1 });
     const montag = subDays(sonntag, 6);
     const dienstag = subDays(sonntag, 5);
@@ -38,24 +44,37 @@ export const WocheView = ({ title }: { title: string }) => {
     setEintrage(eintraege);
   }, []);
 
+  const nextWeek = () => {
+    const newDatum = addWeeks(datum, 1);
+    dispatch(setDatum(newDatum));
+  };
+
+  const lastWeek = () => {
+    const newDatum = addWeeks(datum, -1);
+    dispatch(setDatum(newDatum));
+  };
 
   return (
     <Container style={{ background: "#b8e994" }}>
-      <Typography variant="subtitle2">Welcome to {title}!</Typography>
-      <Grid container
-            alignItems={"flex-start"}
-            justifyContent={"space-between"}
+      <Typography variant="subtitle2">{titel}!</Typography>
+      <Grid
+        container
+        alignItems={"flex-start"}
+        justifyContent={"space-between"}
       >
 
         <Grid item xs={0}>
-          <KeyboardArrowLeftIcon />
+          <IconButton onClick={() => lastWeek()}>
+            <KeyboardArrowLeftIcon />
+          </IconButton>
         </Grid>
         {eineWoche.map((wochentag: Wochentag) => {
           return (
-            <Grid item xs={2}>
+            <Grid item xs={2} key={wochentag.tag}>
               <TagItem wochentag={wochentag} style={{ background: "#82ccdd" }} />
-              {eintraege && eintraege.filter(e => e.datum.getDate() === getDaDay(date, wochentag.tag)).map(e =>
+              {eintraege && eintraege.filter(e => e.datum.getDate() === getDaDay(datum, wochentag.tag)).map(e =>
                 <EintragItem
+                  key={`${e.text}-${e.datum}-${e.stunden}`}
                   text={e.text}
                   style={{ background: "#fad390" }}
                   stunden={e.stunden} />)}
@@ -63,17 +82,17 @@ export const WocheView = ({ title }: { title: string }) => {
               <EintragItem
                 text="Gesamt"
                 style={{ background: "#78e08f" }}
-                stunden={eintraege?.filter(e => e.datum.getDate() === getDaDay(date, wochentag.tag))
+                stunden={eintraege?.filter(e => e.datum.getDate() === getDaDay(datum, wochentag.tag))
                   .reduce((acc, e) => acc + e.stunden, 0) ?? 0}></EintragItem>
             </Grid>
           );
         })}
         <Grid item xs={0}>
-          <KeyboardArrowRightIcon />
+          <IconButton onClick={() => nextWeek()}>
+            <KeyboardArrowRightIcon />
+          </IconButton>
         </Grid>
       </Grid>
     </Container>
   );
 };
-
-export default WocheView;

@@ -21,7 +21,8 @@
       "@dude/pbi-list": ["libs/pbi-list/src/index.ts"],
       "@dude/pbi-shared": ["libs/pbi-shared/src/index.ts"],
       "@dude/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"]
+      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"],
+      "@dude/stunden-store": ["libs/stunden-store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
