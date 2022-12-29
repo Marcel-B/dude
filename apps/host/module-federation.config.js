@@ -1,11 +1,11 @@
 // @ts-check
 
 /**
- * @type {import('@nrwl/devkit').ModuleFederationConfig}
+ * @type {import("@nrwl/devkit").ModuleFederationConfig}
  **/
 const moduleFederationConfig = {
-  name: 'host',
-  remotes: ['shop', 'carto', 'about', 'stunden'],
+  name: "host",
+  remotes: ["stunden", "pbi"]
 };
 
 module.exports = moduleFederationConfig;

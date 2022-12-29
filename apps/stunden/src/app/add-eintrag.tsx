@@ -1,8 +1,11 @@
 import {
   Box,
   Button,
-  Dialog, DialogActions, DialogContent, DialogContentText,
-  DialogTitle, FormControl, Grid,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   TextField
 } from "@mui/material";
 import React, { useState } from "react";
@@ -10,58 +13,36 @@ import React, { useState } from "react";
 
 export interface SimpleDialogProps {
   open: boolean;
-  //selectedValue: string;
-  onClose: (value: string) => void;
-}
-
-function useInput(defaultValue: string) {
-  const [value, setValue] = useState(defaultValue);
-
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log("onChange", e);
-    setValue(e.target.value);
-  }
-
-  return {
-    value,
-    onChange
-  };
+  onClose: (result: { taetigkeit: string, dauer: number } | null) => void;
 }
 
 export const AddEintrag = (props: SimpleDialogProps) => {
-  const [value, setValue] = useState("");
-  const [valueDauer, setValueDauer] = useState("");
-  const { onClose,/* selectedValue, */open } = props;
-  const inputTaetigkeit = useInput("");
-  const inputDauer = useInput("");
-
+  const [taetigkeit, setTaetigkeit] = useState("");
+  const [dauer, setDauer] = useState("");
+  const { onClose, open } = props;
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     console.log("onChange", e);
     if (e.target.id === "taetigkeit") {
-      setValue(e.target.value);
+      setTaetigkeit(e.target.value);
     } else if (e.target.id === "dauer") {
-      setValueDauer(e.target.value);
+      setDauer(e.target.value);
     }
   }
 
   const handleClose = () => {
-    //onClose(selectedValue);
+    onClose(null);
   };
 
   const handleSave = () => {
-    console.log(value);
-    console.log(valueDauer);
-    if (value && valueDauer) {
-      onClose(value);
+    console.log(taetigkeit);
+    console.log(dauer);
+    if (dauer && taetigkeit) {
+      onClose({ taetigkeit, dauer: Number(dauer) });
     }
-    setValue("");
-    setValueDauer("");
-    //onClose(selectedValue);
-  };
-
-  const handleListItemClick = (value: string) => {
-    onClose(value);
+    setDauer("");
+    setTaetigkeit("");
+    onClose(null);
   };
 
   return (
@@ -79,7 +60,11 @@ export const AddEintrag = (props: SimpleDialogProps) => {
             label="Tätigkeit" />
           <TextField
             sx={{ mt: 2 }}
-            fullWidth id="dauer" type="number" variant="outlined" onChange={onChange} label="Dauer" />
+            fullWidth id="dauer"
+            type="number"
+            variant="outlined"
+            onChange={onChange}
+            label="Dauer" />
         </Box>
       </DialogContent>
       <DialogActions sx={{ mr: 2, mb: 2 }}>

@@ -17,7 +17,7 @@ specifiers:
   '@nrwl/cypress': 15.3.0
   '@nrwl/eslint-plugin-nx': 15.3.0
   '@nrwl/express': 15.3.3
-  '@nrwl/jest': 15.3.3
+  '@nrwl/jest': 15.3.0
   '@nrwl/js': ^15.3.3
   '@nrwl/linter': 15.3.0
   '@nrwl/node': 15.3.3
@@ -57,6 +57,7 @@ specifiers:
   eslint-plugin-react: 7.31.11
   eslint-plugin-react-hooks: 4.6.0
   express: ^4.18.1
+  immer: ^9.0.16
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
   jsdom: ~20.0.3
@@ -116,7 +117,7 @@ devDependencies:
   '@nrwl/cypress': 15.3.0_dsqkkr2l25ylqczwowrfdfi3nm
   '@nrwl/eslint-plugin-nx': 15.3.0_6kagsv3wk4eaoifmky67smw36u
   '@nrwl/express': 15.3.3_rvzi2xvjqeib42sn75kkvspdoe
-  '@nrwl/jest': 15.3.3_y4z5zo3e324uskgmzm64q7iaum
+  '@nrwl/jest': 15.3.0_y4z5zo3e324uskgmzm64q7iaum
   '@nrwl/js': 15.3.3_tyc4nll2gfj7gdt7bsks7otarm
   '@nrwl/linter': 15.3.0_d43evfs7jiv5njt4irji6gdwke
   '@nrwl/node': 15.3.3_2fyciq562fdr2abmt37xsptdby
@@ -150,6 +151,7 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.6.1_eslint@8.15.0
   eslint-plugin-react: 7.31.11_eslint@8.15.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.15.0
+  immer: 9.0.16
   jest: 28.1.1_odkjkoia5xunhxkdrka32ib6vi
   jest-environment-jsdom: 28.1.1
   jsdom: 20.0.3
@@ -7894,7 +7896,6 @@ packages:
 
   /immer/9.0.16:
     resolution: {integrity: sha512-qenGE7CstVm1NrHQbMh8YaSzTZTFNP3zPqr3YU0S0UY441j4bJTg4A2Hh5KAhwgaiU6ZZ1Ar6y/2f4TblnMReQ==}
-    dev: false
 
   /immutable/4.1.0:
     resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}

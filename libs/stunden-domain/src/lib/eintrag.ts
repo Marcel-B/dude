@@ -1,5 +1,6 @@
 export interface Eintrag {
   text: string;
   stunden: number;
-  datum: Date;
+  datum: string;
+  abrechenbar: boolean;
 }

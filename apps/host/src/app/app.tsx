@@ -1,50 +1,55 @@
-import * as React from 'react';
-import NxWelcome from './nx-welcome';
-import { Link, Route, Routes } from 'react-router-dom';
+import * as React from "react";
+import NxWelcome from "./nx-welcome";
+import { Link, Route, Routes } from "react-router-dom";
+import { AppBar, Box, Button, Container, Divider, Toolbar, Typography } from "@mui/material";
 
-const Stunden = React.lazy(() => import('stunden/Module'));
+const Pbi = React.lazy(() => import("pbi/Module"));
+const Stunden = React.lazy(() => import("stunden/Module"));
 
-const Shop = React.lazy(() => import('shop/Module'));
-
-const Carto = React.lazy(() => import('carto/Module'));
-
-const About = React.lazy(() => import('about/Module'));
 
 export function App() {
   return (
     <React.Suspense fallback={null}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/stunden">Stunden</Link>
-        </li>
-
-        <li>
-          <Link to="/shop">Shop</Link>
-        </li>
-
-        <li>
-          <Link to="/carto">Carto</Link>
-        </li>
-
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-      </ul>
+      <AppBar position="static" sx={{ m: 0, mb: 2 }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box>
+              <Button
+                component={Link}
+                to="/"
+                key="/"
+                sx={{ my: 2, textDecoration: "none", color: "white" }}
+              >
+                Startseite
+              </Button>
+              <Button
+                component={Link}
+                to="/pbi"
+                key="/pbi"
+                sx={{ my: 2, textDecoration: "none", color: "whitesmoke" }}
+              >
+                pbi-O-mat&trade;
+              </Button>
+              <Button
+                component={Link}
+                to="/stunden"
+                key="/stunden"
+                sx={{ my: 2, textDecoration: "none", color: "white" }}
+              >
+                Stunden
+              </Button>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
       <Routes>
         <Route path="/" element={<NxWelcome title="host" />} />
+        <Route path="/pbi" element={<Pbi />} />
         <Route path="/stunden" element={<Stunden />} />
-
-        <Route path="/shop" element={<Shop />} />
-
-        <Route path="/carto" element={<Carto />} />
-
-        <Route path="/about" element={<About />} />
-      </Routes>
+      </Routes>;
     </React.Suspense>
-  );
+  )
+    ;
 }
 
 export default App;

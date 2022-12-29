@@ -1,17 +1,19 @@
 import { Container, Divider, Grid, IconButton, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { addWeeks, lastDayOfWeek, subDays } from "date-fns";
-import { eineWoche, Eintrag, Wochentag } from "@dude/stunden-domain";
+import { addWeeks, lastDayOfWeek, parse, startOfDay, subDays } from "date-fns";
+import { eineWoche, Eintrag, Tag, Wochentag } from "@dude/stunden-domain";
 import { TagItem } from "./tag-item";
 import { EintragItem } from "./eintrag-item";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, setDatum } from "@dude/stunden-store";
+import { RootState, setDatum, useAppDispatch, useAppSelector } from "@dude/stunden-store";
+import format from "date-fns/format";
 
-const getDaDay = (date: Date, day: Day) => {
-  const sonntag = lastDayOfWeek(date, { weekStartsOn: 1 });
-  return subDays(sonntag, day).getDate();
+const getDaDay = (date: string, day: Day) => {
+  const d = parse(date, "dd.MM.yyyy", new Date());
+  const sonntag = lastDayOfWeek(d, { weekStartsOn: 1 });
+  const result = subDays(sonntag, day);
+  return format(result, "dd.MM.yyyy");
 };
 
 interface IProps {
@@ -19,44 +21,41 @@ interface IProps {
 }
 
 export const WocheView = ({ titel }: IProps) => {
-  const [eintraege, setEintrage] = React.useState<Eintrag[]>();
-  const dispatch = useDispatch();
-  const datum = useSelector((state: RootState) => state.datum.datum);
-
-  useEffect(() => {
-    const sonntag = lastDayOfWeek(new Date(), { weekStartsOn: 1 });
-    const montag = subDays(sonntag, 6);
-    const dienstag = subDays(sonntag, 5);
-    const mittwoch = subDays(sonntag, 4);
-    const donnerstag = subDays(sonntag, 3);
-    const freitag = subDays(sonntag, 2);
-    const samstag = subDays(sonntag, 1);
-    const eintraege: Eintrag[] = [
-      { text: "Buchhaltung", stunden: 2, datum: montag },
-      { text: "Kunde 1", stunden: 8, datum: montag },
-      { text: "Buchhaltung", stunden: 1.25, datum: montag },
-      { text: "Kunde 1", stunden: 8, datum: dienstag },
-      //{ text: "Am Mittwoch", stunden: 8, datum: mittwoch },
-      { text: "Kunde 3", stunden: 8, datum: donnerstag },
-      { text: "Orga", stunden: 8, datum: freitag },
-      { text: "Arbeit", stunden: 8, datum: samstag }
-    ];
-    setEintrage(eintraege);
-  }, []);
+  const dispatch = useAppDispatch();
+  const { datum } = useAppSelector((state: RootState) => state.datum);
+  const { eintraege } = useAppSelector((state: RootState) => state.eintrag);
 
   const nextWeek = () => {
-    const newDatum = addWeeks(datum, 1);
-    dispatch(setDatum(newDatum));
+    const asDate = parse(datum, "dd.MM.yyyy", startOfDay(new Date()));
+    const newDatum = addWeeks(asDate, 1);
+    dispatch(setDatum(format(newDatum, "dd.MM.yyyy")));
+  };
+
+  const getKalenderWoche = (date: string) => {
+    const d = parse(date, "dd.MM.yyyy", new Date());
+    const kalenderWoche = format(d, "w");
+    return kalenderWoche;
+  };
+
+  const getTitel = (date: string) => {
+    const d = parse(date, "dd.MM.yyyy", new Date());
+    const jahr = format(d, "yyyy");
+    return getKalenderWoche(date) + ". KW " + jahr;
   };
 
   const lastWeek = () => {
-    const newDatum = addWeeks(datum, -1);
-    dispatch(setDatum(newDatum));
+    const asDate = parse(datum, "dd.MM.yyyy", startOfDay(new Date()));
+    const newDatum = addWeeks(asDate, -1);
+    dispatch(setDatum(format(newDatum, "dd.MM.yyyy")));
+  };
+  const getEintragForTag = (eintraege: Eintrag[], tag: Tag) => {
+    return eintraege.filter(e => e.datum === getDaDay(datum, tag));
   };
 
   return (
-    <Container style={{ background: "#b8e994" }}>
-      <Typography variant="subtitle2">{titel}!</Typography>
+    <Container sx={{ p: 2 }}>
+      <Typography variant="h3">{getTitel(datum)}</Typography>
+      <Divider sx={{ mb: 2 }} />
       <Grid
         container
         alignItems={"flex-start"}
@@ -71,18 +70,18 @@ export const WocheView = ({ titel }: IProps) => {
         {eineWoche.map((wochentag: Wochentag) => {
           return (
             <Grid item xs={2} key={wochentag.tag}>
-              <TagItem wochentag={wochentag} style={{ background: "#82ccdd" }} />
-              {eintraege && eintraege.filter(e => e.datum.getDate() === getDaDay(datum, wochentag.tag)).map(e =>
+              <TagItem wochentag={wochentag} style={{ background: "#7ed6df" }} />
+              {eintraege && getEintragForTag(eintraege, wochentag.tag).map(e =>
                 <EintragItem
                   key={`${e.text}-${e.datum}-${e.stunden}`}
                   text={e.text}
-                  style={{ background: "#fad390" }}
+                  style={{ background: "#dff9fb" }}
                   stunden={e.stunden} />)}
               <Divider sx={{ mt: 2, mb: 2, borderBottom: "2px solid black" }} />
               <EintragItem
                 text="Gesamt"
-                style={{ background: "#78e08f" }}
-                stunden={eintraege?.filter(e => e.datum.getDate() === getDaDay(datum, wochentag.tag))
+                style={{ background: "#6ab04c" }}
+                stunden={getEintragForTag(eintraege, wochentag.tag)
                   .reduce((acc, e) => acc + e.stunden, 0) ?? 0}></EintragItem>
             </Grid>
           );
