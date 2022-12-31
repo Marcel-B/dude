@@ -1,7 +1,7 @@
 import { WocheView } from "./woche-view";
 import React, { useEffect } from "react";
 import { Eintrag } from "@dude/stunden-domain";
-import { setEintraege, useAppDispatch } from "@dude/stunden-store";
+import { setEintraege, useAppDispatch } from "@dude/store";
 import { apiClient } from "@dude/api-client";
 
 export const App = () => {

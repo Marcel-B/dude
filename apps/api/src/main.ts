@@ -3,7 +3,7 @@ import * as path from "path";
 import * as cors from "cors";
 import * as bodyParser from "body-parser";
 import * as  sqlite3 from "sqlite3";
-import { Project, Pbi } from "@dude/pbi-shared";
+import { Projekt, Pbi } from "@dude/stunden-domain";
 import { Eintrag } from "@dude/stunden-domain";
 
 
@@ -16,8 +16,8 @@ const db = new sqlite3.Database("./db/Times.db", sqlite3.OPEN_CREATE | sqlite3.O
 
 //db.run("DROP TABLE eintrag");
 //db.run("DROP TABLE pbi");
-db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, project TEXT, FOREIGN KEY(project) references project(projectId))`);
-db.run(`create table if not exists project(projectId TEXT NOT NULL PRIMARY KEY, name TEXT)`);
+db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, beschreibung TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
+db.run(`create table if not exists projekt(id TEXT NOT NULL PRIMARY KEY, name TEXT)`);
 db.run(`create table if not exists eintrag(id INTEGER NOT NULL PRIMARY KEY, text TEXT, stunden REAL, datum TEXT, abrechenbar BOOLEAN)`);
 
 const app = express();
@@ -25,6 +25,19 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/assets", express.static(path.join(__dirname, "assets")));
+
+app.delete("/api/table", (req, res) => {
+  try {
+    db.run("DROP TABLE eintrag");
+    db.run("DROP TABLE pbi");
+    db.run("DROP TABLE projekt");
+    db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, beschreibung TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
+    db.run(`create table if not exists projekt(id TEXT NOT NULL PRIMARY KEY, name TEXT)`);
+    db.run(`create table if not exists eintrag(id INTEGER NOT NULL PRIMARY KEY, text TEXT, stunden REAL, datum TEXT, abrechenbar BOOLEAN)`);
+  } catch (e) {
+    console.error(e);
+  }
+});
 
 app.get("/api/pbi", (req, res) => {
   db.all(`SELECT * FROM main.pbi`, (err, rows: Pbi[]) => {
@@ -49,7 +62,7 @@ app.delete("/api/pbi/:id", (req, res) => {
 app.post("/api/pbi", (req, res) => {
   const pbi: Pbi = req.body;
   console.log("Body", pbi);
-  const command = `INSERT INTO pbi(name, project) VALUES('${pbi.name}', '${pbi.project}')`;
+  const command = `INSERT INTO pbi(name, projektId) VALUES('${pbi.name}', '${pbi.projektId}')`;
   console.debug(command);
   db.run(command);
   db.get(`SELECT * FROM pbi WHERE id = last_insert_rowid()`, (err, row: Pbi) => {
@@ -78,9 +91,8 @@ app.get("/api/eintrag", (req, res) => {
   });
 });
 
-
-app.get("/api/project", (req, res) => {
-  db.all(`SELECT * FROM main.project`, (err, rows: Project[]) => {
+app.get("/api/projekt", (req, res) => {
+  db.all(`SELECT * FROM main.projekt`, (err, rows: Projekt[]) => {
     if (err) {
       console.error(err.message);
     } else {
@@ -89,9 +101,23 @@ app.get("/api/project", (req, res) => {
   });
 });
 
-app.get("/api/project/:projectId", (req, res) => {
-  const projectId = req.params.projectId;
-  db.get(`SELECT * FROM main.project WHERE projectId = '${projectId}'`, (err, rows: Project[]) => {
+app.post("/api/projekt", (req, res) => {
+  try {
+    const projekt: Projekt = req.body;
+    console.log("Body", projekt);
+    const command = `INSERT INTO projekt(id, name) VALUES('${projekt.id}', '${projekt.name}')`;
+    console.debug(command);
+    db.run(command);
+    res.send(projekt);
+  } catch (e) {
+    console.error(e);
+    res.send("error");
+  }
+});
+
+app.get("/api/projekt/:projektId", (req, res) => {
+  const projektId = req.params.projektId;
+  db.get(`SELECT * FROM main.projekt WHERE id = '${projektId}'`, (err, rows: Projekt[]) => {
     if (err) {
       console.error(err.message);
 
@@ -102,6 +128,7 @@ app.get("/api/project/:projectId", (req, res) => {
 });
 
 const port = process.env.port || 3333;
+
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
 });

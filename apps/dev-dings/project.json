@@ -1,0 +1,102 @@
+{
+  "name": "dev-dings",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dev-dings/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/dev-dings",
+        "index": "apps/dev-dings/src/index.html",
+        "baseHref": "/",
+        "main": "apps/dev-dings/src/main.ts",
+        "polyfills": "apps/dev-dings/src/polyfills.ts",
+        "tsConfig": "apps/dev-dings/tsconfig.app.json",
+        "assets": [
+          "apps/dev-dings/src/favicon.ico",
+          "apps/dev-dings/src/assets"
+        ],
+        "styles": ["apps/dev-dings/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "apps/dev-dings/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/dev-dings/src/environments/environment.ts",
+              "with": "apps/dev-dings/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/dev-dings/webpack.config.prod.js"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dev-dings:build",
+        "hmr": true,
+        "port": 4206
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dev-dings:build:development"
+        },
+        "production": {
+          "buildTarget": "dev-dings:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dev-dings/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/dev-dings/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dev-dings:build",
+        "port": 4206
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dev-dings:build:development"
+        },
+        "production": {
+          "buildTarget": "dev-dings:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

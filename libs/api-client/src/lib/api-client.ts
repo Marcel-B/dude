@@ -1,7 +1,8 @@
 import axios from "axios";
-import { Eintrag } from "@dude/stunden-domain";
+import { Eintrag, Projekt } from "@dude/stunden-domain";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:3333" });
+//const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:3333" });
+const axiosInstance = axios.create({ baseURL: "http://localhost:3333" });
 
 const get = async <T>(path: string): Promise<T> => {
   const response = await axiosInstance.get<T>(path);
@@ -10,7 +11,7 @@ const get = async <T>(path: string): Promise<T> => {
 };
 
 const post = async <T>(path: string, content: T): Promise<T> => {
-  const response = await axiosInstance.post<T>(path, JSON.stringify(content));
+  const response = await axiosInstance.post<T>(path, content);
   const r = response.data;
   return r;
 };
@@ -31,8 +32,18 @@ const stunden = {
   }
 };
 
+const projekte = {
+  async getProjekte(): Promise<Projekt[]> {
+    return await get<Projekt[]>("/api/projekt");
+  },
+  async addProjekt(projekt: Projekt): Promise<Projekt> {
+    return await post<Projekt>("/api/projekt", projekt);
+  }
+};
+
 export const apiClient = {
-  stunden
+  stunden,
+  projekte
 };
 
 

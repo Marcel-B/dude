@@ -1,7 +1,6 @@
 import SaveIcon from "@mui/icons-material/Save";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
-  Divider,
   FormControl,
   Grid,
   InputAdornment,
@@ -9,19 +8,18 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
-  Typography
+  SelectChangeEvent
 } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
-import { Pbi, Project } from "@dude/pbi-shared";
+import { Pbi, Projekt } from "@dude/stunden-domain";
 import { LoadingButton } from "@mui/lab";
 
 export interface PbiProps {
-  projects: Project[];
+  projekte: Projekt[];
   addPbi: (pbi: Pbi) => void;
 }
 
-export const PbiCreate = ({ projects, addPbi }: PbiProps) => {
+export const PbiCreate = ({ projekte, addPbi }: PbiProps) => {
   const [pbi, setPbi] = useState("");
   const [project, setProject] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,7 +44,7 @@ export const PbiCreate = ({ projects, addPbi }: PbiProps) => {
     const newPbi: Pbi = {
       id: 0,
       name: pbi,
-      project: project
+      projektId: project
     };
     fetch("http://localhost:3333/api/pbi", {
       method: "POST",
@@ -57,7 +55,7 @@ export const PbiCreate = ({ projects, addPbi }: PbiProps) => {
     })
       .then(res => res.json() as Promise<Pbi>)
       .then((data) => {
-        addPbi({ ...data, project: projects.find((p) => p.projectId === data.project)?.name ?? "n/a" });
+        addPbi({ ...data, projektId: projekte.find((p) => p.id === data.projektId)?.name ?? "n/a" });
         setPbi("");
         setProject("");
       })
@@ -87,14 +85,14 @@ export const PbiCreate = ({ projects, addPbi }: PbiProps) => {
               value={project}
               label="Projekte"
               onChange={handleSelectChange}>
-              {projects.map((project) => (
-                <MenuItem key={project.projectId} value={project.projectId}>{project.name}</MenuItem>))}
+              {projekte.map((projekt) => (
+                <MenuItem key={projekt.id} value={projekt.id}>{projekt.name}</MenuItem>))}
             </Select>
           </FormControl>
         </Grid>
         <Grid item xs={2}>
           <LoadingButton
-            sx={{height: "100%"}}
+            sx={{ height: "100%" }}
             onClick={handleSave}
             loading={loading}
             loadingPosition={"start"}

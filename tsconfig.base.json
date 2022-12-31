@@ -16,14 +16,12 @@
     "baseUrl": ".",
     "paths": {
       "@dude/api-client": ["libs/api-client/src/index.ts"],
-      "@dude/cart": ["libs/cart/src/index.ts"],
-      "@dude/create-project": ["libs/create-project/src/index.ts"],
       "@dude/pbi": ["libs/pbi/src/index.ts"],
       "@dude/pbi-list": ["libs/pbi-list/src/index.ts"],
-      "@dude/pbi-shared": ["libs/pbi-shared/src/index.ts"],
+      "@dude/projekt": ["libs/projekt/src/index.ts"],
       "@dude/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"],
-      "@dude/stunden-store": ["libs/stunden-store/src/index.ts"]
+      "@dude/store": ["libs/store/src/index.ts"],
+      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

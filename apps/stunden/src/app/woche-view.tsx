@@ -6,7 +6,7 @@ import { addWeeks, lastDayOfWeek, parse, startOfDay, subDays } from "date-fns";
 import { eineWoche, Eintrag, Tag, Wochentag } from "@dude/stunden-domain";
 import { TagItem } from "./tag-item";
 import { EintragItem } from "./eintrag-item";
-import { RootState, setDatum, useAppDispatch, useAppSelector } from "@dude/stunden-store";
+import { RootState, setDatum, useAppDispatch, useAppSelector } from "@dude/store";
 import format from "date-fns/format";
 
 const getDaDay = (date: string, day: Day) => {

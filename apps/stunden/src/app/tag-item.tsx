@@ -5,7 +5,7 @@ import format from "date-fns/format";
 import AddIcon from "@mui/icons-material/Add";
 import { Eintrag, Wochentag } from "@dude/stunden-domain";
 import { AddEintrag } from "./add-eintrag";
-import { addEintrag, RootState, useAppDispatch, useAppSelector } from "@dude/stunden-store";
+import { addEintrag, RootState, useAppDispatch, useAppSelector } from "@dude/store";
 
 interface IProps {
   wochentag: Wochentag;

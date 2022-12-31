@@ -3,3 +3,5 @@
 
 declare module 'stunden/Module';
 declare module 'pbi/Module';
+
+declare module 'dev-dings/Module';

@@ -1,7 +1,7 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
-import { Pbi } from "@dude/pbi-shared";
+import { Pbi } from "@dude/stunden-domain";
 import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
 import AltRouteIcon from "@mui/icons-material/AltRoute";
 import { toBranch } from "./utils";
@@ -24,14 +24,14 @@ export const PbiList = ({ pbis, deletePbi, triggerSnackbar }: PbiListProps) => {
       width: 120,
       getActions: (params: GridRowParams<Pbi>) => [
         <GridActionsCellItem label="Copy" icon={<ContentCopyIcon color="info" />} onClick={() => {
-          const forClipboard = `${params.row.name} (${params.row.description})`;
+          const forClipboard = `${params.row.name} (${params.row.beschreibung})`;
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }
           navigator.clipboard
             .writeText(forClipboard)
             .then(() => {
-              params.row.description = "";
+              params.row.beschreibung = "";
             });
         }}
         />,
@@ -43,7 +43,7 @@ export const PbiList = ({ pbis, deletePbi, triggerSnackbar }: PbiListProps) => {
           navigator.clipboard
             .writeText(forClipboard)
             .then(() => {
-              params.row.description = "";
+              params.row.beschreibung = "";
             });
         }}
         />,

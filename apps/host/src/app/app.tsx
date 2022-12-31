@@ -1,11 +1,12 @@
-import * as React from "react";
-import NxWelcome from "./nx-welcome";
-import { Link, Route, Routes } from "react-router-dom";
-import { AppBar, Box, Button, Container, Divider, Toolbar, Typography } from "@mui/material";
+import * as React from 'react';
+import NxWelcome from './nx-welcome';
+import { Link, Route, Routes } from 'react-router-dom';
+import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 
-const Pbi = React.lazy(() => import("pbi/Module"));
-const Stunden = React.lazy(() => import("stunden/Module"));
+const DevDings = React.lazy(() => import('dev-dings/Module'));
 
+const Pbi = React.lazy(() => import('pbi/Module'));
+const Stunden = React.lazy(() => import('stunden/Module'));
 
 export function App() {
   return (
@@ -18,7 +19,7 @@ export function App() {
                 component={Link}
                 to="/"
                 key="/"
-                sx={{ my: 2, textDecoration: "none", color: "white" }}
+                sx={{ my: 2, textDecoration: 'none', color: 'white' }}
               >
                 Startseite
               </Button>
@@ -26,7 +27,7 @@ export function App() {
                 component={Link}
                 to="/pbi"
                 key="/pbi"
-                sx={{ my: 2, textDecoration: "none", color: "whitesmoke" }}
+                sx={{ my: 2, textDecoration: 'none', color: 'whitesmoke' }}
               >
                 pbi-O-mat&trade;
               </Button>
@@ -34,7 +35,7 @@ export function App() {
                 component={Link}
                 to="/stunden"
                 key="/stunden"
-                sx={{ my: 2, textDecoration: "none", color: "white" }}
+                sx={{ my: 2, textDecoration: 'none', color: 'white' }}
               >
                 Stunden
               </Button>
@@ -44,12 +45,13 @@ export function App() {
       </AppBar>
       <Routes>
         <Route path="/" element={<NxWelcome title="host" />} />
+        <Route path="/dev-dings" element={<DevDings />} />
         <Route path="/pbi" element={<Pbi />} />
         <Route path="/stunden" element={<Stunden />} />
-      </Routes>;
+      </Routes>
+      ;
     </React.Suspense>
-  )
-    ;
+  );
 }
 
 export default App;

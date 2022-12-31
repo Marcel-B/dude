@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./app/app";
 import { Provider } from "react-redux";
-import { store } from "@dude/stunden-store";
+import { store } from "@dude/store";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const theme = createTheme({
