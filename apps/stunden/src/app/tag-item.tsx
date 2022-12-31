@@ -33,7 +33,7 @@ export const TagItem = ({ wochentag, style }: IProps) => {
         };
         dispatch(addEintrag(eintrag));
 
-        fetch("http://localhost:3333/api/eintrag", {
+        fetch("http://192.168.2.103:3333/api/eintrag", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

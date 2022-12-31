@@ -19,6 +19,7 @@ export const CreateProject = ({ addProject, triggerSnackbar }: CreateProjectProp
   const [project, setProject] = React.useState<Project>({ name: "", projectId: "" });
   const [loading, setLoading] = React.useState(false);
   const handleSave = () => {
+
     setLoading(true);
     addProject(project);
     setProject({ name: "", projectId: "" });

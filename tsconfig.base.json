@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dude/api-client": ["libs/api-client/src/index.ts"],
       "@dude/cart": ["libs/cart/src/index.ts"],
       "@dude/create-project": ["libs/create-project/src/index.ts"],
       "@dude/pbi": ["libs/pbi/src/index.ts"],
