@@ -3,9 +3,7 @@ import NxWelcome from './nx-welcome';
 import { Link, Route, Routes } from 'react-router-dom';
 import { AppBar, Box, Button, Container, Toolbar } from '@mui/material';
 
-const DevDings = React.lazy(() => import('dev-dings/Module'));
-
-const Pbi = React.lazy(() => import('pbi/Module'));
+const PbiOMat = React.lazy(() => import('pbi-o-mat/Module'));
 const Stunden = React.lazy(() => import('stunden/Module'));
 
 export function App() {
@@ -25,8 +23,8 @@ export function App() {
               </Button>
               <Button
                 component={Link}
-                to="/pbi"
-                key="/pbi"
+                to="/pbi-o-mat"
+                key="/pbi-o-mat"
                 sx={{ my: 2, textDecoration: 'none', color: 'whitesmoke' }}
               >
                 pbi-O-mat&trade;
@@ -45,8 +43,7 @@ export function App() {
       </AppBar>
       <Routes>
         <Route path="/" element={<NxWelcome title="host" />} />
-        <Route path="/dev-dings" element={<DevDings />} />
-        <Route path="/pbi" element={<Pbi />} />
+        <Route path="/pbi-o-mat" element={<PbiOMat />} />
         <Route path="/stunden" element={<Stunden />} />
       </Routes>
       ;

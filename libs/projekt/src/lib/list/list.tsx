@@ -1,20 +1,37 @@
-import styles from "./list.module.scss";
-import { fetchProjekte, projekteSelectors, store, useAppDispatch, useAppSelector } from "@dude/store";
-import { useEffect } from "react";
-import { DataGrid, GridColumns } from "@mui/x-data-grid";
+import {
+  deleteProjekt,
+  fetchProjekte,
+  projekteSelectors,
+  useAppDispatch,
+  useAppSelector
+} from "@dude/store";
+import React, { useEffect } from "react";
+import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Projekt } from "@dude/stunden-domain";
 
 export const List = () => {
   const projekte = useAppSelector(projekteSelectors.selectAll);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("Now Dispatch fetchProjekte");
     dispatch(fetchProjekte());
   }, []);
 
   const cols: GridColumns = [
     { field: "id", headerName: "Projekt ID" },
-    { field: "name", headerName: "Projekt" }
+    { field: "name", headerName: "Projekt" },
+    {
+      field: "actions",
+      type: "actions",
+      width: 120,
+      getActions: (params: GridRowParams<Projekt>) => [
+        <GridActionsCellItem label="Löschen" showInMenu icon={<DeleteIcon color="warning" />} onClick={() => {
+          dispatch(deleteProjekt(params.row.id.toString()));
+        }}
+        />
+      ]
+    }
   ];
 
   return (

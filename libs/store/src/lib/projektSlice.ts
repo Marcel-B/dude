@@ -1,7 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Projekt } from "@dude/stunden-domain";
 import { apiClient } from "@dude/api-client";
-import { RootState, store } from "./store";
+import { RootState } from "./store";
 
 const projektAdapter = createEntityAdapter<Projekt>({
   selectId: (projekt) => projekt.id,
@@ -18,6 +18,11 @@ export const addProjekt = createAsyncThunk("projekt/addProjekt", async (projekt:
   return response;
 });
 
+export const deleteProjekt = createAsyncThunk("projekt/deleteProjekt", async (id: string) => {
+  await apiClient.projekte.deleteProjekt(id);
+  return id;
+});
+
 export const projektSlice = createSlice({
   name: "projekt",
   initialState: projektAdapter.getInitialState(),
@@ -28,6 +33,9 @@ export const projektSlice = createSlice({
     });
     builder.addCase(addProjekt.fulfilled, (state, action: PayloadAction<Projekt>) => {
       projektAdapter.addOne(state, action.payload);
+    });
+    builder.addCase(deleteProjekt.fulfilled, (state, action: PayloadAction<string>) => {
+      projektAdapter.removeOne(state, action.payload);
     });
   }
 });

@@ -16,7 +16,7 @@ const db = new sqlite3.Database("./db/Times.db", sqlite3.OPEN_CREATE | sqlite3.O
 
 //db.run("DROP TABLE eintrag");
 //db.run("DROP TABLE pbi");
-db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, beschreibung TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
+db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
 db.run(`create table if not exists projekt(id TEXT NOT NULL PRIMARY KEY, name TEXT)`);
 db.run(`create table if not exists eintrag(id INTEGER NOT NULL PRIMARY KEY, text TEXT, stunden REAL, datum TEXT, abrechenbar BOOLEAN)`);
 
@@ -31,7 +31,7 @@ app.delete("/api/table", (req, res) => {
     db.run("DROP TABLE eintrag");
     db.run("DROP TABLE pbi");
     db.run("DROP TABLE projekt");
-    db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, beschreibung TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
+    db.run(`create table if not exists pbi(id INTEGER NOT NULL PRIMARY KEY, name TEXT, projektId TEXT, FOREIGN KEY(projektId) references projekt(id))`);
     db.run(`create table if not exists projekt(id TEXT NOT NULL PRIMARY KEY, name TEXT)`);
     db.run(`create table if not exists eintrag(id INTEGER NOT NULL PRIMARY KEY, text TEXT, stunden REAL, datum TEXT, abrechenbar BOOLEAN)`);
   } catch (e) {
@@ -123,6 +123,16 @@ app.get("/api/projekt/:projektId", (req, res) => {
 
     } else {
       res.send(rows);
+    }
+  });
+});
+
+app.delete("/api/projekt/:id", (req, res) => {
+  db.run(`DELETE FROM main.projekt WHERE id = ?`, [req.params.id], (err) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      res.send("ok");
     }
   });
 });

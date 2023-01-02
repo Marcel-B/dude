@@ -17,11 +17,11 @@
     "paths": {
       "@dude/api-client": ["libs/api-client/src/index.ts"],
       "@dude/pbi": ["libs/pbi/src/index.ts"],
-      "@dude/pbi-list": ["libs/pbi-list/src/index.ts"],
       "@dude/projekt": ["libs/projekt/src/index.ts"],
       "@dude/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@dude/store": ["libs/store/src/index.ts"],
-      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"]
+      "@dude/stunden-domain": ["libs/stunden-domain/src/index.ts"],
+      "@dude/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
