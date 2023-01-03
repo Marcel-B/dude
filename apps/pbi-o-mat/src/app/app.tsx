@@ -16,48 +16,9 @@ import { Create as CreatePbi, List as ListPbi } from "@dude/pbi";
 
 export function App() {
   const [projects, setProject] = useState<Projekt[]>([]);
-  const [pbi, setPbi] = useState<Pbi[]>([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error" | "info">("success");
-
-  useEffect(() => {
-    // if (projects.length === 0) {
-    //   fetch("http://localhost:3333/api/project")
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       setProject(data);
-    //     });
-    // }
-    //
-    // if (projects.length > 0 && pbi.length === 0) {
-    //   fetch("http://localhost:3333/api/pbi")
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       const pbis = data.map((pbi: Pbi) => {
-    //         return {
-    //           ...pbi,
-    //           project: projects.find((p) => p.id === pbi.projektId)?.name ?? "n/a"
-    //         };
-    //       });
-    //       setPbi(pbis);
-    //     });
-    // }
-  }, [projects, setProject]);
-
-  const handleAddPbi = (p: Pbi) => {
-    setPbi([...pbi, p]);
-    setSnackbarMessage(`P.B.I. '${p.name}' hinzugefügt`);
-    setSnackbarSeverity("success");
-    setOpenSnackbar(true);
-  };
-
-  const handleDeletePbi = (p: Pbi) => {
-    setPbi(pbi.filter((pbi: Pbi) => pbi.id !== p.id));
-    setSnackbarMessage(`P.B.I. '${p.name}' gelöscht`);
-    setSnackbarSeverity("info");
-    setOpenSnackbar(true);
-  };
 
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);

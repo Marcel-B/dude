@@ -26,8 +26,8 @@ const prodConfig = {
    * ]
    */
   remotes: [
-    ["stunden", "//eu2.contabostorage.com/293d582641ac4dc1a6fc0d39b43574ee:stunden/"],
-    ["pbi-o-mat", "//eu2.contabostorage.com/293d582641ac4dc1a6fc0d39b43574ee:pbi-o-mat/"]
+    ["stunden", "https://eu2.contabostorage.com/293d582641ac4dc1a6fc0d39b43574ee:stunden/"],
+    ["pbi-o-mat", "https://eu2.contabostorage.com/293d582641ac4dc1a6fc0d39b43574ee:pbi-o-mat/"]
   ]
 };
 

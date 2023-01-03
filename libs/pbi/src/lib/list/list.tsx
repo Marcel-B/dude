@@ -8,7 +8,7 @@ import {
   fetchPbis,
   fetchProjekte,
   pbiSelectors,
-  projekteSelectors,
+  projekteSelectors, setToClipboard,
   useAppDispatch,
   useAppSelector
 } from "@dude/store";
@@ -22,8 +22,12 @@ export interface IProps {
 export const List = ({ triggerSnackbar }: IProps) => {
   const pbis = useAppSelector(pbiSelectors.selectAll);
   const projekte = useAppSelector(projekteSelectors.selectAll);
-
   const dispatch = useAppDispatch();
+
+  const writeToClipboard = (text: string) => {
+    console.log(text);
+    dispatch(setToClipboard(text));
+  };
 
   useEffect(() => {
     dispatch(fetchPbis());
@@ -46,11 +50,8 @@ export const List = ({ triggerSnackbar }: IProps) => {
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }
-          navigator.clipboard
-            .writeText(forClipboard)
-            .then(() => {
-              params.row.beschreibung = "";
-            });
+          writeToClipboard(forClipboard);
+          params.row.beschreibung = "";
         }}
         />,
         <GridActionsCellItem label="Branch" icon={<AltRouteIcon color="primary" />} onClick={() => {
@@ -58,11 +59,8 @@ export const List = ({ triggerSnackbar }: IProps) => {
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }
-          navigator.clipboard
-            .writeText(forClipboard)
-            .then(() => {
-              params.row.beschreibung = "";
-            });
+          writeToClipboard(forClipboard);
+          params.row.beschreibung = "";
         }}
         />,
         <GridActionsCellItem label="Löschen" showInMenu icon={<DeleteIcon color="warning" />} onClick={() => {

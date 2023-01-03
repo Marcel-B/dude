@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 export interface DatumState {
   datum: string;
+  toClipboard: string;
 }
 
 const initialState: DatumState = {
@@ -16,10 +17,16 @@ export const datumSlice = createSlice({
   reducers: {
     setDatum: (state, action: PayloadAction<string>) => {
       state.datum = action.payload;
+    },
+    setToClipboard: (state, action: PayloadAction<string>) => {
+      state.toClipboard = action.payload;
+    },
+    resetToClipboard: (state) => {
+      state.toClipboard = "";
     }
   }
 });
 
 
-export const { setDatum } = datumSlice.actions;
+export const { setDatum, setToClipboard, resetToClipboard} = datumSlice.actions;
 export const selectDatum = (state: DatumState) => state.datum;
