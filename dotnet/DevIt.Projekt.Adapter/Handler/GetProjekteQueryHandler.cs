@@ -21,20 +21,3 @@ public class GetProjekteQueryHandler : IRequestHandler<GetProjekteQuery, IEnumer
     return await _projektRepository.GetProjekteAsync(cancellationToken);
   }
 }
-public class GetProjektByIdQueryHandler : IRequestHandler<GetProjektByIdQuery, Domain.Projekt>
-{
-  private readonly IProjektRepository _projektRepository;
-
-  public GetProjektByIdQueryHandler(
-    IProjektRepository projektRepository)
-  {
-    _projektRepository = projektRepository;
-  }
-
-
-  public async Task<Domain.Projekt> Handle(GetProjektByIdQuery request, CancellationToken cancellationToken)
-  {
-    var result = await _projektRepository.GetProjektByIdAsync(request.Id, cancellationToken);
-    return result;
-  }
-}

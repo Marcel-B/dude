@@ -1,5 +1,4 @@
-﻿using DevIt.Projekt.Adapter.Command;
-using DevIt.Projekt.Adapter.Handler;
+﻿using DevIt.Projekt.Adapter.Handler;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +8,7 @@ public static class ServiceCollectionExtensions
 {
   public static IServiceCollection AddProjektAdapter(this IServiceCollection services)
   {
-    services.AddScoped<IRequestHandler<CreateProjektCommand>, CreateProjektCommandHandler>();
+    services.AddMediatR(typeof(CreateProjektCommandHandler));
     return services;
   }
 }
