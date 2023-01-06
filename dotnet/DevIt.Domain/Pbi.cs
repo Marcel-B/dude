@@ -7,7 +7,10 @@ public class Pbi
   public int Id { get; private set; }
   public string Name { get; private set; }
   public string ProjektId { get; private set; }
-  private Pbi(){}
+
+  private Pbi()
+  {
+  }
 
   public static Pbi Create(CreatePbi command)
     => command.Validate(new Pbi
@@ -23,7 +26,7 @@ public class Pbi
     {
       public PbiValidator()
       {
-        RuleFor(x => x.Id).Equal(0);
+        RuleFor(x => x.Id).GreaterThanOrEqualTo(0);
         RuleFor(x => x.Name).NotEmpty();
         RuleFor(x => x.ProjektId).NotEmpty();
       }
@@ -31,11 +34,12 @@ public class Pbi
 
     private IValidator<Pbi> _validator;
 
-    public CreatePbi(string name, string projektId)
+    public CreatePbi(string name, string projektId, int id = 0)
     {
       _validator = new PbiValidator();
       Name = name;
       ProjektId = projektId;
+      Id = id;
     }
 
     public int Id { get; }

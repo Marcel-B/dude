@@ -1,24 +1,31 @@
 using DevIt.Domain;
+using DevIt.Persistence;
 using DevIt.Projekt.Adapter.Command;
 using DevIt.Repository;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Projekt.Adapter.Handler;
 
 public class UpdateProjektCommandHandler : IRequestHandler<UpdateProjektCommand>
 {
-  private readonly IProjektRepository _projektRepository;
+  private readonly IServiceProvider _serviceProvider;
 
-  public UpdateProjektCommandHandler(IProjektRepository projektRepository)
+  public UpdateProjektCommandHandler(
+    IServiceProvider serviceProvider)
   {
-    _projektRepository = projektRepository;
+    _serviceProvider = serviceProvider;
   }
 
-  public async Task<Unit> Handle(UpdateProjektCommand request, CancellationToken cancellationToken)
+  public async Task<Unit> Handle(
+    UpdateProjektCommand request,
+    CancellationToken cancellationToken)
   {
     var create = new CreateProjekt(request.Id, request.Name);
     var projekt = Domain.Projekt.Create(create);
-    await _projektRepository.UpdateProjektAsync(projekt, cancellationToken);
+    var uow = _serviceProvider.GetRequiredService<IUnitOfWork>();
+    await uow.Projekte.UpdateProjektAsync(projekt, cancellationToken);
+    await uow.CompleteAsync(cancellationToken);
     return Unit.Value;
   }
 }

@@ -12,11 +12,10 @@ public static class ServiceCollectionExtensions
     {
       var sp = services.BuildServiceProvider();
       var configuration = sp.GetRequiredService<IConfiguration>();
-      services.AddDbContext<ApplicationContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
 
-      services.AddScoped<IProjektRepository, ProjektRepository>();
-      services.AddScoped<IPbiRepository, PbiRepository>();
+      services.AddDbContextFactory<ApplicationContext>(options =>
+        options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
 
       return services;
     }

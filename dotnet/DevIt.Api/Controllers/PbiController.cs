@@ -47,6 +47,8 @@ public class PbiController : ControllerBase
     [FromBody] UpdatePbiCommand command,
     CancellationToken cancellationToken)
   {
+    if(id != command.Id)
+      throw new BadHttpRequestException("Id in route and body are not equal");
     await _mediator.Send(command, cancellationToken);
     return Ok();
   }

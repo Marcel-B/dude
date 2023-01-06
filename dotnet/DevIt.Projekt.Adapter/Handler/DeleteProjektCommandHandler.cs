@@ -1,21 +1,26 @@
+using DevIt.Persistence;
 using DevIt.Projekt.Adapter.Command;
 using DevIt.Repository;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Projekt.Adapter.Handler;
 
 public class DeleteProjektCommandHandler : IRequestHandler<DeleteProjektCommand>
 {
-  private readonly IProjektRepository _projektRepository;
+  private readonly IServiceProvider _serviceProvider;
 
-  public DeleteProjektCommandHandler(IProjektRepository projektRepository)
+  public DeleteProjektCommandHandler(
+    IServiceProvider serviceProvider)
   {
-    _projektRepository = projektRepository;
+    _serviceProvider = serviceProvider;
   }
 
   public async Task<Unit> Handle(DeleteProjektCommand request, CancellationToken cancellationToken)
   {
-    await _projektRepository.DeleteProjektAsync(request.Id, cancellationToken);
+    var uow = _serviceProvider.GetRequiredService<IUnitOfWork>();
+    await uow.Projekte.DeleteProjektAsync(request.Id, cancellationToken);
+    await uow.CompleteAsync(cancellationToken);
     return Unit.Value;
   }
 }

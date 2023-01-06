@@ -1,23 +1,28 @@
+using DevIt.Persistence;
 using DevIt.Projekt.Adapter.Query;
 using DevIt.Repository;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Projekt.Adapter.Handler;
 
 public class GetProjekteQueryHandler : IRequestHandler<GetProjekteQuery, IEnumerable<Domain.Projekt>>
 {
-  private readonly IProjektRepository _projektRepository;
+  private readonly IServiceProvider _serviceProvider;
 
   public GetProjekteQueryHandler(
-    IProjektRepository projektRepository)
+    IServiceProvider serviceProvider)
   {
-    _projektRepository = projektRepository;
+    _serviceProvider = serviceProvider;
   }
 
   public async Task<IEnumerable<Domain.Projekt>> Handle(
     GetProjekteQuery request,
     CancellationToken cancellationToken)
   {
-    return await _projektRepository.GetProjekteAsync(cancellationToken);
+    var uow = _serviceProvider.GetRequiredService<IUnitOfWork>();
+    var result = await uow.Projekte.GetProjekteAsync(cancellationToken);
+    await uow.CompleteAsync(cancellationToken);
+    return result;
   }
 }

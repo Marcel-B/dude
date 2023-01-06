@@ -1,16 +1,19 @@
 using DevIt.Pbi.Adapter.Commands;
-using DevIt.Repository;
+using DevIt.Persistence;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Pbi.Adapter.Handler;
 
 public class CreatePbiCommandHandler : IRequestHandler<CreatePbiCommand, Domain.Pbi>
 {
-  private readonly IPbiRepository _pbiRepository;
+  private readonly IUnitOfWork _unitOfWork;
+  private readonly IServiceProvider _serviceProvider;
 
-  public CreatePbiCommandHandler(IPbiRepository pbiRepository)
+  public CreatePbiCommandHandler(
+    IServiceProvider serviceProvider)
   {
-    _pbiRepository = pbiRepository;
+    _serviceProvider = serviceProvider;
   }
 
   public async Task<Domain.Pbi> Handle(
@@ -19,6 +22,10 @@ public class CreatePbiCommandHandler : IRequestHandler<CreatePbiCommand, Domain.
   {
     var createCommand = new Domain.Pbi.CreatePbi(request.Name, request.ProjektId);
     var pbi = Domain.Pbi.Create(createCommand);
-    return await _pbiRepository.CreatePbiAsync(pbi, cancellationToken);
+    using var scope = _serviceProvider.CreateScope();
+    var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+    var result = await uow.Pbis.CreatePbiAsync(pbi, cancellationToken);
+    await uow.CompleteAsync(cancellationToken);
+    return result;
   }
 }

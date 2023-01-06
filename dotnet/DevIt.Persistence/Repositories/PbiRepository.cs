@@ -28,15 +28,13 @@ public class PbiRepository : IPbiRepository
   public async Task<Pbi> CreatePbiAsync(Pbi pbi, CancellationToken cancellationToken)
   {
     _context.Pbis.Add(pbi);
-    await _context.SaveChangesAsync(cancellationToken);
     return pbi;
   }
 
-  public async Task<Pbi> UpdatePbiAsync(int id, Pbi pbi, CancellationToken cancellationToken)
+  public async Task<Pbi> UpdatePbiAsync(Pbi pbi, CancellationToken cancellationToken)
   {
-    var pbiToUpdate = await _context.Pbis.FirstAsync(x => x.Id == id, cancellationToken);
+    var pbiToUpdate = await _context.Pbis.FirstAsync(x => x.Id == pbi.Id, cancellationToken);
     _context.Entry(pbiToUpdate).CurrentValues.SetValues(pbi);
-    await _context.SaveChangesAsync(cancellationToken);
     return pbiToUpdate;
   }
 
@@ -44,6 +42,5 @@ public class PbiRepository : IPbiRepository
   {
     var pbiToDelete = await _context.Pbis.FirstAsync(x => x.Id == id, cancellationToken);
     _context.Pbis.Remove(pbiToDelete);
-    await _context.SaveChangesAsync(cancellationToken);
   }
 }
