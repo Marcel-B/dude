@@ -15,12 +15,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
 
 var app = builder.Build();
+app.UseCors(builder => builder
+  .WithOrigins(app.Configuration["Cors:AllowedOrigins"])
+  .AllowAnyHeader()
+  .AllowAnyMethod());
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-  app.UseSwagger();
-  app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 //app.UseHttpsRedirection();
