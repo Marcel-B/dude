@@ -16,10 +16,6 @@ public class ApplicationContext : DbContext
   {
     base.OnModelCreating(modelBuilder);
 
-    modelBuilder
-      .Entity<Pbi>()
-      .HasOne<Projekt>()
-      .WithMany()
-      .HasForeignKey(x => x.ProjektId);
+    modelBuilder.Entity<Projekt>().HasMany(o => o.Pbis).WithOne();
   }
 }

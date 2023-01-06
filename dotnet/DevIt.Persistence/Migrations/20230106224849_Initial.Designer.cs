@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevIt.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230104085037_Initial")]
+    [Migration("20230106224849_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,14 +40,9 @@ namespace DevIt.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProjektId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProjektId");
-
-                    b.HasIndex("ProjektId1");
 
                     b.ToTable("Pbis");
                 });
@@ -69,14 +64,10 @@ namespace DevIt.Persistence.Migrations
             modelBuilder.Entity("DevIt.Domain.Pbi", b =>
                 {
                     b.HasOne("DevIt.Domain.Projekt", null)
-                        .WithMany()
+                        .WithMany("Pbis")
                         .HasForeignKey("ProjektId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DevIt.Domain.Projekt", null)
-                        .WithMany("Pbis")
-                        .HasForeignKey("ProjektId1");
                 });
 
             modelBuilder.Entity("DevIt.Domain.Projekt", b =>

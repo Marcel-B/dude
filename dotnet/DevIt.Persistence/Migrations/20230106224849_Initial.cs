@@ -29,8 +29,7 @@ namespace DevIt.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProjektId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProjektId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ProjektId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,22 +40,12 @@ namespace DevIt.Persistence.Migrations
                         principalTable: "Projekte",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pbis_Projekte_ProjektId1",
-                        column: x => x.ProjektId1,
-                        principalTable: "Projekte",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pbis_ProjektId",
                 table: "Pbis",
                 column: "ProjektId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pbis_ProjektId1",
-                table: "Pbis",
-                column: "ProjektId1");
         }
 
         /// <inheritdoc />
