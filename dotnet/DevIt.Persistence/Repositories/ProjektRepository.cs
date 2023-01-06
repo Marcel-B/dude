@@ -17,7 +17,6 @@ public class ProjektRepository : IProjektRepository
   public async Task<Projekt> CreateProjektAsync(Projekt projekt, CancellationToken cancellationTokens)
   {
     _context.Projekte.Add(projekt);
-    await _context.SaveChangesAsync(cancellationTokens);
     return projekt;
   }
 
@@ -35,13 +34,12 @@ public class ProjektRepository : IProjektRepository
   {
     var projekt = await _context.Projekte.FirstAsync(projekt => projekt.Id == id, cancellationToken);
     _context.Projekte.Remove(projekt);
-    await _context.SaveChangesAsync(cancellationToken);
   }
 
-  public async Task UpdateProjektAsync(Projekt projekt, CancellationToken cancellationToken)
+  public async Task<Projekt> UpdateProjektAsync(Projekt projekt, CancellationToken cancellationToken)
   {
     var projektToUpdate = await _context.Projekte.FirstAsync(pr => pr.Id == projekt.Id, cancellationToken);
     _context.Entry(projektToUpdate).CurrentValues.SetValues(projekt);
-    await _context.SaveChangesAsync(cancellationToken);
+    return projektToUpdate;
   }
 }

@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DevIt.Projekt.Adapter.Command;
 
-public class CreateProjektCommand : IRequest
+public class CreateProjektCommand : IRequest<Domain.Projekt>
 {
   public CreateProjektCommand(string id, string name)
   {

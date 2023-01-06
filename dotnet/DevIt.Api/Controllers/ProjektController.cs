@@ -37,8 +37,8 @@ public class ProjektController : ControllerBase
     [FromBody] CreateProjektCommand command,
     CancellationToken cancellationToken)
   {
-    await _mediator.Send(command, cancellationToken);
-    return Ok();
+    var result = await _mediator.Send(command, cancellationToken);
+    return Ok(result);
   }
 
   [HttpPut("{id}")]
@@ -47,8 +47,8 @@ public class ProjektController : ControllerBase
     [FromBody] UpdateProjektCommand command,
     CancellationToken cancellationToken)
   {
-    await _mediator.Send(command, cancellationToken);
-    return Ok();
+    var result = await _mediator.Send(command, cancellationToken);
+    return Ok(result);
   }
 
   [HttpDelete("{id}")]

@@ -8,5 +8,5 @@ public interface IProjektRepository
   Task<ICollection<Projekt>> GetProjekteAsync(CancellationToken cancellationToken);
   Task<Projekt> GetProjektByIdAsync(string id, CancellationToken cancellationToken);
   Task DeleteProjektAsync(string id, CancellationToken cancellationToken);
-  Task UpdateProjektAsync(Projekt projekt, CancellationToken cancellationToken);
+  Task<Projekt> UpdateProjektAsync(Projekt projekt, CancellationToken cancellationToken);
 }

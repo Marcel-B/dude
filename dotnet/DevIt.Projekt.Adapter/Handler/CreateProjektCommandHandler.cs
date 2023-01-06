@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Projekt.Adapter.Handler;
 
-public class CreateProjektCommandHandler : IRequestHandler<CreateProjektCommand>
+public class CreateProjektCommandHandler : IRequestHandler<CreateProjektCommand, Domain.Projekt>
 {
   private readonly IServiceProvider _serviceProvider;
 
@@ -17,7 +17,7 @@ public class CreateProjektCommandHandler : IRequestHandler<CreateProjektCommand>
     _serviceProvider = serviceProvider;
   }
 
-  public async Task<Unit> Handle(
+  public async Task<Domain.Projekt> Handle(
     CreateProjektCommand request,
     CancellationToken cancellationToken)
   {
@@ -26,6 +26,6 @@ public class CreateProjektCommandHandler : IRequestHandler<CreateProjektCommand>
     var uow = _serviceProvider.GetService<IUnitOfWork>();
     var result = await uow.Projekte.CreateProjektAsync(projekt, cancellationToken);
     await uow.CompleteAsync(cancellationToken);
-    return Unit.Value;
+    return result;
   }
 }
