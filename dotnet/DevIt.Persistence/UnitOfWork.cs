@@ -27,16 +27,16 @@ public class UnitOfWork : IUnitOfWork
 
   public async Task<int> CompleteAsync(CancellationToken cancellationToken)
   {
-    await using var transaction = await GetSqlTransactionAsync(cancellationToken);
+    //await using var transaction = await GetSqlTransactionAsync(cancellationToken);
     try
     {
       var result = await _context.SaveChangesAsync(cancellationToken);
-      transaction.CommitAsync(cancellationToken);
+      //transaction.CommitAsync(cancellationToken);
       return result;
     }
     catch (Exception ex)
     {
-      transaction.RollbackAsync(cancellationToken);
+      //transaction.RollbackAsync(cancellationToken);
       throw;
     }
     finally
