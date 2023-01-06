@@ -16,3 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build ./dotnet --file ./dotnet/DevIt.Api/Dockerfile --tag millegalb/devit-d-api:$(date +%s)
+    - name: Docker Push
+      # You may pin to the exact commit or the version.
+      # uses: opspresso/action-docker@233ac522cc300320464ddd95cee4059986cc1587
+      uses: opspresso/action-docker@v0.4.0
