@@ -2,7 +2,6 @@ using System.Data;
 using DevIt.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Persistence;
 
@@ -15,10 +14,12 @@ public class UnitOfWork : IUnitOfWork
     _context = context;
     Pbis = new PbiRepository(_context);
     Projekte = new ProjektRepository(_context);
+    Eintraege = new EintragRepository(_context);
   }
 
-  public IPbiRepository Pbis { get;  }
-  public IProjektRepository Projekte { get;  }
+  public IPbiRepository Pbis { get; }
+  public IProjektRepository Projekte { get; }
+  public IEintragRepository Eintraege { get; }
 
   public int Complete()
   {

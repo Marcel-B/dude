@@ -8,13 +8,11 @@
 
     <ItemGroup>
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DevIt.Eintrag.Adapter\DevIt.Eintrag.Adapter.csproj" />
-      <ProjectReference Include="..\DevIt.Pbi.Adapter\DevIt.Pbi.Adapter.csproj" />
-      <ProjectReference Include="..\DevIt.Persistence\DevIt.Persistence.csproj" />
-      <ProjectReference Include="..\DevIt.Projekt.Adapter\DevIt.Projekt.Adapter.csproj" />
+      <ProjectReference Include="..\DevIt.Repository\DevIt.Repository.csproj" />
     </ItemGroup>
 
 </Project>

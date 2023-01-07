@@ -7,6 +7,7 @@ public class ApplicationContext : DbContext
 {
   public DbSet<Projekt> Projekte { get; set; }
   public DbSet<Pbi> Pbis { get; set; }
+  public DbSet<Eintrag> Eintraege { get; set; }
 
   public ApplicationContext(DbContextOptions<ApplicationContext> builder) : base(builder)
   {

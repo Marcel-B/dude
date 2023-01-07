@@ -1,3 +1,5 @@
+using DevIt.Eintrag.Adapter.Commands;
+using DevIt.Eintrag.Adapter.Queries;
 using DevIt.Pbi.Adapter.Commands;
 using DevIt.Pbi.Adapter.Queries;
 using MediatR;
@@ -7,11 +9,11 @@ namespace DevIt.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PbiController : ControllerBase
+public class EintragController : ControllerBase
 {
   private readonly IMediator _mediator;
 
-  public PbiController(IMediator mediator)
+  public EintragController(IMediator mediator)
   {
     _mediator = mediator;
   }
@@ -19,7 +21,7 @@ public class PbiController : ControllerBase
   [HttpGet]
   public async Task<IActionResult> GetByAsync(CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new GetPbisQuery(), cancellationToken);
+    var result = await _mediator.Send(new GetEintraegeQuery(), cancellationToken);
     return Ok(result);
   }
 
@@ -28,13 +30,13 @@ public class PbiController : ControllerBase
     [FromRoute] int id,
     CancellationToken cancellationToken)
   {
-    var result = await _mediator.Send(new GetPbiByIdQuery(id), cancellationToken);
+    var result = await _mediator.Send(new GetEintragByIdQuery(id), cancellationToken);
     return Ok(result);
   }
 
   [HttpPost]
   public async Task<IActionResult> CreateAsync(
-    [FromBody] CreatePbiCommand command,
+    [FromBody] CreateEintragCommand command,
     CancellationToken cancellationToken)
   {
     var result = await _mediator.Send(command, cancellationToken);
@@ -44,7 +46,7 @@ public class PbiController : ControllerBase
   [HttpPut("{id:int}")]
   public async Task<IActionResult> UpdateAsync(
     [FromRoute] int id,
-    [FromBody] UpdatePbiCommand command,
+    [FromBody] UpdateEintragCommand command,
     CancellationToken cancellationToken)
   {
     if (id != command.Id)
@@ -58,7 +60,7 @@ public class PbiController : ControllerBase
     [FromRoute] int id,
     CancellationToken cancellationToken)
   {
-    await _mediator.Send(new DeletePbiCommand(id), cancellationToken);
+    await _mediator.Send(new DeleteEintragCommand(id), cancellationToken);
     return NoContent();
   }
 }

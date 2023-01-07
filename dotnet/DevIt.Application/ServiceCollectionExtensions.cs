@@ -1,4 +1,5 @@
 ﻿using DevIt.Domain;
+using DevIt.Eintrag.Adapter;
 using DevIt.Pbi.Adapter;
 using DevIt.Persistence;
 using DevIt.Projekt.Adapter;
@@ -12,6 +13,7 @@ public static class ServiceCollectionExtensions
   {
     return services
       .AddDomain()
+      .AddEintragAdapter()
       .AddProjektAdapter()
       .AddPbiAdapter()
       .AddPersistence();

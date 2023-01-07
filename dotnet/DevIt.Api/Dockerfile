@@ -7,6 +7,7 @@ WORKDIR /src
 COPY ["DevIt.Api/DevIt.Api.csproj", "DevIt.Api/"]
 COPY ["DevIt.Application/DevIt.Application.csproj", "DevIt.Application/"]
 COPY ["DevIt.Projekt.Adapter/DevIt.Projekt.Adapter.csproj", "DevIt.Projekt.Adapter/"]
+COPY ["DevIt.Projekt.Adapter/DevIt.Eintrag.Adapter.csproj", "DevIt.Eintrag.Adapter/"]
 COPY ["DevIt.Repository/DevIt.Repository.csproj", "DevIt.Repository/"]
 COPY ["DevIt.Domain/DevIt.Domain.csproj", "DevIt.Domain/"]
 COPY ["DevIt.Persistence/DevIt.Persistence.csproj", "DevIt.Persistence/"]

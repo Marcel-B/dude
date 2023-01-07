@@ -8,6 +8,8 @@ public class Pbi
   public string Name { get; private set; }
   public string ProjektId { get; private set; }
 
+  public virtual Projekt Projekt { get; }
+
   private Pbi()
   {
   }
@@ -45,7 +47,6 @@ public class Pbi
     public int Id { get; }
     public string Name { get; }
     public string ProjektId { get; }
-    public virtual Projekt Projekt { get; }
 
     public Pbi Validate(Pbi pbi)
     {
