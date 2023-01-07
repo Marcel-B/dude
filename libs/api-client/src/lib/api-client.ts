@@ -2,7 +2,7 @@ import axios from "axios";
 import { Eintrag, Pbi, Projekt } from "@dude/stunden-domain";
 import { PbiDto } from "./dto/pbi-dto";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:3333" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:8054" });
 //const axiosInstance = axios.create({ baseURL: "http://localhost:3333" });
 
 const get = async <Out>(path: string): Promise<Out> => {
@@ -21,12 +21,15 @@ const del = async (path: string): Promise<void> => {
   await axiosInstance.delete(path);
 };
 
-const stunden = {
+const eintraege = {
   async getEintraege(): Promise<Eintrag[]> {
     return await get<Eintrag[]>("/api/eintrag");
   },
   async getEintrag(id: string): Promise<Eintrag> {
     return await get<Eintrag>(`/api/eintrag/${id}`);
+  },
+  async addEintrag(eintrag: Eintrag): Promise<Eintrag> {
+    return await post<Eintrag, Eintrag>("/api/eintrag", eintrag);
   },
   async deleteEintrag(id: string): Promise<void> {
     return await del(`/api/eintrag/${id}`);
@@ -58,7 +61,7 @@ const pbis = {
 };
 
 export const apiClient = {
-  stunden,
+  eintraege,
   projekte,
   pbis
 };

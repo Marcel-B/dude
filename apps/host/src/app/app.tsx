@@ -9,7 +9,7 @@ const PbiOMat = React.lazy(() => import("pbi-o-mat/Module"));
 const Stunden = React.lazy(() => import("stunden/Module"));
 
 export function App() {
-  const { toClipboard } = useAppSelector((state) => state.datum);
+  const { toClipboard } = useAppSelector((state) => state.appState);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

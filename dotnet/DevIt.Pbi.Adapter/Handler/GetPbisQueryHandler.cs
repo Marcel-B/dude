@@ -7,22 +7,20 @@ namespace DevIt.Pbi.Adapter.Handler;
 
 public class GetPbisQueryHandler : IRequestHandler<GetPbisQuery, IList<Domain.Pbi>>
 {
-  private readonly IServiceProvider _serviceProvider;
+  private readonly IUnitOfWork _unitOfWork;
 
   public GetPbisQueryHandler(
-    IServiceProvider serviceProvider)
+    IUnitOfWork unitOfWork)
   {
-    _serviceProvider = serviceProvider;
+    _unitOfWork = unitOfWork;
   }
 
   public async Task<IList<Domain.Pbi>> Handle(
     GetPbisQuery request,
     CancellationToken cancellationToken)
   {
-    using var scope = _serviceProvider.CreateScope();
-    var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-    var pbis = await uow.Pbis.GetPbisAsync(cancellationToken);
-    await uow.CompleteAsync(cancellationToken);
+    var pbis = await _unitOfWork.Pbis.GetPbisAsync(cancellationToken);
+    await _unitOfWork.CompleteAsync(cancellationToken);
     return pbis;
   }
 }

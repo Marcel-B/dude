@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@dude/api-client": ["libs/api-client/src/index.ts"],
+      "@dude/eintrag": ["libs/eintrag/src/index.ts"],
       "@dude/pbi": ["libs/pbi/src/index.ts"],
       "@dude/projekt": ["libs/projekt/src/index.ts"],
       "@dude/shared/ui": ["libs/shared/ui/src/index.ts"],

@@ -1,18 +1,32 @@
-import { WocheView } from "./woche-view";
-import React, { useEffect } from "react";
+import React from "react";
+import { Create, Woche, WocheHeader } from "@dude/eintrag";
+import { Box, Divider } from "@mui/material";
 import { Eintrag } from "@dude/stunden-domain";
-import { setEintraege, useAppDispatch } from "@dude/store";
-import { apiClient } from "@dude/api-client";
+import { addEintrag, setOpenCreate, useAppDispatch, useAppSelector } from "@dude/store";
 
 export const App = () => {
+  const { openCreate, selectedDatum } = useAppSelector(state => state.eintrag);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    apiClient.stunden.getEintraege().then((result: Eintrag[]) => dispatch(setEintraege(result)));
-  }, []);
-
+  const onClose = (result: { taetigkeit: string, dauer: number, datum: string } | null) => {
+    if (result) {
+      const eintrag: Eintrag = {
+        id: 0,
+        datum: result.datum,
+        text: result?.taetigkeit ?? "",
+        stunden: result?.dauer ?? 0,
+        abrechenbar: true
+      };
+      dispatch(addEintrag(eintrag));
+    }
+    dispatch(setOpenCreate({ openCreate: false, selectedDatum: "" }));
+  };
   return (
-    <WocheView titel={"Stunden"} />
+    <Box sx={{ m: "2rem" }}>
+      <WocheHeader></WocheHeader>
+      <Divider sx={{ mb: 2 }} />
+      <Woche></Woche>
+      <Create open={openCreate} onClose={onClose} datum={selectedDatum} />
+    </Box>
   );
 };
 

@@ -1,7 +1,5 @@
 using DevIt.Eintrag.Adapter.Commands;
 using DevIt.Eintrag.Adapter.Queries;
-using DevIt.Pbi.Adapter.Commands;
-using DevIt.Pbi.Adapter.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
