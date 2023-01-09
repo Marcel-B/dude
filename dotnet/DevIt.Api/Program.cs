@@ -16,7 +16,8 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 app.UseCors(builder => builder
-  .WithOrigins(app.Configuration["Cors"])
+  .WithOrigins(app.Configuration["Cors"]
+    .Split(','))
   .AllowAnyHeader()
   .AllowAnyMethod());
 
