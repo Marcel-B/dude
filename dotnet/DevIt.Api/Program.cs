@@ -39,3 +39,12 @@ var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
 context.Database.Migrate();
 
 app.Run();
+
+// Notwendig für die IntigrationTests
+// Nähere Infos unter https://docs.microsoft.com/de-de/aspnet/core/test/integration-tests?view=aspnetcore-6.0#basic-tests-with-the-default-webapplicationfactory
+namespace DevIt.Api
+{
+  public class Program
+  {
+  }
+}
