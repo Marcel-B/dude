@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "In", "In", "{AE29AE47-0397-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Eintrag.Adapter", "DevIt.Eintrag.Adapter\DevIt.Eintrag.Adapter.csproj", "{BAB5FB02-0E50-4333-8E1F-FF196FC7E876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.IntegrationTests", "DevIt.IntegrationTests\DevIt.IntegrationTests.csproj", "{444855D7-6AF3-4A8A-91D2-5AAA038FABF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{BAB5FB02-0E50-4333-8E1F-FF196FC7E876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB5FB02-0E50-4333-8E1F-FF196FC7E876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB5FB02-0E50-4333-8E1F-FF196FC7E876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{444855D7-6AF3-4A8A-91D2-5AAA038FABF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{444855D7-6AF3-4A8A-91D2-5AAA038FABF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{444855D7-6AF3-4A8A-91D2-5AAA038FABF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{444855D7-6AF3-4A8A-91D2-5AAA038FABF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CBE79FD-379E-484D-AA7E-346CAB39DE67} = {DC150107-920E-45B7-A2B0-39D42C831090}
