@@ -2,8 +2,8 @@ import axios from "axios";
 import { Eintrag, Pbi, Projekt } from "@dude/stunden-domain";
 import { PbiDto } from "./dto/pbi-dto";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:8054" });
-//const axiosInstance = axios.create({ baseURL: "http://localhost:3333" });
+//const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:8054" });
+const axiosInstance = axios.create({ baseURL: "http://localhost:5263" });
 
 const get = async <Out>(path: string): Promise<Out> => {
   const response = await axiosInstance.get<Out>(path);
