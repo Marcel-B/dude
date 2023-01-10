@@ -1,6 +1,6 @@
 import React from "react";
-import { Create, Woche, WocheHeader } from "@dude/eintrag";
-import { Box, Divider } from "@mui/material";
+import { Create, Woche, WocheHeader, Zusammenfassung } from "@dude/eintrag";
+import { Box, Divider, Stack } from "@mui/material";
 import { Eintrag } from "@dude/stunden-domain";
 import { addEintrag, setOpenCreate, useAppDispatch, useAppSelector } from "@dude/store";
 
@@ -24,7 +24,10 @@ export const App = () => {
     <Box sx={{ m: "2rem" }}>
       <WocheHeader></WocheHeader>
       <Divider sx={{ mb: 2 }} />
-      <Woche></Woche>
+      <Stack direction={"row"}>
+        <Woche></Woche>
+        <Zusammenfassung></Zusammenfassung>
+      </Stack>
       <Create open={openCreate} onClose={onClose} datum={selectedDatum} />
     </Box>
   );

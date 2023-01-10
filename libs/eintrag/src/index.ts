@@ -1,3 +1,4 @@
+export * from './lib/zusammenfassung/zusammenfassung';
 export * from './lib/eintrag-footer/eintrag-footer';
 export * from './lib/woche-header/woche-header';
 export * from './lib/eintrag-item-header/eintrag-item-header';

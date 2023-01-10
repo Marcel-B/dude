@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DevIt.Abrechnung.Adapter\DevIt.Abrechnung.Adapter.csproj" />
       <ProjectReference Include="..\DevIt.Eintrag.Adapter\DevIt.Eintrag.Adapter.csproj" />
       <ProjectReference Include="..\DevIt.Pbi.Adapter\DevIt.Pbi.Adapter.csproj" />
       <ProjectReference Include="..\DevIt.Persistence\DevIt.Persistence.csproj" />

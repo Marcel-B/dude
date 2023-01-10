@@ -1,4 +1,5 @@
-﻿using DevIt.Domain;
+﻿using DevIt.Abrechnung.Adapter;
+using DevIt.Domain;
 using DevIt.Eintrag.Adapter;
 using DevIt.Pbi.Adapter;
 using DevIt.Persistence;
@@ -15,6 +16,7 @@ public static class ServiceCollectionExtensions
       .AddDomain()
       .AddEintragAdapter()
       .AddProjektAdapter()
+      .AddAbrechnungAdapter()
       .AddPbiAdapter()
       .AddPersistence();
   }

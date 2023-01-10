@@ -29,4 +29,8 @@
       <ProjectReference Include="..\DevIt.Api\DevIt.Api.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers" />
+    </ItemGroup>
+
 </Project>
