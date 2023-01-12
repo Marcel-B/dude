@@ -83,6 +83,9 @@ const abrechnung = {
     params.append("text", text);
     const result = await get<{ stunden: number }>(`/api/abrechnung/by-jahr?${params.toString()}`);
     return result.stunden;
+  },
+  async getProjekte(): Promise<string[]> {
+    return await get<string[]>("/api/abrechnung/projekte");
   }
 };
 

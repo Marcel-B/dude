@@ -1,38 +1,89 @@
-import { Card, Divider, Stack, Typography } from "@mui/material";
-import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
-import EuroIcon from "@mui/icons-material/Euro";
+import { Autocomplete, Card, debounce, Divider, TextField, Typography } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import {
+  fetchAbrechnungJahr,
+  fetchAbrechnungKalenderwoche,
+  fetchAbrechnungMonat, fetchProjektnamen,
+  useAppDispatch,
+  useAppSelector
+} from "@dude/store";
+import { format } from "date-fns";
+import ZusammenfassungItem from "../zusammenfassung-item/zusammenfassung-item";
 
 export function Zusammenfassung() {
+  const { monat, jahr, kalenderwoche, projekte } = useAppSelector(state => state.abrechnung);
+  const { datum } = useAppSelector(state => state.eintrag);
+  const appDispatch = useAppDispatch();
+
+  const [stundensatz, setStundensatz] = useState(1);
+  const [kunde, setKunde] = useState("");
+
+  const debouncedKunde = useCallback(debounce((value: string) => {
+    setKunde(value);
+  }, 500), []);
+
+  const debouncedStundensatz = useCallback(debounce((value: number) => {
+    setStundensatz(value);
+  }, 500), []);
+
+  const stundensatzChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const stundensatz = event.target.value;
+    debouncedStundensatz(Number(stundensatz));
+  };
+  const kundeChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const kunde = event.target.value;
+    debouncedKunde(kunde);
+  };
+
+  useEffect(() => {
+    const d = new Date(datum);
+    appDispatch(
+      fetchAbrechnungMonat({
+        monat: d.getMonth() + 1,
+        jahr: d.getFullYear(),
+        text: kunde
+      }));
+
+    appDispatch(fetchProjektnamen());
+
+    appDispatch(
+      fetchAbrechnungKalenderwoche({
+        kalenderwoche: Number(format(d, "w")),
+        jahr: d.getFullYear(),
+        text: kunde
+      }));
+
+    appDispatch(
+      fetchAbrechnungJahr({
+        jahr: d.getFullYear(),
+        text: kunde
+      }));
+
+  }, [datum, kunde, stundensatz]);
+
   return (
-    <Card sx={{ p: 2, width: 222, height: 170 }}>
+    <Card sx={{ p: 2, width: 222 }}>
       <Typography variant="h2">Abrechnung</Typography>
       <Divider />
-      <Stack direction={"row"} sx={{ mt: 1, justifyContent: "space-between" }}>
-        <Typography variant="body1">Woche <QueryBuilderIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">77h</Typography>
-      </Stack>
-      <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
-        <Typography variant="body1">Woche <EuroIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">1.551$</Typography>
-      </Stack>
+      <TextField
+        label="Stundensatz"
+        type="number"
+        onChange={stundensatzChanged}
+        sx={{ mt: 1, mb: 1, justifyContent: "space-between" }} />
+      <Autocomplete
+        options={projekte}
+        onSelect={kundeChanged}
+        renderInput={(params) => <TextField {...params} onChange={kundeChanged} label="Projekte" />} />
+      {/*<TextField*/}
+      {/*  label="Kunde"*/}
+      {/*  type="text"*/}
+      {/*  onChange={kundeChanged}*/}
+      {/*  sx={{ mt: 1, mb: 1, justifyContent: "space-between" }} />*/}
+      <ZusammenfassungItem title={"Woche"} stundensatz={stundensatz} stunden={kalenderwoche} />
       <Divider />
-      <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
-        <Typography variant="body1">Monat <QueryBuilderIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">222</Typography>
-      </Stack>
-      <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
-        <Typography variant="body1">Monat <EuroIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">1.551$</Typography>
-      </Stack>
+      <ZusammenfassungItem title={"Monat"} stundensatz={stundensatz} stunden={monat} />
       <Divider />
-      <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
-        <Typography variant="body1">Jahr <QueryBuilderIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">222</Typography>
-      </Stack>
-      <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
-        <Typography variant="body1">Jahr <EuroIcon style={{ fontSize: "1rem" }} /></Typography>
-        <Typography variant="body1">1.551$</Typography>
-      </Stack>
+      <ZusammenfassungItem stunden={jahr} stundensatz={stundensatz} title={"Jahr"} />
     </Card>
   );
 }

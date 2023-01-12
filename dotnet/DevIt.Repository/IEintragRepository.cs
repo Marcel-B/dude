@@ -17,5 +17,6 @@ public interface IEintragRepository
 
   Task<IList<Eintrag>> GetEintragByMonatAsync(int monat, int jahr, string text, CancellationToken cancellationToken);
   Task<IList<Eintrag>> GetEintragByJahrAsync(int jahr, string text, CancellationToken cancellationToken);
+  Task<IList<string>> GetProjekteAsync(CancellationToken cancellationToken);
   Task DeleteEintragAsync(int id, CancellationToken cancellationToken);
 }

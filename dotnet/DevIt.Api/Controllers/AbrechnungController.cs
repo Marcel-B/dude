@@ -1,4 +1,5 @@
 using DevIt.Abrechnung.Adapter.Queries;
+using DevIt.Projekt.Adapter.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,5 +47,13 @@ public class AbrechnungController : ControllerBase
     var result = await _mediator.Send(new GetAbrechnungByKalenderwocheQuery(kalenderwoche, jahr, text),
       cancellationToken);
     return Ok(new {Stunden = result});
+  }
+
+  [HttpGet("projekte")]
+  public async Task<IActionResult> GetProjekteAsync(
+    CancellationToken cancellationToken)
+  {
+    var result = await _mediator.Send(new Abrechnung.Adapter.Queries.GetProjekteQuery(), cancellationToken);
+    return Ok(result);
   }
 }

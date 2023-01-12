@@ -25,3 +25,21 @@ public class GetAbrechnungByMonatQueryHandler :
     return result.Select(x => x.Stunden).Sum();
   }
 }
+
+public class GetProjekteQueryHandler :
+  IRequestHandler<GetProjekteQuery, IEnumerable<string>>
+{
+  private readonly IUnitOfWork _unitOfWork;
+
+  public GetProjekteQueryHandler(IUnitOfWork unitOfWork)
+  {
+    _unitOfWork = unitOfWork;
+  }
+
+  public async Task<IEnumerable<string>> Handle(GetProjekteQuery request,
+    CancellationToken cancellationToken)
+  {
+    var result = await _unitOfWork.Eintraege.GetProjekteAsync(cancellationToken);
+    return result;
+  }
+}

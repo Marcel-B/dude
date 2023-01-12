@@ -52,7 +52,6 @@ export const eintragSlice = createSlice({
   }
 });
 
-
 export const eintragSelectors = eintragAdapter.getSelectors(
   (state: RootState) => state.eintrag
 );

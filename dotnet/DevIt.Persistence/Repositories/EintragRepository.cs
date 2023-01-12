@@ -99,6 +99,11 @@ public class EintragRepository : IEintragRepository
       .ToListAsync(cancellationToken);
   }
 
+  public async Task<IList<string>> GetProjekteAsync(CancellationToken cancellationToken)
+  {
+    return await _context.Eintraege.Select(x => x.Text).Distinct().ToListAsync(cancellationToken);
+  }
+
   public async Task DeleteEintragAsync(int id, CancellationToken cancellationToken)
   {
     var eintragToDelte = await _context.Eintraege.FirstAsync(x => x.Id == id, cancellationToken);
