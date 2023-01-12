@@ -1,6 +1,6 @@
 import { Tag, Wochentag } from "@dude/stunden-domain";
 import parseIso from "date-fns/parseISO";
-import { format, lastDayOfWeek, startOfDay, subDays } from "date-fns";
+import { addHours, addWeeks, format, lastDayOfWeek, startOfDay, subDays } from "date-fns";
 
 export const toBranch = (name: string): string => {
   name = name.replace("#", "");
@@ -17,7 +17,7 @@ export const toBranch = (name: string): string => {
 };
 
 export const parsedDate = (date: string): Date => {
-  return startOfDay(parseIso(date));
+  return setCommonTime(parseIso(date));
 };
 
 export const getDateByWochentag = (wochentag: Wochentag, datum: string): Date => {
@@ -33,13 +33,11 @@ export const formatStunden = (stunden: number) => {
 };
 
 export const getFormattedDate = (wochentag: Wochentag, datum: string): string => {
-  const date = getDateByWochentag(wochentag, datum);
-  return format(date, "dd.MM.");
+  return format(getDateByWochentag(wochentag, datum), "dd.MM.");
 };
 
 export const getSonntag = (datum: string): Date => {
-  const date = parsedDate(datum);
-  return lastDayOfWeek(date, { weekStartsOn: 1 });
+  return setCommonTime(lastDayOfWeek(parsedDate(datum), { weekStartsOn: 1 }));
 };
 export const getDateByTag = (datum: string, tag: Tag): Date => {
   return subDays(getSonntag(datum), tag);
@@ -47,6 +45,39 @@ export const getDateByTag = (datum: string, tag: Tag): Date => {
 export const getDateByTagISO = (datum: string, tag: Tag): string => {
   return subDays(getSonntag(datum), tag).toISOString();
 };
+
+export const setCommonTime = (date: Date): Date => {
+  return addHours(startOfDay(date), 12);
+};
+
+export const getDateTimeAsISO = (date: Date): string => {
+  return date.toISOString();
+};
+
+export const addWeek = (date: Date): Date => {
+  return addWeeks(date, 1);
+};
+
+export const subWeek = (date: Date): Date => {
+  return addWeeks(date, -1);
+};
+
+export const changeWeek = (date: Date, change: number): Date => {
+  return addWeeks(date, change);
+};
+
 export const sameDate = (date1: Date, date2: Date): boolean => {
   return format(date1, "yyyy-mm-dd") === format(date2, "yyyy-mm-dd");
+};
+
+export const getTodayAsISO = (): string => {
+  return getDateTimeAsISO(setCommonTime(new Date()));
+};
+
+export const getAsYear = (date: Date): string => {
+  return format(date, "yyyy");
+};
+
+export const getAsCalendarWeek = (date: Date): string => {
+  return format(date, "ww");
 };

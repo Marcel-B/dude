@@ -5,8 +5,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import React, { useEffect } from "react";
 import { eintragSelectors, fetchEintraege, RootState, setDatum, useAppDispatch, useAppSelector } from "@dude/store";
 import EintragItemHeader from "../eintrag-item-header/eintrag-item-header";
-import { getDateByTag, parsedDate, sameDate } from "@dude/util";
-import { addWeeks, startOfDay } from "date-fns";
+import { changeWeek, getDateByTag, getDateTimeAsISO, parsedDate, sameDate, setCommonTime } from "@dude/util";
 import EintragItem from "../eintrag-item/eintrag-item";
 import EintragFooter from "../eintrag-footer/eintrag-footer";
 
@@ -25,10 +24,11 @@ export function Woche() {
     dispatch(fetchEintraege());
   }, []);
 
-  const changeWeek = (amount: number) => {
+  const handleChangeWeek = (amount: number) => {
     const date = parsedDate(datum);
-    const newDatum = addWeeks(date, amount);
-    dispatch(setDatum(startOfDay(newDatum).toISOString()));
+    const newDatum = changeWeek(date, amount);
+    const commonTime = setCommonTime(newDatum);
+    dispatch(setDatum(getDateTimeAsISO(commonTime)));
   };
 
   return (
@@ -39,7 +39,7 @@ export function Woche() {
     >
 
       <Grid item xs={0}>
-        <IconButton onClick={() => changeWeek(-1)}>
+        <IconButton onClick={() => handleChangeWeek(-1)}>
           <KeyboardArrowLeftIcon />
         </IconButton>
       </Grid>
@@ -60,7 +60,7 @@ export function Woche() {
         );
       })}
       <Grid item xs={0}>
-        <IconButton onClick={() => changeWeek(1)}>
+        <IconButton onClick={() => handleChangeWeek(1)}>
           <KeyboardArrowRightIcon />
         </IconButton>
       </Grid>

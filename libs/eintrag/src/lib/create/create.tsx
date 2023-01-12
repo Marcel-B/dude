@@ -6,27 +6,40 @@ import {
   DialogContent,
   DialogTitle,
   DialogContentText,
-  TextField
+  TextField, Autocomplete, debounce, Checkbox, FormGroup, FormControlLabel
 } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useAppSelector } from "@dude/store";
 
 interface IProps {
   open: boolean;
   datum: string;
-  onClose: (result: { taetigkeit: string, dauer: number, datum: string } | null) => void;
+  onClose: (result: { taetigkeit: string, dauer: number, datum: string, abrechenbar: boolean } | null) => void;
 }
 
 export function Create({ onClose, open, datum }: IProps) {
   const [taetigkeit, setTaetigkeit] = useState("");
   const [dauer, setDauer] = useState("");
+  const [abrechenbar, setAbrechenbar] = useState(true);
+  const { projekte } = useAppSelector(state => state.abrechnung);
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.id === "taetigkeit") {
-      setTaetigkeit(e.target.value);
-    } else if (e.target.id === "dauer") {
-      setDauer(e.target.value);
-    }
-  }
+  const debouncedTaetigkeit = useCallback(debounce((value: string) => {
+    setTaetigkeit(value);
+  }, 500), []);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDauer(e.target.value);
+  };
+
+  const taetigkeitChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const taetigkeit = event.target.value;
+    debouncedTaetigkeit(taetigkeit);
+  };
+
+  const abrechenbarChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const abrechenbar = event.target.checked;
+    setAbrechenbar(abrechenbar);
+  };
 
   const handleClose = () => {
     onClose(null);
@@ -34,7 +47,7 @@ export function Create({ onClose, open, datum }: IProps) {
 
   const handleSave = () => {
     if (dauer && taetigkeit) {
-      onClose({ taetigkeit, dauer: Number(dauer), datum });
+      onClose({ taetigkeit, dauer: Number(dauer), datum, abrechenbar });
     }
     setDauer("");
     setTaetigkeit("");
@@ -48,11 +61,12 @@ export function Create({ onClose, open, datum }: IProps) {
           Geben Sie bitte hier die Tätigkeit und die Dauer in Stunden ein.
         </DialogContentText>
         <Box component="form" justifyContent="space-between">
-          <TextField
+          <Autocomplete
+            options={projekte}
+            freeSolo
             sx={{ mt: 2 }}
-            fullWidth
-            id="taetigkeit" type="text" variant="outlined" onChange={onChange}
-            label="Tätigkeit" />
+            onSelect={taetigkeitChanged}
+            renderInput={(params) => <TextField {...params} onChange={taetigkeitChanged} label="Projekte" />} />
           <TextField
             sx={{ mt: 2 }}
             fullWidth id="dauer"
@@ -60,6 +74,11 @@ export function Create({ onClose, open, datum }: IProps) {
             variant="outlined"
             onChange={onChange}
             label="Dauer" />
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={abrechenbar} onChange={abrechenbarChanged} />}
+              label="Abrechenbar" />
+          </FormGroup>
         </Box>
       </DialogContent>
       <DialogActions sx={{ mr: 2, mb: 2 }}>

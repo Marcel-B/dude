@@ -1,8 +1,6 @@
-import styles from "./eintrag-footer.module.scss";
 import { Paper, Stack, Typography } from "@mui/material";
 import { formatStunden } from "@dude/util";
 
-/* eslint-disable-next-line */
 interface IProps {
   stunden: number;
   style?: React.CSSProperties;

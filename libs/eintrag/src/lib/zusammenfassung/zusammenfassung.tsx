@@ -69,16 +69,13 @@ export function Zusammenfassung() {
         label="Stundensatz"
         type="number"
         onChange={stundensatzChanged}
-        sx={{ mt: 1, mb: 1, justifyContent: "space-between" }} />
+        sx={{ mt: 1, mb: 2, justifyContent: "space-between" }} />
       <Autocomplete
         options={projekte}
+        freeSolo
+        sx={{mb: 1}}
         onSelect={kundeChanged}
         renderInput={(params) => <TextField {...params} onChange={kundeChanged} label="Projekte" />} />
-      {/*<TextField*/}
-      {/*  label="Kunde"*/}
-      {/*  type="text"*/}
-      {/*  onChange={kundeChanged}*/}
-      {/*  sx={{ mt: 1, mb: 1, justifyContent: "space-between" }} />*/}
       <ZusammenfassungItem title={"Woche"} stundensatz={stundensatz} stunden={kalenderwoche} />
       <Divider />
       <ZusammenfassungItem title={"Monat"} stundensatz={stundensatz} stunden={monat} />

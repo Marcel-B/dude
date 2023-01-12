@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } fro
 import { Eintrag } from "@dude/stunden-domain";
 import { apiClient } from "@dude/api-client";
 import { RootState } from "./store";
-import { startOfDay } from "date-fns";
+import { getTodayAsISO } from "@dude/util";
 
 
 const eintragAdapter = createEntityAdapter<Eintrag>({
@@ -23,7 +23,7 @@ export const addEintrag = createAsyncThunk("eintrag/addEintrag", async (eintrag:
 export const eintragSlice = createSlice({
   name: "eintrag",
   initialState: eintragAdapter.getInitialState({
-    datum: startOfDay(new Date()).toISOString(),
+    datum: getTodayAsISO(),
     loading: false,
     openCreate: false,
     selectedDatum: ""
@@ -35,10 +35,9 @@ export const eintragSlice = createSlice({
     setOpenCreate: (state, action: PayloadAction<{ openCreate: boolean, selectedDatum: string }>) => {
       state.openCreate = action.payload.openCreate;
       state.selectedDatum = action.payload.selectedDatum;
-
     },
     reset: (state) => {
-      state.datum = startOfDay(new Date()).toISOString();
+      state.datum = getTodayAsISO();
       state.openCreate = false;
     }
   },
