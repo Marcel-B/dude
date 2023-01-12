@@ -9,8 +9,6 @@ export function WocheHeader() {
   const dispatch = useAppDispatch();
 
   const changeToToday = () => {
-    const date = parsedDate(datum);
-    const newDatum = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     dispatch(setDatum(startOfDay(new Date()).toISOString()));
   };
 

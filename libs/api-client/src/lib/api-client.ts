@@ -2,8 +2,8 @@ import axios from "axios";
 import { Eintrag, Pbi, Projekt } from "@dude/stunden-domain";
 import { PbiDto } from "./dto/pbi-dto";
 
-//const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:8054" });
-const axiosInstance = axios.create({ baseURL: "http://localhost:5263" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.2.103:8054" });
+//const axiosInstance = axios.create({ baseURL: "http://localhost:5263" });
 
 const get = async <Out>(path: string): Promise<Out> => {
   const response = await axiosInstance.get<Out>(path);
@@ -60,7 +60,34 @@ const pbis = {
   }
 };
 
+const abrechnung = {
+  async getByKalenderwoche(kalenderwoche: number, jahr: number, text: string): Promise<number> {
+    const params = new URLSearchParams();
+    params.append("kalenderwoche", kalenderwoche.toString());
+    params.append("jahr", jahr.toString());
+    params.append("text", text);
+    const result = await get<{ stunden: number }>(`/api/abrechnung/by-kalenderwoche?${params.toString()}`);
+    return result.stunden;
+  },
+  async getByMonat(monat: number, jahr: number, text: string): Promise<number> {
+    const params = new URLSearchParams();
+    params.append("jahr", jahr.toString());
+    params.append("monat", monat.toString());
+    params.append("text", text);
+    const result = await get<{ stunden: number }>(`/api/abrechnung/by-monat?${params.toString()}`);
+    return result.stunden;
+  },
+  async getByJahr(jahr: number, text: string): Promise<number> {
+    const params = new URLSearchParams();
+    params.append("jahr", jahr.toString());
+    params.append("text", text);
+    const result = await get<{ stunden: number }>(`/api/abrechnung/by-jahr?${params.toString()}`);
+    return result.stunden;
+  }
+};
+
 export const apiClient = {
+  abrechnung,
   eintraege,
   projekte,
   pbis
