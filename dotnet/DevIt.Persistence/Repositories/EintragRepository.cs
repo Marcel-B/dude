@@ -15,8 +15,13 @@ internal static class EintragRepositoryExtensions
   internal static IQueryable<Eintrag> ByText(this IQueryable<Eintrag> eintraege, string text)
     => eintraege.Where(e => e.Text == text);
 
-  internal static IQueryable<Eintrag> ByKalenderwoche(this IQueryable<Eintrag> eintraege, int kalenderwoche)
-    => eintraege.Where(x => myCal.GetWeekOfYear(x.Datum.Date, myCWR, myFirstDOW) == kalenderwoche);
+  internal static async Task<IList<Eintrag>> ByKalenderwoche(this IQueryable<Eintrag> eintraege,
+    int kalenderwoche,
+    CancellationToken cancellationToken)
+  {
+    var result = await eintraege.ToListAsync(cancellationToken);
+    return result.Where(x => myCal.GetWeekOfYear(x.Datum.Date, myCWR, myFirstDOW) == kalenderwoche).ToList();
+  }
 
   internal static IQueryable<Eintrag> ByMonat(this IQueryable<Eintrag> eintraege, int monat)
     => eintraege.Where(x => x.Datum.Month == monat);
@@ -63,7 +68,8 @@ public class EintragRepository : IEintragRepository
     return _context.Eintraege.Where(x => x.Text.Contains(text));
   }
 
-  public async Task<IList<Eintrag>> GetEintragByKalenderwocheAsync(int kalenderwoche,
+  public async Task<IList<Eintrag>> GetEintragByKalenderwocheAsync(
+    int kalenderwoche,
     int jahr,
     string name,
     CancellationToken cancellationToken)
@@ -72,8 +78,7 @@ public class EintragRepository : IEintragRepository
       .Eintraege
       .ByText(name)
       .ByJahr(jahr)
-      .ByKalenderwoche(kalenderwoche)
-      .ToListAsync(cancellationToken);
+      .ByKalenderwoche(kalenderwoche, cancellationToken);
   }
 
   public async Task<IList<Eintrag>> GetEintragByMonatAsync(int monat, int jahr, string text,
