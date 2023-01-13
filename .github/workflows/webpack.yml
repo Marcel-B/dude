@@ -21,6 +21,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: install pnpm
+      run: npm i -G pnpm
+    - name: pnpm i
+      run: pnpm i
 
     - name: Nrwl Nx
       # You may pin to the exact commit or the version.
