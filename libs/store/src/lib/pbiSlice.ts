@@ -25,8 +25,22 @@ export const deletePbi = createAsyncThunk("pbi/deletePbi", async (id: string) =>
 
 export const pbiSlice = createSlice({
   name: "pbi",
-  initialState: pbiAdapter.getInitialState(),
-  reducers: {},
+  initialState: pbiAdapter.getInitialState({
+    openCopyDialog: false,
+    pbi: "",
+    copyDialogType: ""
+  }),
+  reducers: {
+    setOpenCopyDialog: (state, action: PayloadAction<boolean>) => {
+      state.openCopyDialog = action.payload;
+    },
+    setPbi: (state, action: PayloadAction<string>) => {
+      state.pbi = action.payload;
+    },
+    setCopyDialogType: (state, action: PayloadAction<string>) => {
+      state.copyDialogType = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPbis.fulfilled, (state, action: PayloadAction<Pbi[]>) => {
       pbiAdapter.setAll(state, action.payload);
@@ -44,3 +58,4 @@ export const pbiSlice = createSlice({
 export const pbiSelectors = pbiAdapter.getSelectors(
   (state: RootState) => state.pbi
 );
+export const { setOpenCopyDialog, setPbi, setCopyDialogType } = pbiSlice.actions;

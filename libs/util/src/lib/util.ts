@@ -3,13 +3,12 @@ import parseIso from "date-fns/parseISO";
 import { addHours, addWeeks, format, lastDayOfWeek, startOfDay, subDays } from "date-fns";
 
 export const toBranch = (name: string): string => {
-  name = name.replace("#", "");
-  //const regexSpace = /\b \b/g;
-  const regexFalseChars = /[/:]/g;
+  const regexFalseChars = /[/:#']/g;
   const regexDoubleSpace = /\s+/g;
 
   const strPerfect = name
     .replace(regexFalseChars, " ")
+    .trim()
     .replace(regexDoubleSpace, "-")
     .trim();
   return strPerfect;
@@ -37,7 +36,7 @@ export const getFormattedDate = (wochentag: Wochentag, datum: string): string =>
 };
 export const getFormattedDateByDate = (date: string): string => {
   return date ?
-  format(parsedDate(date), "dd.MM.") : "";
+    format(parsedDate(date), "dd.MM.") : "";
 };
 
 export const getSonntag = (datum: string): Date => {

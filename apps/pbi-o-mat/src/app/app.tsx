@@ -12,13 +12,16 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Create as CreateProjekt, List as ListProjekt } from "@dude/projekt";
-import { Create as CreatePbi, List as ListPbi } from "@dude/pbi";
+import { CopyDialog, Create as CreatePbi, List as ListPbi } from "@dude/pbi";
+import { setOpenCopyDialog, useAppDispatch, useAppSelector } from "@dude/store";
 
 export function App() {
   const [projects, setProject] = useState<Projekt[]>([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error" | "info">("success");
+  const { copyDialogType, pbi, openCopyDialog } = useAppSelector(state => state.pbi);
+  const dispatch = useAppDispatch();
 
   const handleSnackbarClose = () => {
     setOpenSnackbar(false);
@@ -26,6 +29,10 @@ export function App() {
 
   const handleAddProject = (p: Projekt) => {
     setProject([...projects, p]);
+  };
+
+  const onColse = () => {
+    dispatch(setOpenCopyDialog(false));
   };
 
   const triggerSnackbar = (message: string, severity: "success" | "error" | "info") => {
@@ -77,6 +84,7 @@ export function App() {
       <Snackbar open={openSnackbar} autoHideDuration={4_000} onClose={handleSnackbarClose}>
         <Alert severity={snackbarSeverity}>{snackbarMessage}</Alert>
       </Snackbar>
+      <CopyDialog type={copyDialogType} pbi={pbi} open={openCopyDialog} onClose={onColse} />
     </Container>
   );
 }

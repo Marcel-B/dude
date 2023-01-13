@@ -8,8 +8,7 @@ import {
   fetchPbis,
   fetchProjekte,
   pbiSelectors,
-  projekteSelectors, setToClipboard,
-  useAppDispatch,
+  projekteSelectors, setCopyDialogType, setOpenCopyDialog, setPbi, useAppDispatch,
   useAppSelector
 } from "@dude/store";
 import { toBranch } from "@dude/util";
@@ -23,11 +22,6 @@ export const List = ({ triggerSnackbar }: IProps) => {
   const pbis = useAppSelector(pbiSelectors.selectAll);
   const projekte = useAppSelector(projekteSelectors.selectAll);
   const dispatch = useAppDispatch();
-
-  const writeToClipboard = (text: string) => {
-    console.log(text);
-    dispatch(setToClipboard(text));
-  };
 
   useEffect(() => {
     dispatch(fetchPbis());
@@ -47,19 +41,23 @@ export const List = ({ triggerSnackbar }: IProps) => {
         <GridActionsCellItem label="Copy" icon={<ContentCopyIcon color="info" />} onClick={() => {
           const postfix = params.row.beschreibung ? `(${params.row.beschreibung.trim()})` : "";
           const forClipboard = `${params.row.name} ${postfix}`;
+          dispatch(setPbi(forClipboard));
+          dispatch(setCopyDialogType("PBI"));
+          dispatch(setOpenCopyDialog(true));
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }
-          writeToClipboard(forClipboard);
           params.row.beschreibung = "";
         }}
         />,
         <GridActionsCellItem label="Branch" icon={<AltRouteIcon color="primary" />} onClick={() => {
           const forClipboard = toBranch(params.row.name);
+          dispatch(setPbi(forClipboard));
+          dispatch(setCopyDialogType("Branch"));
+          dispatch(setOpenCopyDialog(true));
           if (triggerSnackbar) {
             triggerSnackbar(`P.B.I. '${forClipboard}' in die Zwischenablage kopiert`, "info");
           }
-          writeToClipboard(forClipboard);
           params.row.beschreibung = "";
         }}
         />,
