@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
         all: false
         workingDirectory: .
     
-    - name: S3 Sync
+    - name: S3 Sync Stunden
       # You may pin to the exact commit or the version.
       # uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
       uses: jakejarvis/s3-sync-action@v0.5.1
@@ -52,3 +52,15 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_S3_ENDPOINT: 'https://eu2.contabostorage.com'
         SOURCE_DIR: 'dist/apps/stunden'
+        
+    - name: S3 Sync pbi-o-mat
+      # You may pin to the exact commit or the version.
+      # uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
+      uses: jakejarvis/s3-sync-action@v0.5.1
+      env:
+        AWS_REGION: 'European Union (Germany)'
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKE_PBI_O_MAT }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_S3_ENDPOINT: 'https://eu2.contabostorage.com'
+        SOURCE_DIR: 'dist/apps/pbi-o-mat'
