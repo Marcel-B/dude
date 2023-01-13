@@ -48,3 +48,4 @@ jobs:
       env:
         AWS_REGION: 'European Union (Germany)'
         AWS_S3_ENDPOINT: 'https://eu2.contabostorage.com'
+        SOURCE_DIR: 'dist/apps/stunden'
