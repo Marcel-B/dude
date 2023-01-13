@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useAppSelector } from "@dude/store";
+import { getFormattedDate, getFormattedDateByDate } from "@dude/util";
 
 interface IProps {
   open: boolean;
@@ -55,7 +56,7 @@ export function Create({ onClose, open, datum }: IProps) {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Neuer Eintrag</DialogTitle>
+      <DialogTitle>Neuer Eintrag <span style={{marginLeft: 20, fontSize: 15}}>{getFormattedDateByDate(datum)}</span></DialogTitle>
       <DialogContent>
         <DialogContentText>
           Geben Sie bitte hier die Tätigkeit und die Dauer in Stunden ein.

@@ -50,7 +50,7 @@ export function Woche() {
             <Divider sx={{ mt: 2, mb: 2 }} />
             {eintraege && getEintragForTag(eintraege, wochentag.tag)
               .map(e =>
-                <EintragItem key={e.id} text={e.text} stunden={e.stunden}></EintragItem>)}
+                <EintragItem key={e.id} text={e.text} stunden={e.stunden} abrechenbar={e.abrechenbar}></EintragItem>)}
             <Divider sx={{ mt: 2, mb: 2, borderBottom: "2px solid black" }} />
             <EintragFooter
               key={wochentag.tag}

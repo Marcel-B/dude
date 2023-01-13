@@ -69,7 +69,7 @@ export function Zusammenfassung() {
         label="Stundensatz"
         type="number"
         onChange={stundensatzChanged}
-        sx={{ mt: 1, mb: 2, justifyContent: "space-between" }} />
+        sx={{ mt: 2, mb: 2, justifyContent: "space-between" }} />
       <Autocomplete
         options={projekte}
         freeSolo

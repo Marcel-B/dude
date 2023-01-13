@@ -28,15 +28,15 @@ export function ZusammenfassungItem({ stunden, stundensatz, title }: IProps) {
     <Fragment>
       <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
         <Box sx={{ display: "flex" }}>
+          <QueryBuilderIcon sx={{ mt: .5, mr: .5, fontSize: "1rem" }} />
           <Typography variant="body1">{title}</Typography>
-          <QueryBuilderIcon sx={{ mt: .5, ml: .5, fontSize: "1rem" }} />
         </Box>
         <Typography variant="body1">{hours(stunden)} h</Typography>
       </Stack>
       <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
         <Box sx={{ display: "flex" }}>
+          <EuroIcon sx={{ mt: .5, mr: .5, fontSize: "1rem" }} />
           <Typography variant="body1">{title}</Typography>
-          <EuroIcon sx={{ mt: .5, ml: .5, fontSize: "1rem" }} />
         </Box>
         <Typography variant="body1">{money(stunden)}</Typography>
       </Stack>

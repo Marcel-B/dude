@@ -35,6 +35,10 @@ export const formatStunden = (stunden: number) => {
 export const getFormattedDate = (wochentag: Wochentag, datum: string): string => {
   return format(getDateByWochentag(wochentag, datum), "dd.MM.");
 };
+export const getFormattedDateByDate = (date: string): string => {
+  return date ?
+  format(parsedDate(date), "dd.MM.") : "";
+};
 
 export const getSonntag = (datum: string): Date => {
   return setCommonTime(lastDayOfWeek(parsedDate(datum), { weekStartsOn: 1 }));
