@@ -45,3 +45,6 @@ jobs:
       # You may pin to the exact commit or the version.
       # uses: jakejarvis/s3-sync-action@be0c4ab89158cac4278689ebedd8407dd5f35a83
       uses: jakejarvis/s3-sync-action@v0.5.1
+      env:
+        AWS_REGION: 'European Union (Germany)'
+        AWS_S3_ENDPOINT: 'https://eu2.contabostorage.com'
