@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "many": "nx run-many --target=serve --projects=leapp,pbi-api --parallel --maxParallel=2",
+    "many": "nx serve host --devRemotes=stunden,pbi-o-mat",
     "build": "nx build",
     "test": "nx test"
   },

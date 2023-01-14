@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.ReverseProxy", "DevIt.ReverseProxy\DevIt.ReverseProxy.csproj", "{EA824DC1-DE82-4208-B4EC-071EA71B1314}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Api", "DevIt.Api\DevIt.Api.csproj", "{83E3A40A-72F0-45BE-9EAC-67410F49CD85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Application", "DevIt.Application\DevIt.Application.csproj", "{A0DB37F8-807E-4763-B400-91899173A8F4}"
@@ -32,10 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EA824DC1-DE82-4208-B4EC-071EA71B1314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA824DC1-DE82-4208-B4EC-071EA71B1314}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA824DC1-DE82-4208-B4EC-071EA71B1314}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA824DC1-DE82-4208-B4EC-071EA71B1314}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83E3A40A-72F0-45BE-9EAC-67410F49CD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83E3A40A-72F0-45BE-9EAC-67410F49CD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83E3A40A-72F0-45BE-9EAC-67410F49CD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
