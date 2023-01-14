@@ -1,12 +1,16 @@
 using DevIt.Projekt.Adapter.Command;
 using DevIt.Projekt.Adapter.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace DevIt.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
+[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
 public class ProjektController : ControllerBase
 {
   private readonly IMediator _mediator;

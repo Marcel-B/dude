@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/marcel/source/repos/turbo/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj": {}
+    "/Users/marcel/source/repos/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj": {}
   },
   "projects": {
-    "/Users/marcel/source/repos/turbo/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj": {
+    "/Users/marcel/source/repos/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/marcel/source/repos/turbo/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj",
+        "projectUniqueName": "/Users/marcel/source/repos/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj",
         "projectName": "DevIt.ReverseProxy",
-        "projectPath": "/Users/marcel/source/repos/turbo/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj",
+        "projectPath": "/Users/marcel/source/repos/dude/dotnet/DevIt.ReverseProxy/DevIt.ReverseProxy.csproj",
         "packagesPath": "/Users/marcel/.nuget/packages/",
-        "outputPath": "/Users/marcel/source/repos/turbo/dude/dotnet/DevIt.ReverseProxy/obj/",
+        "outputPath": "/Users/marcel/source/repos/dude/dotnet/DevIt.ReverseProxy/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/marcel/.nuget/NuGet/NuGet.Config"
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }
