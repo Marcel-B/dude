@@ -1,0 +1,32 @@
+name: Docker Image Identity.Servus
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Generate build number
+      uses: einaregilsson/build-number@v3
+      with:
+        token: ${{secrets.github_token}}
+    - name: Print new build number
+      run: echo "Build number is $BUILD_NUMBER"
+    - uses: docker/login-action@v2.1.0
+      name: Docker Login
+      with:
+        username: millegalb
+        password: ${{secrets.DOCKER_HUB_PW}}
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build ./dotnet/Identity.Servus --file ./dotnet/Identity.Servus/Dockerfile --tag millegalb/identity-servus:0.0.$BUILD_NUMBER
+    - name: Push the Docker image
+      run: docker push millegalb/identity-servus:0.0.$BUILD_NUMBER
+

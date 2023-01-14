@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.IntegrationTests", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Abrechnung.Adapter", "DevIt.Abrechnung.Adapter\DevIt.Abrechnung.Adapter.csproj", "{28A70221-D5DE-42CF-8AD2-FA793F2D9353}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login.Example", "Login.Example\Login.Example.csproj", "{16DB73D2-738A-49D4-B939-C5EA11FD5A4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{28A70221-D5DE-42CF-8AD2-FA793F2D9353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28A70221-D5DE-42CF-8AD2-FA793F2D9353}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28A70221-D5DE-42CF-8AD2-FA793F2D9353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DB73D2-738A-49D4-B939-C5EA11FD5A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DB73D2-738A-49D4-B939-C5EA11FD5A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DB73D2-738A-49D4-B939-C5EA11FD5A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DB73D2-738A-49D4-B939-C5EA11FD5A4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CBE79FD-379E-484D-AA7E-346CAB39DE67} = {DC150107-920E-45B7-A2B0-39D42C831090}
