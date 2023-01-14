@@ -10,6 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="LettuceEncrypt" Version="1.2.0" />
       <PackageReference Include="Yarp.ReverseProxy" Version="1.1.1" />
     </ItemGroup>
 
