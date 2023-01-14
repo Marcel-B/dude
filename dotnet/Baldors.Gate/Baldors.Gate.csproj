@@ -5,6 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <AssemblyName>Baldors.Gate</AssemblyName>
+        <RootNamespace>Baldors.Gate</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
