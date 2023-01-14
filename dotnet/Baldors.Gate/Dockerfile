@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Baldors.Gate.csproj", "Baldors.Gate/"]
+COPY ["Baldors.Gate/Baldors.Gate.csproj", "Baldors.Gate/"]
 RUN dotnet restore "Baldors.Gate/Baldors.Gate.csproj"
 COPY . .
 WORKDIR "/src/Baldors.Gate"
