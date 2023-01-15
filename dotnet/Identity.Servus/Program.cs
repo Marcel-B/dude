@@ -1,7 +1,7 @@
 using Identity.Servus;
-using LettuceEncrypt;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Server;
 using Quartz;
@@ -11,6 +11,7 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 services.AddRazorPages();
+services.AddScoped<IEmailSender, EmailSender>();
 
 services.AddDbContext<ApplicationContext>(options =>
 {
