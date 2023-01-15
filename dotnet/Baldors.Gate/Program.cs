@@ -1,13 +1,13 @@
+using System.Net;
 using LettuceEncrypt;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel((context, options) =>
 {
-  options.ConfigureHttpsDefaults(httpsOptions =>
-  {
-    options.ListenAnyIP(443,
-      portOptions => { portOptions.UseHttps(h => { h.UseLettuceEncrypt(options.ApplicationServices); }); });
-  });
+  var appServices = options.ApplicationServices;
+  options.Listen(
+    IPAddress.Any, 443,
+    o => o.UseHttps(h => { h.UseLettuceEncrypt(appServices); }));
 });
 var services = builder.Services;
 
@@ -16,8 +16,8 @@ services
   .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
 services
-  .AddLettuceEncrypt();
-  //.PersistDataToDirectory(new DirectoryInfo("/app/config"), "Password123");
+  .AddLettuceEncrypt()
+  .PersistDataToDirectory(new DirectoryInfo("/app/config"), "Password123");
 
 var app = builder.Build();
 app.UseRouting();
