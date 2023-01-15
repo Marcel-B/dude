@@ -27,4 +27,13 @@
       <PackageReference Include="Quartz.Extensions.Hosting" Version="3.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="wwwroot\css\site.css">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\js\site.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
