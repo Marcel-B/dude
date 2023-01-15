@@ -27,6 +27,11 @@ span {
   color: #726ed4;
 }
 
+h2 {
+  color: #726ed4;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 2rem!important;
+}
 p.welcome {
   padding: 2rem;
   color: #726ed4;
