@@ -7,22 +7,8 @@ using OpenIddict.Server;
 using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel((context, options) =>
-{
-  options.ConfigureHttpsDefaults(httpsOptions =>
-  {
-    options.ListenAnyIP(443,
-      portOptions => { portOptions.UseHttps(h => { h.UseLettuceEncrypt(options.ApplicationServices); }); });
-  });
-});
-
-
 var services = builder.Services;
 var configuration = builder.Configuration;
-
-services
-  .AddLettuceEncrypt()
-  .PersistDataToDirectory(new DirectoryInfo("/app/config"), "Password123");
 
 services.AddRazorPages();
 
