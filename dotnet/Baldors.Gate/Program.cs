@@ -1,14 +1,6 @@
-using System.Net;
 using LettuceEncrypt;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel((context, options) =>
-{
-  var appServices = options.ApplicationServices;
-  options.Listen(
-    IPAddress.Any, 443,
-    o => o.UseHttps(h => { h.UseLettuceEncrypt(appServices); }));
-});
 var services = builder.Services;
 
 services
