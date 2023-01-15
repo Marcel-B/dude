@@ -8,36 +8,35 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Sofia+Sans:ital,wght@1,900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Share+Tech+Mono&family=Sofia+Sans:ital,wght@1,900&family=Ubuntu+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
   <nav>
-    <div class="container" style="padding: 1rem; display: flex; justify-content: space-between">
-    <span>=====</span>
-      <a class="nav-link" style="font-size: 1.5rem; margin-top: -0.5rem" asp-area="" asp-page="/Index">Identity Servus&TRADE;</a>
-      <div>|</div>
-      <a class="nav-link" asp-area="" asp-page="/Index">Heimat</a>
-      <div>|</div>
-      <a class="nav-link" asp-area="" asp-page="/Privacy">Privatsphäre</a>
-      <div>|</div>
+    <div class="container" style="padding: 1rem; display: flex; justify-content: space-between; align-items: baseline">
+    <div class="eq">=====</div>
+      <a class="nav-link" style="font-size: 1.5rem;" asp-area="" asp-page="/Index">IDENTITY SERVUS&TRADE;</a>
+      <div class="eq">|</div>
+      <a class="nav-link" asp-area="" asp-page="/Index">HEIMAT</a>
+      <div class="eq">|</div>
+      <a class="nav-link" asp-area="" asp-page="/Privacy">PRIVATSPHÄRE</a>
+      <div class="eq">|</div>
       <partial name="_LoginPartial"/>
-      <div></div>
-    <span>======</span>
+    <div class="eq">======</div>
     </div>
   </nav>
 </header>
 <div class="container">
-  <main role="main" class="pb-3">
+  <main id="lo" role="main" class="pb-3">
     @RenderBody()
   </main>
 </div>
 
 <footer>
-  <div>
-    &copy; 2023 - b-velop - <a asp-area="" class="nav-item" asp-page="/Privacy">Privacy</a>
+  <div style="font-family: Ubuntu Mono">
+    &copy; 2023 - Marcel Benders // b-velop - <a asp-area="" class="nav-item" asp-page="/Privacy">PRIVATSPHÄRE</a>
   </div>
 </footer>
 
