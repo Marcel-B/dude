@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Servus", "Identity.Servus\Identity.Servus.csproj", "{AD0A1021-C343-4BFA-9FC5-6F810BE5F6AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Servus.AppUser.Adapter", "Identity.Servus.AppUser.Adapter\Identity.Servus.AppUser.Adapter.csproj", "{C56C4D60-9C80-460C-A828-35049FFB87D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{AD0A1021-C343-4BFA-9FC5-6F810BE5F6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD0A1021-C343-4BFA-9FC5-6F810BE5F6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD0A1021-C343-4BFA-9FC5-6F810BE5F6AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C56C4D60-9C80-460C-A828-35049FFB87D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56C4D60-9C80-460C-A828-35049FFB87D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56C4D60-9C80-460C-A828-35049FFB87D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56C4D60-9C80-460C-A828-35049FFB87D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
