@@ -1,4 +1,4 @@
-name: Docker Image devit-api
+name: Docker Image devit-api identity-servus
 
 on:
   push:

@@ -1,3 +1,4 @@
+using Identity.Servus.Persistence;
 using OpenIddict.Abstractions;
 
 namespace Identity.Servus;
@@ -19,7 +20,7 @@ public class Worker : IHostedService
   {
     await using var scope = _serviceProvider.CreateAsyncScope();
 
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     await context.Database.EnsureCreatedAsync(cancellationToken);
 
     var manager = scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();

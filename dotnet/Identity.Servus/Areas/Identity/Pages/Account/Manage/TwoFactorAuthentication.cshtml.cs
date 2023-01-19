@@ -2,24 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Threading.Tasks;
-using Identity.Servus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace Identity.Servus.Areas.Identity.Pages.Account.Manage
 {
     public class TwoFactorAuthenticationModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<Domain.AppUser> _userManager;
+        private readonly SignInManager<Domain.AppUser> _signInManager;
         private readonly ILogger<TwoFactorAuthenticationModel> _logger;
 
         public TwoFactorAuthenticationModel(
-            UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
+            UserManager<Domain.AppUser> userManager, SignInManager<Domain.AppUser> signInManager, ILogger<TwoFactorAuthenticationModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;

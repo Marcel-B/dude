@@ -17,14 +17,14 @@ namespace Identity.Servus.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly IUserStore<AppUser> _userStore;
+        private readonly UserManager<Domain.AppUser> _userManager;
+        private readonly SignInManager<Domain.AppUser> _signInManager;
+        private readonly IUserStore<Domain.AppUser> _userStore;
 
         public ExternalLoginsModel(
-            UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager,
-            IUserStore<AppUser> userStore)
+            UserManager<Domain.AppUser> userManager,
+            SignInManager<Domain.AppUser> signInManager,
+            IUserStore<Domain.AppUser> userStore)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -70,7 +70,7 @@ namespace Identity.Servus.Areas.Identity.Pages.Account.Manage
                 .ToList();
 
             string passwordHash = null;
-            if (_userStore is IUserPasswordStore<AppUser> userPasswordStore)
+            if (_userStore is IUserPasswordStore<Domain.AppUser> userPasswordStore)
             {
                 passwordHash = await userPasswordStore.GetPasswordHashAsync(user, HttpContext.RequestAborted);
             }

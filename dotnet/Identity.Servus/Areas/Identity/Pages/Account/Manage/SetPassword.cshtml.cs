@@ -14,12 +14,12 @@ namespace Identity.Servus.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<Domain.AppUser> _userManager;
+        private readonly SignInManager<Domain.AppUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            UserManager<Domain.AppUser> userManager,
+            SignInManager<Domain.AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
