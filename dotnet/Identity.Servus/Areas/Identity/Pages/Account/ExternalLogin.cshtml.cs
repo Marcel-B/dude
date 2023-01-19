@@ -2,39 +2,33 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Options;
-using Identity.Servus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace Identity.Servus.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IUserStore<AppUser> _userStore;
-        private readonly IUserEmailStore<AppUser> _emailStore;
+        private readonly SignInManager<Domain.AppUser> _signInManager;
+        private readonly UserManager<Domain.AppUser> _userManager;
+        private readonly IUserStore<Domain.AppUser> _userStore;
+        private readonly IUserEmailStore<Domain.AppUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<AppUser> signInManager,
-            UserManager<AppUser> userManager,
-            IUserStore<AppUser> userStore,
+            SignInManager<Domain.AppUser> signInManager,
+            UserManager<Domain.AppUser> userManager,
+            IUserStore<Domain.AppUser> userStore,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender)
         {
@@ -86,7 +80,7 @@ namespace Identity.Servus.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
         }
-        
+
         public IActionResult OnGet() => RedirectToPage("./Login");
 
         public IActionResult OnPost(string provider, string returnUrl = null)
@@ -198,11 +192,11 @@ namespace Identity.Servus.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private AppUser CreateUser()
+        private Domain.AppUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<AppUser>();
+                return Activator.CreateInstance<Domain.AppUser>();
             }
             catch
             {
@@ -212,13 +206,13 @@ namespace Identity.Servus.Areas.Identity.Pages.Account
             }
         }
 
-        private IUserEmailStore<AppUser> GetEmailStore()
+        private IUserEmailStore<Domain.AppUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<AppUser>)_userStore;
+            return (IUserEmailStore<Domain.AppUser>)_userStore;
         }
     }
 }

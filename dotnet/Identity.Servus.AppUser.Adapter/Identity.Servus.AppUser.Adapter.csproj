@@ -6,4 +6,19 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="11.1.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Identity.Servus.Messaging\Identity.Servus.Messaging.csproj" />
+      <ProjectReference Include="..\Identity.Servus.Repository\Identity.Servus.Repository.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands" />
+      <Folder Include="Handler" />
+    </ItemGroup>
+
 </Project>
