@@ -33,7 +33,4 @@ jobs:
       run: docker push millegalb/identity-servus:0.0.$BUILD_NUMBER
     - name: Push the Docker image DevIt
       run: docker push millegalb/devit-d-api:0.0.$BUILD_NUMBER
-      run: docker build ./dotnet/Identity.Servus --file ./dotnet/Identity.Servus/Dockerfile --tag millegalb/identity-servus:0.0.$BUILD_NUMBER
-    - name: Push Identity.Servus Docker image
-      run: docker push millegalb/identity-servus:0.0.$BUILD_NUMBER
 
