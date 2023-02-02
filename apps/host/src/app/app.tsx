@@ -62,7 +62,6 @@ export function App() {
         <Route path="/pbi-o-mat" element={<PbiOMat writeToClipboard={toClipboard} />} />
         <Route path="/stunden" element={<Stunden />} />
       </Routes>
-      ;
     </React.Suspense>
   );
 }

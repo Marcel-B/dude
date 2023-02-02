@@ -17,7 +17,6 @@ export function NxWelcome({ title }: { title: string }) {
       </Container>
     </>
   )
-    ;
 }
 
 export default NxWelcome;

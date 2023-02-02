@@ -14,6 +14,11 @@ export function Woche() {
   const { datum } = useAppSelector((state: RootState) => state.eintrag);
   const eintraege = useAppSelector(eintragSelectors.selectAll);
 
+  /**
+   * Returns Eintraege for Tag
+   * @param eintraege Eintraege
+   * @param tag Tag
+   */
   const getEintragForTag = (eintraege: Eintrag[], tag: Tag) => {
     return eintraege.filter(e =>
       sameDate(parsedDate(e.datum), getDateByTag(datum, tag))
