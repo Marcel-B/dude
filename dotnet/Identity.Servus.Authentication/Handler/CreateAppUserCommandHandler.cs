@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Azure.Core;
 using Identity.Servus.Authentication.Commands;
 using Identity.Servus.Domain;
@@ -38,6 +39,8 @@ public class CreateAppUserCommandHandler : IRequestHandler<CreateAppUserCommand,
     var emailStore = GetEmailStore();
     await emailStore.SetEmailAsync(user, request.Email, CancellationToken.None);
     var result = await _userManager.CreateAsync(user, request.Password);
+    await _userManager.AddClaimAsync(user, new Claim("email", request.Email));
+    await _userManager.AddClaimAsync(user, new Claim("administrator", "true"));
     return result.Succeeded
       ? new AppUserCreated(true, user)
       : new AppUserCreated(false, ErrorMessages: result.Errors.ToList());

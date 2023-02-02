@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenIddict.Server;
 using Quartz;
 
 namespace Identity.Servus.Authorization;
@@ -99,10 +100,10 @@ public static class ServiceCollectionExtensions
         });
 
         // Register the event handler responsible for populating userinfo responses.
-        // options
-        //   .AddEventHandler<OpenIddictServerEvents.HandleUserinfoRequestContext>(options =>
-        //     options
-        //       .UseSingletonHandler<Handlers.PopulateUserinfo>());
+        options
+          .AddEventHandler<OpenIddictServerEvents.HandleUserinfoRequestContext>(options =>
+            options
+              .UseSingletonHandler<Handlers.PopulateUserinfo>());
       })
       .AddValidation(options =>
       {
