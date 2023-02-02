@@ -19,11 +19,6 @@ interface IProps {
 
 export function CopyDialog({ type, pbi, open, onClose }: IProps) {
 
-  useEffect(() => {
-    console.log("type", type);
-    console.log("pbi", pbi);
-  }, [type, pbi]);
-
   return (
     <>
       <Dialog onClose={onClose} open={open}>

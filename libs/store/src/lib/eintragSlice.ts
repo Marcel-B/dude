@@ -4,20 +4,17 @@ import { apiClient } from "@dude/api-client";
 import { RootState } from "./store";
 import { getTodayAsISO } from "@dude/util";
 
-
 const eintragAdapter = createEntityAdapter<Eintrag>({
   selectId: (eintrag) => eintrag.id,
   sortComparer: (a, b) => a.datum.localeCompare(b.datum)
 });
 
 export const fetchEintraege = createAsyncThunk("eintrag/fetchEintraege", async () => {
-  const response = await apiClient.eintraege.getEintraege();
-  return response;
+  return await apiClient.eintraege.getEintraege();
 });
 
 export const addEintrag = createAsyncThunk("eintrag/addEintrag", async (eintrag: Eintrag) => {
-  const response = await apiClient.eintraege.addEintrag(eintrag);
-  return response;
+  return await apiClient.eintraege.addEintrag(eintrag);
 });
 
 export const eintragSlice = createSlice({
