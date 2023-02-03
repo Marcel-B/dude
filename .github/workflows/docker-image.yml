@@ -56,12 +56,12 @@ jobs:
         all: false
         workingDirectory: .
 
+    - name: Build HOST
+      run: docker build . --file Host.Dockerfile --tag millegalb/devit-host:0.0.$BUILD_NUMBER
     - name: Build DevIt API
       run: docker build ./dotnet --file ./dotnet/DevIt.Api/Dockerfile --tag millegalb/devit-d-api:0.0.$BUILD_NUMBER
     - name: Build Identity Servus
       run: docker build ./dotnet --file ./dotnet/Identity.Servus/Dockerfile --tag millegalb/identity-servus:0.0.$BUILD_NUMBER
-    - name: Build HOST
-      run: docker build . --file Host.Dockerfile --tag millegalb/devit-host:0.0.$BUILD_NUMBER
 
     - name: Push the Docker image Idenetity
       run: docker push millegalb/identity-servus:0.0.$BUILD_NUMBER
