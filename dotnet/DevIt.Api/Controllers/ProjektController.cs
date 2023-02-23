@@ -10,7 +10,7 @@ namespace DevIt.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+// [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
 public class ProjektController : ControllerBase
 {
   private readonly IMediator _mediator;

@@ -25,16 +25,15 @@ app.UseCors(builder => builder
   .AllowAnyMethod());
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-app.UseSwagger();
-app.UseSwaggerUI();
-//}
+if (app.Environment.IsDevelopment())
+{
+  app.UseSwagger();
+  app.UseSwaggerUI();
+}
 
-//app.UseHttpsRedirection();
 
 //app.UseAuthentication();
-app.UseAuthorization();
+// app.UseAuthorization();
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
