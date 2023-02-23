@@ -1,5 +1,4 @@
 using DevIt.Abrechnung.Adapter.Queries;
-using DevIt.Projekt.Adapter.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
