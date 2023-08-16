@@ -2,6 +2,7 @@ using Duende.IdentityServer;
 using Identity.Cata.Data;
 using Identity.Cata.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -15,7 +16,7 @@ internal static class HostingExtensions
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    builder.Services.AddScoped<IEmailSender, EmailSender>();
     builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
       .AddEntityFrameworkStores<ApplicationDbContext>()
       .AddDefaultTokenProviders();
@@ -63,10 +64,14 @@ internal static class HostingExtensions
     app.UseStaticFiles();
     app.UseRouting();
     app.UseIdentityServer();
+    app.UseAuthentication();
     app.UseAuthorization();
 
-    app.MapRazorPages()
-      .RequireAuthorization();
+    app.MapControllerRoute(
+      name: "default",
+      pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.MapRazorPages();
 
     return app;
   }
