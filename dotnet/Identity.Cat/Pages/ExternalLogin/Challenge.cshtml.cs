@@ -10,36 +10,37 @@ namespace Identity.Cat.Pages.ExternalLogin;
 [SecurityHeaders]
 public class Challenge : PageModel
 {
-  private readonly IIdentityServerInteractionService _interactionService;
+    private readonly IIdentityServerInteractionService _interactionService;
 
-  public Challenge(IIdentityServerInteractionService interactionService)
-  {
-    _interactionService = interactionService;
-  }
-
-  public IActionResult OnGet(string scheme, string returnUrl)
-  {
-    if (string.IsNullOrEmpty(returnUrl)) returnUrl = "~/";
-
-    // validate returnUrl - either it is a valid OIDC URL or back to a local page
-    if (Url.IsLocalUrl(returnUrl) == false && _interactionService.IsValidReturnUrl(returnUrl) == false)
+    public Challenge(
+        IIdentityServerInteractionService interactionService)
     {
-      // user might have clicked on a malicious link - should be logged
-      throw new Exception("invalid return URL");
+        _interactionService = interactionService;
     }
 
-    // start challenge and roundtrip the return URL and scheme 
-    var props = new AuthenticationProperties
+    public IActionResult OnGet(
+        string scheme,
+        string returnUrl)
     {
-      RedirectUri = Url.Page("/externallogin/callback"),
+        if (string.IsNullOrEmpty(returnUrl)) returnUrl = "~/";
 
-      Items =
-      {
-        {"returnUrl", returnUrl},
-        {"scheme", scheme},
-      }
-    };
+        // validate returnUrl - either it is a valid OIDC URL or back to a local page
+        if (Url.IsLocalUrl(returnUrl) == false && _interactionService.IsValidReturnUrl(returnUrl) == false)
+            // user might have clicked on a malicious link - should be logged
+            throw new Exception("invalid return URL");
 
-    return Challenge(props, scheme);
-  }
+        // start challenge and roundtrip the return URL and scheme 
+        var props = new AuthenticationProperties
+        {
+            RedirectUri = Url.Page("/externallogin/callback"),
+
+            Items =
+            {
+                {"returnUrl", returnUrl},
+                {"scheme", scheme}
+            }
+        };
+
+        return Challenge(props, scheme);
+    }
 }

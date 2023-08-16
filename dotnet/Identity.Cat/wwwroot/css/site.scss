@@ -30,8 +30,9 @@ span {
 h2 {
   color: #726ed4;
   font-family: "Share Tech Mono", monospace;
-  font-size: 2rem!important;
+  font-size: 2rem !important;
 }
+
 p.welcome {
   padding: 2rem;
   color: #726ed4;
@@ -48,11 +49,13 @@ p.welcome::after {
   background: #726ed4;
   display: inline-block;
 }
+
 @keyframes cursor-blink {
   0% {
     opacity: 0;
   }
 }
+
 p.welcome::after {
   /*code commented for brevity*/
   animation: cursor-blink 1.5s steps(2) infinite;
