@@ -16,7 +16,7 @@ public class ProjektRepository : IProjektRepository
 
   public async Task<Projekt> CreateProjektAsync(Projekt projekt, CancellationToken cancellationTokens)
   {
-    _context.Projekte.Add(projekt);
+    await _context.Projekte.AddAsync(projekt);
     return projekt;
   }
 

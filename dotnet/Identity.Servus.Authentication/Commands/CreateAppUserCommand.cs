@@ -5,6 +5,6 @@ namespace Identity.Servus.Authentication.Commands;
 
 public class CreateAppUserCommand : IRequest<AppUserCreated>
 {
-  public string Email { get; set; }
-  public string Password { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
 }

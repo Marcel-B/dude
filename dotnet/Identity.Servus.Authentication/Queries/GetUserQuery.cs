@@ -3,4 +3,5 @@ using MediatR;
 
 namespace Identity.Servus.Authentication.Queries;
 
-public record GetUserQuery(string Email) : IRequest<AppUser>;
+public record GetUserQuery(
+    string Email) : IRequest<AppUser>;

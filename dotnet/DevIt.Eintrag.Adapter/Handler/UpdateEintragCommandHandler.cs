@@ -15,9 +15,10 @@ public class UpdateEintragCommandHandler : IRequestHandler<UpdateEintragCommand,
 
   public async Task<Domain.Eintrag> Handle(UpdateEintragCommand request, CancellationToken cancellationToken)
   {
-    var createEintragCommand =
-      new Domain.Eintrag.CreateEintrag(request.Text, request.Stunden, request.Datum, request.Abrechenbar, request.Id);
-    var eintrag = Domain.Eintrag.Create(createEintragCommand);
+    var oldEintrag = await _uow.Eintraege.GetEintragByIdAsync(request.Id, cancellationToken);
+    var updateEintragCommand =
+      new Domain.Eintrag.UpdateEintrag(request.Text, request.Stunden, request.Datum, request.Abrechenbar);
+    var eintrag = Domain.Eintrag.Update(updateEintragCommand, oldEintrag);
 
     var result = await _uow.Eintraege.UpdateEintragAsync(eintrag, cancellationToken);
     await _uow.CompleteAsync(cancellationToken);

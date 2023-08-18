@@ -1,12 +1,11 @@
 ﻿@page
-@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model GenerateRecoveryCodesModel
 @{
     ViewData["Title"] = "Generate two-factor authentication (2FA) recovery codes";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
-<partial name="_StatusMessage" for="StatusMessage" />
+<partial name="_StatusMessage" for="StatusMessage"/>
 <h3>@ViewData["Title"]</h3>
 <div class="alert alert-warning" role="alert">
     <p>

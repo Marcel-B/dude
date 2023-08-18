@@ -36,14 +36,23 @@ namespace DevIt.Persistence.Migrations
                     b.Property<DateTimeOffset>("Datum")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("ExterneId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
                     b.Property<double>("Stunden")
                         .HasColumnType("float");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExterneId")
+                        .IsUnique()
+                        .HasFilter("[ExterneId] IS NOT NULL");
 
                     b.ToTable("Eintraege");
                 });
@@ -58,7 +67,8 @@ namespace DevIt.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.Property<string>("ProjektId")
                         .IsRequired()
@@ -76,11 +86,20 @@ namespace DevIt.Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ExterneId")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExterneId")
+                        .IsUnique()
+                        .HasFilter("[ExterneId] IS NOT NULL");
 
                     b.ToTable("Projekte");
                 });

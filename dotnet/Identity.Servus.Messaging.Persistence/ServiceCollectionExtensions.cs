@@ -4,8 +4,9 @@ namespace Identity.Servus.Messaging.Persistence;
 
 public static class ServiceCollectionExtensions
 {
-  public static IServiceCollection AddMessaginDb(this IServiceCollection services)
-  {
-    return services;
-  }
+    public static IServiceCollection AddMessaginDb(
+        this IServiceCollection services)
+    {
+        return services;
+    }
 }

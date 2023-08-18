@@ -5,9 +5,12 @@ namespace Identity.Servus.Persistence;
 
 public static class ServiceCollectionExtensions
 {
-  public static IServiceCollection AddDomain(this IServiceCollection services)
-  {
-    var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-    return services;
-  }
+    public static IServiceCollection AddDomain(
+        this IServiceCollection services)
+    {
+        var configuration = services
+            .BuildServiceProvider()
+            .GetRequiredService<IConfiguration>();
+        return services;
+    }
 }

@@ -4,8 +4,9 @@ namespace Identity.Servus.AppUser.Adapter;
 
 public static class ServiceCollectionExtensions
 {
-  public static IServiceCollection AddDomain(this IServiceCollection services)
-  {
-    return services;
-  }
+    public static IServiceCollection AddDomain(
+        this IServiceCollection services)
+    {
+        return services;
+    }
 }

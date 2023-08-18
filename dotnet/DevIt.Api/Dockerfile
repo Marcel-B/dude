@@ -12,6 +12,7 @@ COPY ["DevIt.Repository/DevIt.Repository.csproj", "DevIt.Repository/"]
 COPY ["DevIt.Domain/DevIt.Domain.csproj", "DevIt.Domain/"]
 COPY ["DevIt.Persistence/DevIt.Persistence.csproj", "DevIt.Persistence/"]
 COPY ["DevIt.Pbi.Adapter/DevIt.Pbi.Adapter.csproj", "DevIt.Pbi.Adapter/"]
+COPY ["DevIt.Moco.Adapter/DevIt.Moco.Adapter.csproj", "DevIt.Moco.Adapter/"]
 RUN dotnet restore "DevIt.Api/DevIt.Api.csproj" -v diag
 COPY . .
 WORKDIR "/src/DevIt.Api"

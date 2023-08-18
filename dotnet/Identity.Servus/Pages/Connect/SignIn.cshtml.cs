@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Security.Claims;
 using System.Text.Json.Nodes;
@@ -18,18 +17,22 @@ public class SignInModel : PageModel
 
     public string? ReturnUrl { get; set; }
 
-    public IActionResult OnGet(string? returnUrl = null)
+    public IActionResult OnGet(
+        string? returnUrl = null)
     {
         ReturnUrl = returnUrl;
 
         return Page();
     }
 
-    public IActionResult OnPost(string? returnUrl = null)
+    public IActionResult OnPost(
+        string? returnUrl = null)
     {
         var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, Claims.Name, Claims.Role);
 
-        var time = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture);
+        var time = DateTimeOffset
+            .UtcNow.ToUnixTimeSeconds()
+            .ToString(CultureInfo.InvariantCulture);
         identity.AddClaim(new Claim(Claims.AuthenticationTime, time, ClaimValueTypes.Integer64));
 
         if (string.Equals(Username, "John", StringComparison.OrdinalIgnoreCase))

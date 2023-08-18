@@ -1,86 +1,89 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 body {
-  background: #332AB6 !important;
-  border: solid 5rem #726ed4;
-  color: #726ed4;
-  height: 100vh;
-  overflow: hidden;
+    background: #332AB6 !important;
+    border: solid 5rem #726ed4;
+    color: #726ed4;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #lo, main {
-  height: calc(100vh - 18rem);
-  overflow-y: auto;
+    height: calc(100vh - 18rem);
+    overflow-y: auto;
 }
 
 h1.title {
-  color: #726ed4;
-  margin-top: 1rem;
-  font-family: "Lobster", cursive;
+    color: #726ed4;
+    margin-top: 1rem;
+    font-family: "Lobster", cursive;
 }
 
 a.nav-link {
-  color: #726ed4;
+    color: #726ed4;
 }
 
 span {
-  color: #726ed4;
+    color: #726ed4;
 }
 
 h2 {
-  color: #726ed4;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 2rem!important;
+    color: #726ed4;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 2rem !important;
 }
+
 p.welcome {
-  padding: 2rem;
-  color: #726ed4;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 1.5rem;
+    padding: 2rem;
+    color: #726ed4;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1.5rem;
 }
 
 p.welcome::after {
-  content: "";
-  margin-bottom: -3px;
-  padding-bottom: 0;
-  width: 15px;
-  height: 1.5rem;
-  background: #726ed4;
-  display: inline-block;
+    content: "";
+    margin-bottom: -3px;
+    padding-bottom: 0;
+    width: 15px;
+    height: 1.5rem;
+    background: #726ed4;
+    display: inline-block;
 }
+
 @keyframes cursor-blink {
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 }
+
 p.welcome::after {
-  /*code commented for brevity*/
-  animation: cursor-blink 1.5s steps(2) infinite;
+    /*code commented for brevity*/
+    animation: cursor-blink 1.5s steps(2) infinite;
 }
 
 .impressum {
-  padding: 2rem;
-  color: #726ed4;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 1.5rem;
+    padding: 2rem;
+    color: #726ed4;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1.5rem;
 }
 
 .nav-link, #logout {
-  color: #726ed4;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 1.5rem !important;
+    color: #726ed4;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 1.5rem !important;
 }
 
 div.eq {
-  font-size: 1.8rem;
-  vertical-align: bottom;
-  color: #726ed4;
-  font-family: "Share Tech Mono", monospace;
+    font-size: 1.8rem;
+    vertical-align: bottom;
+    color: #726ed4;
+    font-family: "Share Tech Mono", monospace;
 }
 
 footer > div {
-  position: fixed;
-  padding: 1rem;
-  bottom: 5rem;
-  color: #726ed4;
+    position: fixed;
+    padding: 1rem;
+    bottom: 5rem;
+    color: #726ed4;
 }

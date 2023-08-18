@@ -7,9 +7,13 @@ namespace Contruum.Server.Pages.Connect;
 
 public class SignOutModel : PageModel
 {
-    public IActionResult OnGet() => RedirectToPage("Index");
+    public IActionResult OnGet()
+    {
+        return RedirectToPage("Index");
+    }
 
-    public IActionResult OnPost(string? returnUrl = null)
+    public IActionResult OnPost(
+        string? returnUrl = null)
     {
         var properties = new AuthenticationProperties
         {
