@@ -1,0 +1,17 @@
+{
+  "babelrcRoots": [
+    "*"
+  ],
+  "presets": [
+    [
+      "@nrwl/react/babel",
+      {
+        "runtime": "automatic"
+      }
+    ],
+    "@babel/preset-flow"
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-flow"
+  ]
+}
