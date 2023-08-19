@@ -9,6 +9,7 @@ services.AddPersistence(builder.Configuration);
 services.AddHostedService<MqttWorker>();
 services.AddCommandHandlers();
 var app = builder.Build();
+Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
 context.Database.Migrate();

@@ -18,10 +18,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.Measurement.Adapter", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.Repository", "Mqtt.Repository\Mqtt.Repository.csproj", "{24A0BA6F-5C07-47D1-AF7D-F8CDAE3C8CB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.Identity", "Mqtt.Identity\Mqtt.Identity.csproj", "{37CBF669-35C9-4925-BF49-66B88A0F8DDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuendeIdentityServerwithIn-MemoryStoresandTestUsers1", "DuendeIdentityServerwithIn-MemoryStoresandTestUsers1\DuendeIdentityServerwithIn-MemoryStoresandTestUsers1.csproj", "{A83B2EA3-E5F2-4CBB-B088-E9951D725E61}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,13 +52,5 @@ Global
 		{24A0BA6F-5C07-47D1-AF7D-F8CDAE3C8CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24A0BA6F-5C07-47D1-AF7D-F8CDAE3C8CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24A0BA6F-5C07-47D1-AF7D-F8CDAE3C8CB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37CBF669-35C9-4925-BF49-66B88A0F8DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37CBF669-35C9-4925-BF49-66B88A0F8DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37CBF669-35C9-4925-BF49-66B88A0F8DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37CBF669-35C9-4925-BF49-66B88A0F8DDC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A83B2EA3-E5F2-4CBB-B088-E9951D725E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A83B2EA3-E5F2-4CBB-B088-E9951D725E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A83B2EA3-E5F2-4CBB-B088-E9951D725E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A83B2EA3-E5F2-4CBB-B088-E9951D725E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

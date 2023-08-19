@@ -6,18 +6,13 @@
       "launchBrowser": false,
       "applicationUrl": "http://192.168.2.228:5103",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "Application__ClientId": "daChief",
-        "Application__Password": "FkiDons+#geV^FbJpPG7",
-        "Application__Server": "13e448dabb7745f592dd52dae76edf23.s2.eu.hivemq.cloud",
-        "Application__UserName": "aquahi",
-        "ConnectionStrings__DefaultConnection": "Data Source=192.168.2.103,1433;Encrypt=True;TrustServerCertificate=True;Initial Catalog=BBQ;User Id=sa;Password=lolo-lala-l1l1lL1"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://192.168.2.228:7221;http://192.168.2.228:5103",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
