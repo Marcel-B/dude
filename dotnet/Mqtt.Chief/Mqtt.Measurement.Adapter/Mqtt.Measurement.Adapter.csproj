@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Mqtt.Domain\Mqtt.Domain.csproj" />
-      <ProjectReference Include="..\Mqtt.Persistence\Mqtt.Persistence.csproj" />
+        <ProjectReference Include="..\Mqtt.Domain\Mqtt.Domain.csproj"/>
+        <ProjectReference Include="..\Mqtt.Persistence\Mqtt.Persistence.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,10 @@
-﻿using Mqtt.Domain;
+﻿using com.b_velop.Mqtt.Domain;
 
-namespace Mqtt.Repository;
+namespace com.b_velop.Mqtt.Repository;
 
 public interface IMeasurementRepository
 {
-  Task<Measurement> InsertAsync(Measurement measurement, CancellationToken cancellationToken = default);
+    Task<Measurement> InsertAsync(
+        Measurement measurement,
+        CancellationToken cancellationToken = default);
 }

@@ -1,21 +1,25 @@
+using com.b_velop.Mqtt.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mqtt.Repository;
 
-namespace Mqtt.Persistence;
+namespace com.b_velop.Mqtt.Persistence;
 
 public static class ServiceCollectionExtension
 {
-  public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
-    => services
-      .AddScoped<IDeviceRepository, DeviceRepository>()
-      .AddScoped<ISensorRepository, SensorRepository>()
-      .AddScoped<IUnitRepository, UnitRepository>()
-      .AddScoped<ITimestampRepository, TimestampRepository>()
-      .AddScoped<IMeasurementRepository, MeasurementRepository>()
-      .AddDbContext<ApplicationContext>(options =>
-      {
-        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-      });
+    public static IServiceCollection AddPersistence(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        return services
+            .AddScoped<IDeviceRepository, DeviceRepository>()
+            .AddScoped<ISensorRepository, SensorRepository>()
+            .AddScoped<IUnitRepository, UnitRepository>()
+            .AddScoped<ITimestampRepository, TimestampRepository>()
+            .AddScoped<IMeasurementRepository, MeasurementRepository>()
+            .AddDbContext<ApplicationContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
+    }
 }

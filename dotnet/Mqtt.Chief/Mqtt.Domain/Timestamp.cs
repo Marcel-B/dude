@@ -1,18 +1,19 @@
 using System.Collections.ObjectModel;
 
-namespace Mqtt.Domain;
+namespace com.b_velop.Mqtt.Domain;
 
 public class Timestamp : Entity
 {
-  public DateTimeOffset DateTime { get; set; }
-  public virtual ICollection<Measurement> Measurements { get; set; } = new Collection<Measurement>();
+    public DateTimeOffset DateTime { get; set; }
+    public virtual ICollection<Measurement> Measurements { get; set; } = new Collection<Measurement>();
 
-  public static Timestamp Create(DateTimeOffset dateTime)
-  {
-    return new Timestamp
+    public static Timestamp Create(
+        DateTimeOffset dateTime)
     {
-      Created = DateTimeOffset.Now,
-      DateTime = dateTime
-    };
-  }
+        return new Timestamp
+        {
+            Created = DateTimeOffset.Now,
+            DateTime = dateTime
+        };
+    }
 }
