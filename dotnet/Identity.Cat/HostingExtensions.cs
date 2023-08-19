@@ -14,14 +14,17 @@ internal static class HostingExtensions
         this WebApplicationBuilder builder)
     {
         builder.Services.AddRazorPages();
-
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerTitan")));
         builder.Services.AddScoped<IEmailSender, EmailSender>();
         builder
             .Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+
+        var identityCatConfiguration = builder
+            .Configuration.GetSection("IdentityCatConfiguration")
+            .Get<IdentityCatConfiguration>();
 
         builder
             .Services
@@ -35,9 +38,9 @@ internal static class HostingExtensions
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiScopes(Config.ApiScopes)
-            .AddInMemoryClients(Config.Clients)
+            .AddInMemoryIdentityResources(identityCatConfiguration.GetIdentityResources())
+            .AddInMemoryApiScopes(identityCatConfiguration.GetApiScopes())
+            .AddInMemoryClients(identityCatConfiguration.GetClients())
             .AddAspNetIdentity<ApplicationUser>();
 
         builder

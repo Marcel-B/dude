@@ -3,7 +3,6 @@
     "SelfHost": {
       "commandName": "Project",
       "launchBrowser": false,
-      "commandLineArgs": "/seed",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

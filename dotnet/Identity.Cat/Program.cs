@@ -20,6 +20,9 @@ try
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 
+    var conString = builder.Configuration.GetConnectionString("SqlServerTitan");
+    Log.Information("DataBase "+ conString);
+
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
