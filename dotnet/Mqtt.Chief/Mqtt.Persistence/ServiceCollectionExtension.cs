@@ -19,7 +19,8 @@ public static class ServiceCollectionExtension
             .AddScoped<IMeasurementRepository, MeasurementRepository>()
             .AddDbContext<ApplicationContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                var cs = configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(cs);
             });
     }
 }

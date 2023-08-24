@@ -9,6 +9,8 @@ COPY ["Mqtt.Measurement.Adapter/Mqtt.Measurement.Adapter.csproj", "Mqtt.Measurem
 COPY ["Mqtt.Domain/Mqtt.Domain.csproj", "Mqtt.Domain/"]
 COPY ["Mqtt.Persistence/Mqtt.Persistence.csproj", "Mqtt.Persistence/"]
 COPY ["Mqtt.Repository/Mqtt.Repository.csproj", "Mqtt.Repository/"]
+COPY ["Mqtt.Shared/Mqtt.Shared.csproj", "Mqtt.Shared/"]
+COPY ["Mqtt.Measurement.Service/Mqtt.Measurement.Service.csproj", "Mqtt.Measurement.Service/"]
 RUN dotnet restore "Mqtt.Chief/Mqtt.Chief.csproj"
 COPY . .
 WORKDIR "/src/Mqtt.Chief"

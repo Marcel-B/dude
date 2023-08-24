@@ -1,4 +1,4 @@
-namespace Mqtt.Measurement.Adapter;
+namespace Mqtt.Shared;
 
 public interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery
 {

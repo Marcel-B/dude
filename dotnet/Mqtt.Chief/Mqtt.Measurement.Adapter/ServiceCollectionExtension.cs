@@ -1,4 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using Mqtt.Measurement.Adapter.Command;
+using Mqtt.Measurement.Adapter.Handler;
+using Mqtt.Shared;
 
 namespace Mqtt.Measurement.Adapter;
 

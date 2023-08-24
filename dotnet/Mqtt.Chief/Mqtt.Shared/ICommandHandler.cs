@@ -1,4 +1,4 @@
-namespace Mqtt.Measurement.Adapter;
+namespace Mqtt.Shared;
 
 public interface ICommandHandler<in TCommand> where TCommand : ICommand
 {

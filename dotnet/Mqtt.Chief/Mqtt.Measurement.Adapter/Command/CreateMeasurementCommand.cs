@@ -1,4 +1,6 @@
-namespace Mqtt.Measurement.Adapter;
+using Mqtt.Shared;
+
+namespace Mqtt.Measurement.Adapter.Command;
 
 public class CreateMeasurementCommand : ICommand
 {

@@ -1,4 +1,5 @@
 using com.b_velop.Mqtt.Chief;
+using com.b_velop.Mqtt.Measurement.Service;
 using com.b_velop.Mqtt.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Mqtt.Measurement.Adapter;
@@ -6,12 +7,20 @@ using Mqtt.Measurement.Adapter;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 services.AddPersistence(builder.Configuration);
-services.AddHostedService<MqttWorker>();
 services.AddCommandHandlers();
+services.AddMeasurementService();
+services.AddHostedService<MqttWorker>();
+
 var app = builder.Build();
-Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
 context.Database.Migrate();
 app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints
+        .MapGrpcService<MeasurementService>();
+    endpoints.MapFallback(() => "Hallo");
+});
+
 app.Run();

@@ -1,6 +1,8 @@
 using System.Text;
 using System.Text.Json;
 using Mqtt.Measurement.Adapter;
+using Mqtt.Measurement.Adapter.Command;
+using Mqtt.Shared;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;

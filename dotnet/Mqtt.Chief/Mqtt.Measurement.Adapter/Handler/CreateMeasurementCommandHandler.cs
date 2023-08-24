@@ -1,8 +1,10 @@
 ﻿using System.Globalization;
 using com.b_velop.Mqtt.Domain;
 using com.b_velop.Mqtt.Repository;
+using Mqtt.Measurement.Adapter.Command;
+using Mqtt.Shared;
 
-namespace Mqtt.Measurement.Adapter;
+namespace Mqtt.Measurement.Adapter.Handler;
 
 public class CreateMeasurementCommandHandler : ICommandHandler<CreateMeasurementCommand>
 {

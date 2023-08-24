@@ -8,7 +8,17 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Mqtt.Domain\Mqtt.Domain.csproj"/>
+        <ProjectReference Include="..\Mqtt.Measurement.Service\Mqtt.Measurement.Service.csproj" />
         <ProjectReference Include="..\Mqtt.Persistence\Mqtt.Persistence.csproj"/>
+        <ProjectReference Include="..\Mqtt.Shared\Mqtt.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Query\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Grpc.AspNetCore" Version="2.55.0" />
     </ItemGroup>
 
 </Project>
