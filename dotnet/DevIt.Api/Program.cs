@@ -35,13 +35,10 @@ builder.Services.AddQuartzHostedService(
 
 
 var app = builder.Build();
-// using var scope = app.Services.CreateScope();
-// var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
-// var result = await context.Database.EnsureCreatedAsync();
-// if (result)
-// {
-//   await context.Database.MigrateAsync();
-// }
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>(); 
+await context.Database.MigrateAsync();
+
 
 app.UseCors(builder => builder
   .WithOrigins(app.Configuration["Cors"]
