@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "Protos/common.proto";
+
+option csharp_namespace = "com.b_velop.Measurement.Service";
+
+package Measurement;
+
+service Measurement {
+  rpc GetMeasurement (GetMeasurementRequest) returns (GetMeasurementReply);
+}
+
+message GetMeasurementRequest {
+  Common.Guid sensor_id = 1;
+}
+
+message GetMeasurementReply {
+  double values = 1;
+}
