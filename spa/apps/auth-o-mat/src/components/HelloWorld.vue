@@ -3,12 +3,15 @@
     <V-Menubar :model="items"></V-Menubar>
   </div>
   <div class="hello">
-    <V-Button label="Submit"/>
+    <V-Button label="Submit" @click="(handleClickButton)"/>
   </div>
 </template>
 
 <script setup>
 import {ref} from 'vue';
+import * as singleSpa from 'single-spa';
+import {login} from 'auth';
+const handleClickButton = () => singleSpa.navigateToUrl('/content');
 
 const items = ref([
   {
@@ -130,18 +133,11 @@ const items = ref([
   },
   {
     label: 'Quit',
-    icon: 'pi pi-fw pi-power-off'
+    icon: 'pi pi-fw pi-power-off',
+    command: () => login().catch(console.error)
   }
 ]);
 
-//
-// export default {
-//   name: 'HelloWorld',
-//   props:
-//       {
-//         msg: String
-//       }
-// }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

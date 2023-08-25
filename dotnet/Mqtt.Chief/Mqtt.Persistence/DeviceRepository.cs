@@ -21,6 +21,12 @@ public class DeviceRepository : IDeviceRepository
         return await _context.Devices.FirstOrDefaultAsync(x => x.Name == name, cancellationToken);
     }
 
+    public async Task<IEnumerable<Device>> GetDevicesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Devices.ToListAsync(cancellationToken);
+    }
+
     public async Task<Device> InsertAsync(
         Device device,
         CancellationToken cancellationToken = default)

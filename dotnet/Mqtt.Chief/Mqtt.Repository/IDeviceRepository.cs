@@ -4,6 +4,9 @@ namespace com.b_velop.Mqtt.Repository;
 
 public interface IDeviceRepository
 {
+    Task<IEnumerable<Device>> GetDevicesAsync(
+        CancellationToken cancellationToken = default);
+
     Task<Device?> GetByNameAsync(
         string name,
         CancellationToken cancellationToken = default);

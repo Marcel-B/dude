@@ -24,6 +24,12 @@ public class SensorRepository : ISensorRepository
             x => x.Name == name && x.DeviceId == deviceId && x.UnitId == unitId, cancellationToken);
     }
 
+    public async Task<ICollection<Sensor>> GetSensorsAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Sensors.ToListAsync(cancellationToken);
+    }
+
     public async Task<Sensor> InsertAsync(
         Sensor sensor,
         CancellationToken cancellationToken = default)

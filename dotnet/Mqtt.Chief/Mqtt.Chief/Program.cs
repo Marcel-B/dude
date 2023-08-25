@@ -20,7 +20,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints
         .MapGrpcService<MeasurementService>();
-    endpoints.MapFallback(() => "Hallo");
+    endpoints.MapFallback(() => "Alive and kickin'");
 });
 
 app.Run();

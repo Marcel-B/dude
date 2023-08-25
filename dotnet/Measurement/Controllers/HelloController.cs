@@ -15,6 +15,28 @@ public class HelloController : ControllerBase
     }
 
     [HttpGet]
+    [Route("api/sensors")]
+    public async Task<IActionResult> GetSensors(
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _measurementService.GetSensors(
+                cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("api/devices")]
+    public async Task<IActionResult> GetDevices(
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _measurementService.GetDevices(
+                cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet]
     [Route("api/hello/{id}")]
     public async Task<IActionResult> Get(
         [FromRoute] Guid id,

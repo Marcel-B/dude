@@ -3,17 +3,6 @@ using Google.Protobuf;
 
 namespace com.b_velop.Measurement.Services;
 
-// public class MeasurementClient : Measurement.MeasurementClient
-// {
-//     private readonly ILogger<MeasurementClient> _logger;
-//
-//     public MeasurementClient(
-//         ILogger<MeasurementClient> logger)
-//     {
-//         _logger = logger;
-//     }
-// }
-
 public class MeasurementService
 {
     private readonly Service.Measurement.MeasurementClient _measurementClient;
@@ -39,5 +28,21 @@ public class MeasurementService
         var reply = await _measurementClient.GetMeasurementAsync(request, cancellationToken: cancellationToken);
 
         return reply.Values;
+    }
+
+    public async Task<IEnumerable<string>> GetSensors(
+        CancellationToken cancellationToken = default)
+    {
+        var request = new GetSensorsRequest();
+        var reply = await _measurementClient.GetSensorsAsync(request, cancellationToken: cancellationToken);
+        return reply.Sensors.Select(x => x.Name);
+    }
+
+    public async Task<IEnumerable<string>> GetDevices(
+        CancellationToken cancellationToken = default)
+    {
+        var request = new GetDevicesRequest();
+        var reply = await _measurementClient.GetDevicesAsync(request, cancellationToken: cancellationToken);
+        return reply.Devices.Select(x => x.Name);
     }
 }

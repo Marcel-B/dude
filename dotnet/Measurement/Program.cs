@@ -21,6 +21,14 @@ builder
 builder.Services.AddTransient<MeasurementService>();
 var app = builder.Build();
 
+app.UseCors(options =>
+{
+    options
+        .WithOrigins("http://localhost:9000")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .Build();
+});
 app.UseRouting();
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
