@@ -1,0 +1,39 @@
+{
+  "name": "@b-velop/measurement",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "serve:standalone": "vue-cli-service serve --mode standalone"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "pinia": "^2.1.6",
+    "primevue": "^3.32.1",
+    "primeflex": "^3.3.1",
+    "primeicons": "^6.0.1",
+    "single-spa-vue": "^2.1.0",
+    "vue": "^3.2.13",
+    "client": "workspace:*"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^2.4.1",
+    "sass": "^1.32.7",
+    "sass-loader": "^12.0.0",
+    "typescript": "~4.5.5",
+    "vue-cli-plugin-single-spa": "~3.3.0"
+  }
+}

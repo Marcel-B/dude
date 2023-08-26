@@ -5,6 +5,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Measurement/Measurement.csproj", "Measurement/"]
+COPY ["Dude.Shared/Dude.Shared.csproj", "Dude.Shared/"]
 RUN dotnet restore "Measurement/Measurement.csproj"
 COPY . .
 WORKDIR "/src/Measurement"

@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-option csharp_namespace = "com.b_velop.Mqtt.Measurement.Service.Common";
-
-package Common;
-
-message Guid {
-    bytes value = 1;
-}

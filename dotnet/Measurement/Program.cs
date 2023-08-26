@@ -1,5 +1,4 @@
-using com.b_velop.Measurement;
-using com.b_velop.Measurement.Service;
+using com.b_velop.Dude.Shared;
 using com.b_velop.Measurement.Services;
 using Grpc.Core;
 

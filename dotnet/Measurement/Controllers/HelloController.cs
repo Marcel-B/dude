@@ -47,4 +47,16 @@ public class HelloController : ControllerBase
                 cancellationToken);
         return Ok(result);
     }
+
+    [HttpGet]
+    [Route("api/device/{id}")]
+    public async Task<IActionResult> GetDeviceById(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _measurementService.GetDeviceById(id,
+                cancellationToken);
+        return Ok(result);
+    }
 }
