@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "projekt",
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
@@ -7,6 +7,10 @@
   "scripts": {
     "lint": "eslint \"**/*.ts*\"",
     "generate:component": "turbo gen react-component"
+  },
+  "dependencies": {
+    "app-store": "workspace:*",
+    "domain": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

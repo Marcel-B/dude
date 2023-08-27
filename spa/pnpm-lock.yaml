@@ -84,15 +84,15 @@ importers:
       next:
         specifier: ^13.4.1
         version: 13.4.1(react-dom@18.2.0)(react@18.2.0)
+      projekt:
+        specifier: workspace:*
+        version: link:../../packages/projekt
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
     devDependencies:
       '@types/node':
         specifier: ^17.0.12
@@ -351,6 +351,9 @@ importers:
       domain:
         specifier: workspace:*
         version: link:../../packages/domain
+      projekt:
+        specifier: workspace:*
+        version: link:../../packages/projekt
       react:
         specifier: ^17.0.2
         version: 17.0.2
@@ -466,15 +469,15 @@ importers:
       next:
         specifier: ^13.4.1
         version: 13.4.1(react-dom@18.2.0)(react@18.2.0)
+      projekt:
+        specifier: workspace:*
+        version: link:../../packages/projekt
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
-      ui:
-        specifier: workspace:*
-        version: link:../../packages/ui
     devDependencies:
       '@types/node':
         specifier: ^17.0.12
@@ -575,9 +578,14 @@ importers:
         specifier: 7.28.0
         version: 7.28.0(eslint@7.32.0)
 
-  packages/tsconfig: {}
-
-  packages/ui:
+  packages/projekt:
+    dependencies:
+      app-store:
+        specifier: workspace:*
+        version: link:../app-store
+      domain:
+        specifier: workspace:*
+        version: link:../domain
     devDependencies:
       '@types/react':
         specifier: ^18.2.0
@@ -599,7 +607,9 @@ importers:
         version: link:../tsconfig
       typescript:
         specifier: ^4.5.2
-        version: 4.9.5
+        version: 4.5.5
+
+  packages/tsconfig: {}
 
   packages/werkzeug:
     dependencies:
