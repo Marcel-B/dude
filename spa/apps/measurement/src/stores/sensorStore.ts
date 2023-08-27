@@ -1,9 +1,27 @@
 import { defineStore } from 'pinia';
+import { Device } from '@/models/device';
+import { apiClient } from 'client';
 
-export const useSensorStore = defineStore('SensorStore', {
+export const useSensorStore = defineStore('DeviceStore', {
   state: () => {
     return {
-      sensors: [],
+      devices: [] as Device[],
     };
+  },
+  actions: {
+    async fill() {
+      const data = await apiClient.client.get<Device[]>('/api/devices/');
+      for (const device of data) {
+        const deviceDto = await apiClient.client.get<{
+          id: string;
+          name: string;
+          sensoren: { name: string; unit: string }[];
+        }>(`/api/device/${device.id}/`);
+        device.sen = deviceDto.sensoren
+          .map((x) => `${x.name} (${x.unit})`)
+          .join(', ');
+      }
+      this.devices = data;
+    },
   },
 });

@@ -49,13 +49,28 @@ public class HelloController : ControllerBase
     }
 
     [HttpGet]
-    [Route("api/device/{id}")]
+    [Route("api/device/{id:guid}")]
     public async Task<IActionResult> GetDeviceById(
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
         var result =
             await _measurementService.GetDeviceById(id,
+                cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("api/measurements/{sensorId:guid}")]
+    public async Task<IActionResult> GetMeasurementBySensorId(
+        [FromRoute] Guid sensorId,
+        [FromQuery] DateTimeOffset? from,
+        [FromQuery] DateTimeOffset? to,
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _measurementService.GetMeasurementBySensorIdAsync(sensorId,
+                from, to,
                 cancellationToken);
         return Ok(result);
     }

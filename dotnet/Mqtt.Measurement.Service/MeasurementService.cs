@@ -67,7 +67,28 @@ public class MeasurementService : Dude.Shared.Measurement.MeasurementBase
         {
             Name = device.Name,
             Id = device.Id.ToProto(),
-            Sensors = {device.Sensors.Select(x => x.ToProto())}
+            Sensors = {device.Sensors.Select(x => x.ToProto())},
+        };
+        return reply;
+    }
+
+    public override async Task<GetMeasurementsReply> GetMeasurements(
+        GetMeasurementsRequest request,
+        ServerCallContext context)
+    {
+        var sensorId = request.SensorId?.Value ?? throw new ArgumentNullException(nameof(request.SensorId));
+        var from = request.From;
+        var to = request.To;
+
+
+        var g = new System.Guid(sensorId.ToByteArray());
+        var measurements = await _measurementRepository.GetBySensorIdAsync(g, from.ToDateTimeOffset(),
+            to.ToDateTimeOffset(),
+            context.CancellationToken);
+
+        var reply = new GetMeasurementsReply
+        {
+            Measurements = {measurements.Select(x => x.ToProto())}
         };
         return reply;
     }

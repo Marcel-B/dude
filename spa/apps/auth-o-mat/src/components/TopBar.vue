@@ -11,27 +11,23 @@ import {login} from 'auth';
 
 const items = ref([
   {
-    label: 'Chart',
+    label: 'Nodes',
     icon: 'pi pi-fw pi-chart-line',
     command: () => singleSpa.navigateToUrl('/state'),
   },
   {
-    label: 'Sensoren',
-    icon: 'pi pi-fw pi-microphone',
+    label: 'PBIs',
+    icon: 'pi pi-fw pi-list',
     command: () => singleSpa.navigateToUrl('/content'),
   },
   {
-    label: 'Zeitraum',
+    label: 'Zeiten',
     icon: 'pi pi-fw pi-calendar',
-  },
-  {
-    label: 'Tabelle',
-    icon: 'pi pi-fw pi-table',
-    command: () => login().catch(console.error)
   },
   {
     label: 'Login',
     icon: 'pi pi-fw pi-user',
+    command: () => login().catch(console.error)
   }
 ]);
 

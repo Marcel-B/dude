@@ -9,6 +9,8 @@
     "serve:standalone": "vue-cli-service serve --mode standalone"
   },
   "dependencies": {
+    "chart.js": "^4.4.0",
+    "date-fns": "^2.30.0",
     "core-js": "^3.8.3",
     "pinia": "^2.1.6",
     "primevue": "^3.32.1",

@@ -1,57 +1,24 @@
 <template>
   <div class="card flex justify-content-between">
-    <V-Card>
-      <template #title>Sensoren</template>
+    <Card>
+      <template #title>Geräte</template>
       <template #content>
-        <div class="flex justify-content-around">
-          <V-Dropdown
-            placeholder="Gerät"
-            optionLabel="name"
-            :options="devices"
-            v-model="selectedDevice"
-          ></V-Dropdown>
-          <V-Dropdown
-            class="w-full md:w-14rem"
-            placeholder="Sensor"
-            optionLabel="name"
-            :options="sensors"
-            v-model="selectedSensor"
-          ></V-Dropdown>
-        </div>
+        <DataTable :value="devices" tableStyle="min-width: 50rem">
+          <Column field="id" header="ID"></Column>
+          <Column field="name" header="Name"></Column>
+          <Column field="sen" header="Sensor(en) (Einheit)"></Column>
+        </DataTable>
       </template>
-    </V-Card>
+    </Card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { client } from 'client';
+import { storeToRefs } from 'pinia';
+import { useSensorStore } from '@/stores/sensorStore';
 
-const selectedDevice = ref();
-const selectedSensor = ref();
-const devices = ref();
-const sensors = ref();
-
-client.get<{ id: string; name: string }[]>('/api/devices/').then((r) => {
-  devices.value = r;
-});
-
-watch(selectedDevice, (device) => {
-  if (device) {
-    client
-      .get<{
-        id: string;
-        name: string;
-        sensoren: { id: string; name: string }[];
-      }>(`/api/device/${selectedDevice.value.id}/`)
-      .then((r) => {
-        sensors.value = r.sensoren;
-      });
-  }
-});
+const { devices } = storeToRefs(useSensorStore());
 </script>
-
-}
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

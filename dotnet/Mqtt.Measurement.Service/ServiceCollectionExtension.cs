@@ -12,7 +12,7 @@ public static class ServiceCollectionExtension
         services.AddGrpc();
         return services;
     }
-    
+
     public static Device ToSystem(
         this DeviceDto deviceDto)
     {
@@ -33,6 +33,17 @@ public static class ServiceCollectionExtension
         };
     }
 
+    public static MeasurementDto ToProto(
+        this Domain.Measurement measurement)
+    {
+        return new MeasurementDto
+        {
+            Id = measurement.Id.ToProto(),
+            Timestamp = measurement.Timestamp.DateTime.ToUnixTimeMilliseconds(),
+            Value = measurement.Value,
+        };
+    }
+
     public static Sensor ToSystem(
         this SensorDto sensorDto)
     {
@@ -50,6 +61,7 @@ public static class ServiceCollectionExtension
         {
             Id = sensor.Id.ToProto(),
             Name = sensor.Name,
+            Unit = sensor.Unit.Name,
         };
     }
 }

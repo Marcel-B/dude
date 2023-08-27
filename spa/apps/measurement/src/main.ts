@@ -5,8 +5,13 @@ import App from './App.vue';
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/lara-light-indigo/theme.css';
 import 'primeicons/primeicons.css';
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
 import Dropdown from 'primevue/dropdown';
 import Card from 'primevue/card';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import Chart from 'primevue/chart';
 
 const vueLifecycles = singleSpaVue({
   createApp,
@@ -25,8 +30,17 @@ const vueLifecycles = singleSpaVue({
     const pinia = createPinia();
     app.use(PrimeVue);
     app.use(pinia);
-    app.component('V-Dropdown', Dropdown);
-    app.component('V-Card', Card);
+    // eslint-disable-next-line vue/multi-word-component-names
+    app.component('wDropdown', Dropdown);
+    // eslint-disable-next-line vue/multi-word-component-names
+    app.component('Card', Card);
+    app.component('TabView', TabView);
+    app.component('TabPanel', TabPanel);
+    app.component('DataTable', DataTable);
+    // eslint-disable-next-line vue/multi-word-component-names
+    app.component('Chart', Chart);
+    // eslint-disable-next-line vue/multi-word-component-names
+    app.component('Column', Column);
   },
   replaceMode: false,
 });

@@ -10,6 +10,7 @@ service Measurement {
   rpc GetSensors (GetSensorsRequest) returns (GetSensorsReply);
   rpc GetDevices (GetDevicesRequest) returns (GetDevicesReply);
   rpc GetDeviceSensors (GetDeviceSensoresRequest) returns (GetDeviceSensorsReply);
+  rpc GetMeasurements (GetMeasurementsRequest) returns (GetMeasurementsReply);
 }
 
 message GetMeasurementRequest {
@@ -29,6 +30,7 @@ message GetSensorsReply {
 message SensorDto {
   Common.Guid id = 1;
   string name = 2;
+  string unit = 3;
 }
 
 message GetDevicesRequest {}
@@ -52,3 +54,18 @@ message GetDeviceSensorsReply {
   repeated SensorDto sensors = 3;
 }
 
+message GetMeasurementsRequest {
+  Common.Guid sensor_id = 1;
+  int64 from = 2;
+  int64 to = 3;
+}
+
+message GetMeasurementsReply {
+  repeated MeasurementDto measurements = 1;
+}
+
+message MeasurementDto {
+  Common.Guid id = 1;
+  double value = 2;
+  int64 timestamp = 3;
+}

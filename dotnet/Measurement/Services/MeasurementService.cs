@@ -6,7 +6,8 @@ namespace com.b_velop.Measurement.Services;
 
 public record Sensor(
     System.Guid Id,
-    string Name);
+    string Name,
+    string Unit);
 
 public record Device(
     System.Guid Id,
@@ -68,7 +69,25 @@ public class MeasurementService
         var device = new Device(
             reply.Id.ToSystem(),
             reply.Name,
-            reply.Sensors.Select(x => new Sensor(x.Id.ToSystem(), x.Name)));
+            reply.Sensors.Select(x => new Sensor(x.Id.ToSystem(), x.Name, x.Unit)));
         return device;
+    }
+
+    public async Task<IEnumerable<UiModel.Measurement>> GetMeasurementBySensorIdAsync(
+        System.Guid sensorId,
+        DateTimeOffset? from = null,
+        DateTimeOffset? to = null,
+        CancellationToken cancellationToken = default)
+    {
+        var request = new GetMeasurementsRequest
+        {
+            SensorId = sensorId.ToProto(),
+            From = from.ToProto(),
+            To = to.ToProto()
+        };
+        var reply = await _measurementClient.GetMeasurementsAsync(request, cancellationToken: cancellationToken);
+        var result = reply.Measurements.Select(x => new UiModel.Measurement
+            (x.Id.ToSystem(), x.Timestamp.ToDateTimeOffset()!.Value, x.Value));
+        return result;
     }
 }

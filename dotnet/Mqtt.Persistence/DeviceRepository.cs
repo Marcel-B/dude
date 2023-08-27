@@ -28,6 +28,7 @@ public class DeviceRepository : IDeviceRepository
         return await _context
             .Devices
             .Include(x => x.Sensors)
+            .ThenInclude(x => x.Unit)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
