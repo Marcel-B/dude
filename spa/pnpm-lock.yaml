@@ -79,40 +79,6 @@ importers:
         specifier: ~3.3.0
         version: 3.3.0(html-webpack-plugin@5.5.3)(webpack@5.88.2)
 
-  apps/docs:
-    dependencies:
-      next:
-        specifier: ^13.4.1
-        version: 13.4.1(react-dom@18.2.0)(react@18.2.0)
-      projekt:
-        specifier: workspace:*
-        version: link:../../packages/projekt
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-    devDependencies:
-      '@types/node':
-        specifier: ^17.0.12
-        version: 17.0.45
-      '@types/react':
-        specifier: ^18.0.22
-        version: 18.2.5
-      '@types/react-dom':
-        specifier: ^18.0.7
-        version: 18.2.3
-      eslint-config-custom:
-        specifier: workspace:*
-        version: link:../../packages/eslint-config-custom
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
-      typescript:
-        specifier: ^4.5.3
-        version: 4.9.5
-
   apps/host:
     dependencies:
       '@types/jest':
@@ -326,7 +292,7 @@ importers:
         version: 5.17.26(@mui/material@5.14.6)(@mui/system@5.14.6)(react-dom@17.0.2)(react@17.0.2)
       '@reduxjs/toolkit':
         specifier: ^1.9.1
-        version: 1.9.5(react@17.0.2)
+        version: 1.9.5(react-redux@8.1.2)(react@17.0.2)
       '@types/jest':
         specifier: ^27.0.1
         version: 27.5.2
@@ -351,9 +317,12 @@ importers:
       domain:
         specifier: workspace:*
         version: link:../../packages/domain
-      projekt:
+      pbi-ui:
         specifier: workspace:*
-        version: link:../../packages/projekt
+        version: link:../../packages/pbi-ui
+      projekt-ui:
+        specifier: workspace:*
+        version: link:../../packages/projekt-ui
       react:
         specifier: ^17.0.2
         version: 17.0.2
@@ -464,45 +433,186 @@ importers:
         specifier: ^5.8.0
         version: 5.9.0
 
-  apps/web:
+  apps/stund-o-mat:
     dependencies:
-      next:
-        specifier: ^13.4.1
-        version: 13.4.1(react-dom@18.2.0)(react@18.2.0)
-      projekt:
-        specifier: workspace:*
-        version: link:../../packages/projekt
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-    devDependencies:
-      '@types/node':
-        specifier: ^17.0.12
-        version: 17.0.45
+      '@emotion/react':
+        specifier: ^11.10.5
+        version: 11.11.1(@types/react@17.0.19)(react@17.0.2)
+      '@emotion/styled':
+        specifier: ^11.10.5
+        version: 11.11.0(@emotion/react@11.11.1)(@types/react@17.0.19)(react@17.0.2)
+      '@fullcalendar/core':
+        specifier: ^6.0.1
+        version: 6.1.8
+      '@fullcalendar/daygrid':
+        specifier: ^6.0.1
+        version: 6.1.8(@fullcalendar/core@6.1.8)
+      '@fullcalendar/react':
+        specifier: ^6.0.1
+        version: 6.1.8(@fullcalendar/core@6.1.8)(react-dom@17.0.2)(react@17.0.2)
+      '@mui/icons-material':
+        specifier: ^5.11.0
+        version: 5.14.6(@mui/material@5.14.6)(@types/react@17.0.19)(react@17.0.2)
+      '@mui/lab':
+        specifier: 5.0.0-alpha.112
+        version: 5.0.0-alpha.112(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.6)(@types/react@17.0.19)(react-dom@17.0.2)(react@17.0.2)
+      '@mui/material':
+        specifier: ^5.11.0
+        version: 5.14.6(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@17.0.19)(react-dom@17.0.2)(react@17.0.2)
+      '@mui/styled-engine-sc':
+        specifier: ^5.11.0
+        version: 5.14.6(styled-components@5.3.11)
+      '@mui/x-data-grid':
+        specifier: ^5.17.16
+        version: 5.17.26(@mui/material@5.14.6)(@mui/system@5.14.6)(react-dom@17.0.2)(react@17.0.2)
+      '@reduxjs/toolkit':
+        specifier: ^1.9.1
+        version: 1.9.5(react-redux@8.1.2)(react@17.0.2)
+      '@types/jest':
+        specifier: ^27.0.1
+        version: 27.5.2
       '@types/react':
-        specifier: ^18.0.22
-        version: 18.2.5
+        specifier: ^17.0.19
+        version: 17.0.19
       '@types/react-dom':
-        specifier: ^18.0.7
-        version: 18.0.7
-      eslint-config-custom:
+        specifier: ^17.0.9
+        version: 17.0.9
+      '@types/systemjs':
+        specifier: ^6.1.1
+        version: 6.13.1
+      '@types/webpack-env':
+        specifier: ^1.16.2
+        version: 1.18.1
+      app-store:
         specifier: workspace:*
-        version: link:../../packages/eslint-config-custom
-      tsconfig:
+        version: link:../../packages/app-store
+      client:
         specifier: workspace:*
-        version: link:../../packages/tsconfig
+        version: link:../../packages/client
+      domain:
+        specifier: workspace:*
+        version: link:../../packages/domain
+      pbi-ui:
+        specifier: workspace:*
+        version: link:../../packages/pbi-ui
+      react:
+        specifier: ^17.0.2
+        version: 17.0.2
+      react-dom:
+        specifier: ^17.0.2
+        version: 17.0.2(react@17.0.2)
+      single-spa:
+        specifier: ^5.9.3
+        version: 5.9.5
+      single-spa-react:
+        specifier: ^4.3.1
+        version: 4.3.1(@types/react-dom@17.0.9)(@types/react@17.0.19)(react@17.0.2)
+      stunden-ui:
+        specifier: workspace:*
+        version: link:../../packages/stunden-ui
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.15.0
+        version: 7.22.10
+      '@babel/eslint-parser':
+        specifier: ^7.15.0
+        version: 7.22.10(@babel/core@7.22.10)(eslint@7.32.0)
+      '@babel/plugin-transform-runtime':
+        specifier: ^7.15.0
+        version: 7.22.10(@babel/core@7.22.10)
+      '@babel/preset-env':
+        specifier: ^7.15.0
+        version: 7.22.10(@babel/core@7.22.10)
+      '@babel/preset-react':
+        specifier: ^7.14.5
+        version: 7.14.5(@babel/core@7.22.10)
+      '@babel/preset-typescript':
+        specifier: ^7.15.0
+        version: 7.22.5(@babel/core@7.22.10)
+      '@babel/runtime':
+        specifier: ^7.15.3
+        version: 7.22.11
+      '@testing-library/jest-dom':
+        specifier: ^5.14.1
+        version: 5.14.1
+      '@testing-library/react':
+        specifier: ^12.0.0
+        version: 12.0.0(react-dom@17.0.2)(react@17.0.2)
+      '@types/testing-library__jest-dom':
+        specifier: ^5.14.1
+        version: 5.14.1
+      babel-jest:
+        specifier: ^27.0.6
+        version: 27.5.1(@babel/core@7.22.10)
+      concurrently:
+        specifier: ^6.2.1
+        version: 6.5.1
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
+      eslint:
+        specifier: ^7.32.0
+        version: 7.32.0
+      eslint-config-prettier:
+        specifier: ^8.3.0
+        version: 8.8.0(eslint@7.32.0)
+      eslint-config-ts-react-important-stuff:
+        specifier: ^3.0.0
+        version: 3.0.0(eslint@7.32.0)
+      eslint-plugin-prettier:
+        specifier: ^3.4.1
+        version: 3.4.1(eslint-config-prettier@8.8.0)(eslint@7.32.0)(prettier@2.8.8)
+      husky:
+        specifier: ^7.0.2
+        version: 7.0.4
+      identity-obj-proxy:
+        specifier: ^3.0.0
+        version: 3.0.0
+      jest:
+        specifier: ^27.0.6
+        version: 27.5.1
+      jest-cli:
+        specifier: ^27.0.6
+        version: 27.5.1
+      prettier:
+        specifier: ^2.3.2
+        version: 2.8.8
+      pretty-quick:
+        specifier: ^3.1.1
+        version: 3.1.3(prettier@2.8.8)
+      ts-config-single-spa:
+        specifier: ^3.0.0
+        version: 3.0.0
       typescript:
-        specifier: ^4.5.3
+        specifier: ^4.3.5
         version: 4.5.5
+      webpack:
+        specifier: ^5.75.0
+        version: 5.88.2(webpack-cli@4.10.0)
+      webpack-cli:
+        specifier: ^4.10.0
+        version: 4.10.0(webpack-dev-server@4.15.1)(webpack@5.88.2)
+      webpack-config-single-spa-react:
+        specifier: ^4.0.0
+        version: 4.0.0(@babel/core@7.22.10)(webpack@5.88.2)
+      webpack-config-single-spa-react-ts:
+        specifier: ^4.0.0
+        version: 4.0.0(@babel/core@7.22.10)(eslint@7.32.0)(typescript@4.5.5)(webpack@5.88.2)
+      webpack-config-single-spa-ts:
+        specifier: ^4.0.0
+        version: 4.1.3(@babel/core@7.22.10)(eslint@7.32.0)(typescript@4.5.5)(webpack@5.88.2)
+      webpack-dev-server:
+        specifier: ^4.0.0
+        version: 4.15.1(webpack-cli@4.10.0)(webpack@5.88.2)
+      webpack-merge:
+        specifier: ^5.8.0
+        version: 5.9.0
 
   packages/app-store:
     dependencies:
       '@reduxjs/toolkit':
         specifier: ^1.9.1
-        version: 1.9.5(react-redux@8.1.2)(react@18.2.0)
+        version: 1.9.5(react-redux@8.1.2)(react@17.0.2)
       client:
         specifier: workspace:*
         version: link:../client
@@ -511,7 +621,7 @@ importers:
         version: link:../domain
       react-redux:
         specifier: ^8.0.5
-        version: 8.1.2(react@18.2.0)(redux@4.2.1)
+        version: 8.1.2(react@17.0.2)(redux@4.2.1)
       werkzeug:
         specifier: workspace:*
         version: link:../werkzeug
@@ -578,7 +688,44 @@ importers:
         specifier: 7.28.0
         version: 7.28.0(eslint@7.32.0)
 
-  packages/projekt:
+  packages/pbi-ui:
+    dependencies:
+      app-store:
+        specifier: workspace:*
+        version: link:../app-store
+      client:
+        specifier: workspace:*
+        version: link:../client
+      domain:
+        specifier: workspace:*
+        version: link:../domain
+      werkzeug:
+        specifier: workspace:*
+        version: link:../werkzeug
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.2.5
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.2.3
+      eslint:
+        specifier: ^7.32.0
+        version: 7.32.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: ^17.0.2
+        version: 17.0.2
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      typescript:
+        specifier: ^4.5.2
+        version: 4.5.5
+
+  packages/projekt-ui:
     dependencies:
       app-store:
         specifier: workspace:*
@@ -586,6 +733,40 @@ importers:
       domain:
         specifier: workspace:*
         version: link:../domain
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.2.5
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.2.3
+      eslint:
+        specifier: ^7.32.0
+        version: 7.32.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      react:
+        specifier: ^17.0.2
+        version: 17.0.2
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      typescript:
+        specifier: ^4.5.2
+        version: 4.5.5
+
+  packages/stunden-ui:
+    dependencies:
+      app-store:
+        specifier: workspace:*
+        version: link:../app-store
+      domain:
+        specifier: workspace:*
+        version: link:../domain
+      werkzeug:
+        specifier: workspace:*
+        version: link:../werkzeug
     devDependencies:
       '@types/react':
         specifier: ^18.2.0
@@ -2543,7 +2724,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@babel/runtime': 7.21.5
+      '@babel/runtime': 7.22.11
       '@emotion/react': 11.11.1(@types/react@17.0.19)(react@17.0.2)
       '@emotion/styled': 11.11.0(@emotion/react@11.11.1)(@types/react@17.0.19)(react@17.0.2)
       '@mui/base': 5.0.0-alpha.110(@types/react@17.0.19)(react-dom@17.0.2)(react@17.0.2)
@@ -2724,96 +2905,11 @@ packages:
       reselect: 4.1.8
     dev: false
 
-  /@next/env@13.4.1:
-    resolution: {integrity: sha512-eD6WCBMFjLFooLM19SIhSkWBHtaFrZFfg2Cxnyl3vS3DAdFRfnx5TY2RxlkuKXdIRCC0ySbtK9JXXt8qLCqzZg==}
-    dev: false
-
   /@next/eslint-plugin-next@13.4.1:
     resolution: {integrity: sha512-tVPS/2FKlA3ANCRCYZVT5jdbUKasBU8LG6bYqcNhyORDFTlDYa4cAWQJjZ7msIgLwMQIbL8CAsxrOL8maa/4Lg==}
     dependencies:
       glob: 7.1.7
     dev: false
-
-  /@next/swc-darwin-arm64@13.4.1:
-    resolution: {integrity: sha512-eF8ARHtYfnoYtDa6xFHriUKA/Mfj/cCbmKb3NofeKhMccs65G6/loZ15a6wYCCx4rPAd6x4t1WmVYtri7EdeBg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-darwin-x64@13.4.1:
-    resolution: {integrity: sha512-7cmDgF9tGWTgn5Gw+vP17miJbH4wcraMHDCOHTYWkO/VeKT73dUWG23TNRLfgtCNSPgH4V5B4uLHoZTanx9bAw==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm64-gnu@13.4.1:
-    resolution: {integrity: sha512-qwJqmCri2ie8aTtE5gjTSr8S6O8B67KCYgVZhv9gKH44yvc/zXbAY8u23QGULsYOyh1islWE5sWfQNLOj9iryg==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-arm64-musl@13.4.1:
-    resolution: {integrity: sha512-qcC54tWNGDv/VVIFkazxhqH1Bnagjfs4enzELVRlUOoJPD2BGJTPI7z08pQPbbgxLtRiu8gl2mXvpB8WlOkMeA==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-x64-gnu@13.4.1:
-    resolution: {integrity: sha512-9TeWFlpLsBosZ+tsm/rWBaMwt5It9tPH8m3nawZqFUUrZyGRfGcI67js774vtx0k3rL9qbyY6+3pw9BCVpaYUA==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-linux-x64-musl@13.4.1:
-    resolution: {integrity: sha512-sNDGaWmSqTS4QRUzw61wl4mVPeSqNIr1OOjLlQTRuyInxMxtqImRqdvzDvFTlDfdeUMU/DZhWGYoHrXLlZXe6A==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-arm64-msvc@13.4.1:
-    resolution: {integrity: sha512-+CXZC7u1iXdLRudecoUYbhbsXpglYv8KFYsFxKBPn7kg+bk7eJo738wAA4jXIl8grTF2mPdmO93JOQym+BlYGA==}
-    engines: {node: '>= 10'}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-ia32-msvc@13.4.1:
-    resolution: {integrity: sha512-vIoXVVc7UYO68VwVMDKwJC2+HqAZQtCYiVlApyKEeIPIQpz2gpufzGxk1z3/gwrJt/kJ5CDZjlhYDCzd3hdz+g==}
-    engines: {node: '>= 10'}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /@next/swc-win32-x64-msvc@13.4.1:
-    resolution: {integrity: sha512-n8V5ImLQZibKTu10UUdI3nIeTLkliEXe628qxqW9v8My3BAH2a7H0SaCqkV2OgqFnn8sG1wxKYw9/SNJ632kSA==}
-    engines: {node: '>= 10'}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1:
     resolution: {integrity: sha512-54/JRvkLIzzDWshCWfuhadfrfZVPiElY8Fcgmg1HroEly/EDSszzhBAsarCux+D/kOslTRquNzuyGSmUSTTHGg==}
@@ -2866,26 +2962,7 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
-  /@reduxjs/toolkit@1.9.5(react-redux@8.1.2)(react@18.2.0):
-    resolution: {integrity: sha512-Rt97jHmfTeaxL4swLRNPD/zV4OxTes4la07Xc4hetpUW/vc75t5m1ANyxG6ymnEQ2FsLQsoMlYB2vV1sO3m8tQ==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18
-      react-redux: ^7.2.1 || ^8.0.2
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.21
-      react: 18.2.0
-      react-redux: 8.1.2(react@18.2.0)(redux@4.2.1)
-      redux: 4.2.1
-      redux-thunk: 2.4.2(redux@4.2.1)
-      reselect: 4.1.8
-    dev: false
-
-  /@reduxjs/toolkit@1.9.5(react@17.0.2):
+  /@reduxjs/toolkit@1.9.5(react-redux@8.1.2)(react@17.0.2):
     resolution: {integrity: sha512-Rt97jHmfTeaxL4swLRNPD/zV4OxTes4la07Xc4hetpUW/vc75t5m1ANyxG6ymnEQ2FsLQsoMlYB2vV1sO3m8tQ==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -2898,6 +2975,7 @@ packages:
     dependencies:
       immer: 9.0.21
       react: 17.0.2
+      react-redux: 8.1.2(react@17.0.2)(redux@4.2.1)
       redux: 4.2.1
       redux-thunk: 2.4.2(redux@4.2.1)
       reselect: 4.1.8
@@ -2949,12 +3027,6 @@ packages:
   /@soda/get-current-script@1.0.2:
     resolution: {integrity: sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==}
     dev: true
-
-  /@swc/helpers@0.5.1:
-    resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
-    dependencies:
-      tslib: 2.5.0
-    dev: false
 
   /@testing-library/dom@8.20.1:
     resolution: {integrity: sha512-/DiOQ5xBxgdYRC8LNk7U+RWat0S3qRLeIw3ZIkMQ9kkVlRmwD/Eg8k8CqIpD6GW7u20JIUOfMKbxtiLutpjQ4g==}
@@ -3264,12 +3336,6 @@ packages:
     dependencies:
       '@types/react': 18.2.5
     dev: false
-
-  /@types/react-dom@18.0.7:
-    resolution: {integrity: sha512-HaXc+BbqAZE1RdsK3tC8SbkFy6UL2xF76lT9rQs5JkPrJg3rWA3Ou/Lhw3YJQzEDkBpmJ79nBsfnd05WrBd2QQ==}
-    dependencies:
-      '@types/react': 18.2.5
-    dev: true
 
   /@types/react-dom@18.2.3:
     resolution: {integrity: sha512-hxXEXWxFJXbY0LMj/T69mznqOZJXNtQMqVxIiirVAZnnpeYiD4zt+lPsgcr/cfWg2VLsxZ1y26vigG03prYB+Q==}
@@ -4971,13 +5037,6 @@ packages:
       run-applescript: 5.0.0
     dev: false
 
-  /busboy@1.6.0:
-    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
-    engines: {node: '>=10.16.0'}
-    dependencies:
-      streamsearch: 1.1.0
-    dev: false
-
   /bytes@3.0.0:
     resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
     engines: {node: '>= 0.8'}
@@ -5039,10 +5098,6 @@ packages:
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
-
-  /caniuse-lite@1.0.30001482:
-    resolution: {integrity: sha512-F1ZInsg53cegyjroxLNW9DmrEQ1SuGRTO1QlpA0o2/6OpQ0gFeDRoq1yFmnr8Sakn9qwwt9DmbxHB6w167OSuQ==}
-    dev: false
 
   /caniuse-lite@1.0.30001521:
     resolution: {integrity: sha512-fnx1grfpEOvDGH+V17eccmNjucGUnCbP6KL+l5KqBIerp26WK/+RQ7CIDE37KGJjaPyqWXXlFUyKiWmvdNNKmQ==}
@@ -5209,10 +5264,6 @@ packages:
     resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==}
     engines: {node: '>= 10'}
     dev: true
-
-  /client-only@0.0.1:
-    resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
-    dev: false
 
   /clipboardy@2.3.0:
     resolution: {integrity: sha512-mKhiIL2DrQIsuXMgBgnfEHOZOryC7kY7YO//TN6c63wlEm3NG5tz+YgY5rVi29KCmq/QQjKYvM7a19+MDOTHOQ==}
@@ -9237,51 +9288,6 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /next@13.4.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-JBw2kAIyhKDpjhEWvNVoFeIzNp9xNxg8wrthDOtMctfn3EpqGCmW0FSviNyGgOSOSn6zDaX48pmvbdf6X2W9xA==}
-    engines: {node: '>=16.8.0'}
-    hasBin: true
-    peerDependencies:
-      '@opentelemetry/api': ^1.1.0
-      fibers: '>= 3.1.0'
-      node-sass: ^6.0.0 || ^7.0.0
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      fibers:
-        optional: true
-      node-sass:
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 13.4.1
-      '@swc/helpers': 0.5.1
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001482
-      postcss: 8.4.14
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      styled-jsx: 5.1.1(react@18.2.0)
-      zod: 3.21.4
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 13.4.1
-      '@next/swc-darwin-x64': 13.4.1
-      '@next/swc-linux-arm64-gnu': 13.4.1
-      '@next/swc-linux-arm64-musl': 13.4.1
-      '@next/swc-linux-x64-gnu': 13.4.1
-      '@next/swc-linux-x64-musl': 13.4.1
-      '@next/swc-win32-arm64-msvc': 13.4.1
-      '@next/swc-win32-ia32-msvc': 13.4.1
-      '@next/swc-win32-x64-msvc': 13.4.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-    dev: false
-
   /nice-try@1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: true
@@ -10130,15 +10136,6 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /postcss@8.4.14:
-    resolution: {integrity: sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.6
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: false
-
   /postcss@8.4.28:
     resolution: {integrity: sha512-Z7V5j0cq8oEKyejIKfpD8b4eBy9cwW2JWPk0+fB1HOAMsfHbnAXLLS+PfVWlzMSLQaWttKDt607I0XHmpE67Vw==}
     engines: {node: ^10 || ^12 || >=14}
@@ -10344,16 +10341,6 @@ packages:
       react: 17.0.2
       scheduler: 0.20.2
 
-  /react-dom@18.2.0(react@18.2.0):
-    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      loose-envify: 1.4.0
-      react: 18.2.0
-      scheduler: 0.23.0
-    dev: false
-
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -10364,7 +10351,7 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-redux@8.1.2(react@18.2.0)(redux@4.2.1):
+  /react-redux@8.1.2(react@17.0.2)(redux@4.2.1):
     resolution: {integrity: sha512-xJKYI189VwfsFc4CJvHqHlDrzyFTY/3vZACbE+rr/zQ34Xx1wQfB4OTOSeOSNrF6BDVe8OOdxIrAnMGXA3ggfw==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -10389,10 +10376,10 @@ packages:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
-      react: 18.2.0
+      react: 17.0.2
       react-is: 18.2.0
       redux: 4.2.1
-      use-sync-external-store: 1.2.0(react@18.2.0)
+      use-sync-external-store: 1.2.0(react@17.0.2)
     dev: false
 
   /react-transition-group@4.4.5(react-dom@17.0.2)(react@17.0.2):
@@ -10415,13 +10402,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-
-  /react@18.2.0:
-    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
-    engines: {node: '>=0.10.0'}
-    dependencies:
-      loose-envify: 1.4.0
-    dev: false
 
   /read-pkg-up@7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -10773,12 +10753,6 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-
-  /scheduler@0.23.0:
-    resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
-    dependencies:
-      loose-envify: 1.4.0
-    dev: false
 
   /schema-utils@2.7.0:
     resolution: {integrity: sha512-0ilKFI6QQF5nxDZLFn2dMjvc4hjg/Wkg7rHd3jK6/A4a1Hl9VFdQWvgB1UMGoU94pad1P/8N7fMcEnLnSiju8A==}
@@ -11235,11 +11209,6 @@ packages:
     dependencies:
       internal-slot: 1.0.5
 
-  /streamsearch@1.1.0:
-    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
-    engines: {node: '>=10.0.0'}
-    dev: false
-
   /string-length@4.0.2:
     resolution: {integrity: sha512-+l6rNN5fYHNhZZy41RXsYptCjA2Igmq4EG7kZAYFQI1E1VTXarr6ZPXBg6eq7Y6eK4FEhY6AJlyuFIb/v/S0VQ==}
     engines: {node: '>=10'}
@@ -11401,23 +11370,6 @@ packages:
       supports-color: 5.5.0
     transitivePeerDependencies:
       - '@babel/core'
-    dev: false
-
-  /styled-jsx@5.1.1(react@18.2.0):
-    resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
-    engines: {node: '>= 12.0.0'}
-    peerDependencies:
-      '@babel/core': '*'
-      babel-plugin-macros: '*'
-      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      babel-plugin-macros:
-        optional: true
-    dependencies:
-      client-only: 0.0.1
-      react: 18.2.0
     dev: false
 
   /stylehacks@5.1.1(postcss@8.4.28):
@@ -12010,12 +11962,12 @@ packages:
       requires-port: 1.0.0
     dev: true
 
-  /use-sync-external-store@1.2.0(react@18.2.0):
+  /use-sync-external-store@1.2.0(react@17.0.2):
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      react: 18.2.0
+      react: 17.0.2
     dev: false
 
   /util-deprecate@1.0.2:
@@ -12927,7 +12879,3 @@ packages:
       normalize-path: 1.0.0
       strip-indent: 2.0.0
     dev: true
-
-  /zod@3.21.4:
-    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
-    dev: false

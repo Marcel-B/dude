@@ -9,3 +9,4 @@ export class Woche {
   static readonly Freitag = new Wochentag("Freitag", Tag.Freitag);
   static readonly Samstag = new Wochentag("Samstag", Tag.Samstag);
 }
+

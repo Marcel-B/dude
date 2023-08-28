@@ -23,11 +23,12 @@ const items = ref([
   {
     label: 'Zeiten',
     icon: 'pi pi-fw pi-calendar',
+    command: () => singleSpa.navigateToUrl('/stunden'),
   },
   {
     label: 'Login',
     icon: 'pi pi-fw pi-user',
-    command: () => login().catch(console.error)
+    command: () => login()
   }
 ]);
 
