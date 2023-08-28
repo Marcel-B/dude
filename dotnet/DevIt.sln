@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Api", "DevIt.Api\DevIt.Api.csproj", "{83E3A40A-72F0-45BE-9EAC-67410F49CD85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Service", "DevIt.Service\DevIt.Service.csproj", "{83E3A40A-72F0-45BE-9EAC-67410F49CD85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Application", "DevIt.Application\DevIt.Application.csproj", "{A0DB37F8-807E-4763-B400-91899173A8F4}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Moco.Service", "DevIt.Moco.Service\DevIt.Moco.Service.csproj", "{A8F1C79C-A6A3-4258-83B9-811F0A2E2C59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIt.Moco.Adapter", "DevIt.Moco.Adapter\DevIt.Moco.Adapter.csproj", "{1926B4CE-FF4F-4C43-B4D8-BF78836E1ED9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dude.Shared", "Dude.Shared\Dude.Shared.csproj", "{8A8AF257-5512-4DCA-824D-6502774DE1BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +84,10 @@ Global
 		{1926B4CE-FF4F-4C43-B4D8-BF78836E1ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1926B4CE-FF4F-4C43-B4D8-BF78836E1ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1926B4CE-FF4F-4C43-B4D8-BF78836E1ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8AF257-5512-4DCA-824D-6502774DE1BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8AF257-5512-4DCA-824D-6502774DE1BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8AF257-5512-4DCA-824D-6502774DE1BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8AF257-5512-4DCA-824D-6502774DE1BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CBE79FD-379E-484D-AA7E-346CAB39DE67} = {DC150107-920E-45B7-A2B0-39D42C831090}

@@ -3,15 +3,15 @@ import { Eintrag } from "domain/stunden";
 
 export const eintraege = {
   async getEintraege(): Promise<Eintrag[]> {
-    return await get<Eintrag[]>("/api/eintrag");
+    return await get<Eintrag[]>("/api/v1/eintrag");
   },
   async getEintrag(id: string): Promise<Eintrag> {
-    return await get<Eintrag>(`/api/eintrag/${id}`);
+    return await get<Eintrag>(`/api/v1/eintrag/${id}`);
   },
   async addEintrag(eintrag: Eintrag): Promise<Eintrag> {
-    return await post<Eintrag, Eintrag>("/api/eintrag", eintrag);
+    return await post<Eintrag, Eintrag>("/api/v1/eintrag", eintrag);
   },
   async deleteEintrag(id: string): Promise<void> {
-    return await del(`/api/eintrag/${id}`);
+    return await del(`/api/v1/eintrag/${id}`);
   }
 };

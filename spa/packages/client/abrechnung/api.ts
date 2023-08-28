@@ -10,7 +10,7 @@ export const abrechnung = {
     params.append("kalenderwoche", kalenderwoche.toString());
     params.append("jahr", jahr.toString());
     params.append("text", text);
-    const result = await get<{ stunden: number }>(`/api/abrechnung/by-kalenderwoche?${params.toString()}`);
+    const result = await get<{ stunden: number }>(`/api/v1/abrechnung/by-kalenderwoche?${params.toString()}`);
     return result.stunden;
   },
   async getByMonat(monat: number, jahr: number, text: string): Promise<number> {
@@ -23,7 +23,7 @@ export const abrechnung = {
     params.append("monat", monat.toString());
     params.append("text", text);
 
-    const result = await get<{ stunden: number }>(`/api/abrechnung/by-monat?${params.toString()}`);
+    const result = await get<{ stunden: number }>(`/api/v1/abrechnung/by-monat?${params.toString()}`);
     return result.stunden;
   },
   async getByJahr(jahr: number, text: string): Promise<number> {

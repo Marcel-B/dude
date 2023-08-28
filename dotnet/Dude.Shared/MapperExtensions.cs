@@ -16,6 +16,12 @@ public static class MapperExtensions
         return dateTimeOffset is null ? 0 : dateTimeOffset.Value.ToUnixTimeMilliseconds();
     }
 
+    public static long ToProto(
+        this DateTimeOffset dateTimeOffset)
+    {
+        return dateTimeOffset.ToUnixTimeMilliseconds();
+    }
+
     public static System.Guid ToSystem(
         this Guid guid)
     {

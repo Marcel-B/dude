@@ -18,5 +18,7 @@
     <ItemGroup>
         <Protobuf Include="Protos/common.proto" GrpcService="Client"/>
         <Protobuf Include="Protos/measurement.proto" GrpcService="Client"/>
+        <Protobuf Include="Protos/eintrag.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/abrechnung.proto" GrpcService="Both"/>
     </ItemGroup>
 </Project>

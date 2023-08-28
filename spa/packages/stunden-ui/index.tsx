@@ -1,6 +1,3 @@
-import * as React from "react";
-
-// component exports
 export * from "./Create";
 export * from "./Eintrag";
 export * from "./EintragFooter";

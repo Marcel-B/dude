@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "Protos/common.proto";
+
+option csharp_namespace = "com.b_velop.Dude.Shared";
+
+package Eintrag;
+
+service EintragService {
+    rpc GetEintraege (GetEintraegeRequest) returns (GetEintraegeReply);
+    rpc GetEintrag (GetEintragRequest) returns (GetEintragReply);
+    rpc CreateEintrag (CreateEintragRequest) returns (CreateEintragReply);
+    rpc UpdateEintrag (UpdateEintragRequest) returns (UpdateEintragReply);
+    rpc DeleteEintrag (DeleteEintragRequest) returns (DeleteEintragReply);
+}
+
+message EintragDto {
+    int32 id = 1;
+    string text = 2;
+    double stunden = 3;
+    int64 datum = 4;
+    bool abrechenbar = 5;
+    string externeId = 6;
+}
+
+message GetEintraegeRequest {}
+
+message GetEintraegeReply {
+    repeated EintragDto eintraege = 1;
+}
+
+message GetEintragRequest {
+    int32 id = 1;
+}
+
+message GetEintragReply {
+    EintragDto eintrag = 1;
+}
+
+message CreateEintragRequest {
+    EintragDto eintrag = 1;
+}
+
+message CreateEintragReply {
+    EintragDto eintrag = 1;
+}
+
+message UpdateEintragRequest {
+    EintragDto eintrag = 1;
+}
+
+message UpdateEintragReply {
+    EintragDto eintrag = 1;
+}
+
+message DeleteEintragRequest {
+    int32 id = 1;
+}
+
+message DeleteEintragReply {
+}
