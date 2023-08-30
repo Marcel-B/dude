@@ -9,18 +9,25 @@
     "generate:component": "turbo gen react-component"
   },
   "dependencies": {
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.22.11",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@mui/icons-material": "^5.14.7",
+    "@mui/material": "^5.14.7",
+    "@mui/x-data-grid": "^6.12.0",
+    "@mui/lab": "^5.0.0-alpha.142",
+    "@turbo/gen": "^1.10.13",
     "app-store": "workspace:*",
     "client": "workspace:*",
     "domain": "workspace:*",
-    "werkzeug" : "workspace:*"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.48.0",
     "eslint-config-custom": "workspace:*",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tsconfig": "workspace:*",
-    "typescript": "^4.5.2"
+    "typescript": "^5.2.2",
+    "werkzeug" : "workspace:*"
   }
 }

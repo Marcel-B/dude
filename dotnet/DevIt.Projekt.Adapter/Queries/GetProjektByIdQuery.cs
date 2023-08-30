@@ -1,8 +1,8 @@
 using MediatR;
 
-namespace DevIt.Projekt.Adapter.Query;
+namespace DevIt.Projekt.Adapter.Queries;
 
-public class GetProjektByIdQuery : IRequest<Domain.Projekt>
+public class GetProjektByIdQuery : IRequest<com.b_velop.DevIt.Domain.Projekt>
 {
   public GetProjektByIdQuery(string id)
   {

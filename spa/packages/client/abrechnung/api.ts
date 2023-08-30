@@ -33,10 +33,10 @@ export const abrechnung = {
     const params = new URLSearchParams();
     params.append("jahr", jahr.toString());
     params.append("text", text);
-    const result = await get<{ stunden: number }>(`/api/abrechnung/by-jahr?${params.toString()}`);
+    const result = await get<{ stunden: number }>(`/api/v1/abrechnung/by-jahr?${params.toString()}`);
     return result.stunden;
   },
   async getProjekte(): Promise<string[]> {
-    return await get<string[]>("/api/abrechnung/projekte");
+    return await get<string[]>("/api/v1/abrechnung/projekte");
   }
 };

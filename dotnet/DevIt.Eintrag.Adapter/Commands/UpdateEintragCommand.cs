@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Commands;
 
-public class UpdateEintragCommand : IRequest<Domain.Eintrag>
+public class UpdateEintragCommand : IRequest<com.b_velop.DevIt.Domain.Eintrag>
 {
   public int Id { get; }
   public string Text { get; }

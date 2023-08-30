@@ -1,10 +1,10 @@
 using DevIt.Eintrag.Adapter.Queries;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Handler;
 
-public class GetEintragByIdQueryHandler : IRequestHandler<GetEintragByIdQuery, Domain.Eintrag>
+public class GetEintragByIdQueryHandler : IRequestHandler<GetEintragByIdQuery, com.b_velop.DevIt.Domain.Eintrag>
 {
   private readonly IUnitOfWork _uow;
 
@@ -13,7 +13,7 @@ public class GetEintragByIdQueryHandler : IRequestHandler<GetEintragByIdQuery, D
     _uow = uow;
   }
 
-  public async Task<Domain.Eintrag> Handle(GetEintragByIdQuery request, CancellationToken cancellationToken)
+  public async Task<com.b_velop.DevIt.Domain.Eintrag> Handle(GetEintragByIdQuery request, CancellationToken cancellationToken)
   {
     return await _uow.Eintraege.GetEintragByIdAsync(request.Id, cancellationToken);
   }

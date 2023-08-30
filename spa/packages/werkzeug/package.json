@@ -13,9 +13,13 @@
     "access": "public"
   },
   "devDependencies": {
-  },
-  "dependencies": {
+    "@babel/runtime": "^7.22.11",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.2.2",
     "date-fns": "^2.30.0",
     "domain": "workspace:*"
+  },
+  "dependencies": {
   }
 }

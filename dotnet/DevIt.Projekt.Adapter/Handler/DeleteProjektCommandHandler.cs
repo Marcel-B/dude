@@ -1,5 +1,4 @@
-using DevIt.Persistence;
-using DevIt.Projekt.Adapter.Command;
+using DevIt.Projekt.Adapter.Commands;
 using DevIt.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

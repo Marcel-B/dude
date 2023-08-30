@@ -1,5 +1,5 @@
-using DevIt.Projekt.Adapter.Command;
-using DevIt.Projekt.Adapter.Query;
+using DevIt.Projekt.Adapter.Commands;
+using DevIt.Projekt.Adapter.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

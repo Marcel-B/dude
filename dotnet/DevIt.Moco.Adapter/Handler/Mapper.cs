@@ -1,5 +1,5 @@
 using b_velop;
-using DevIt.Domain;
+using com.b_velop.DevIt.Domain;
 
 namespace DevIt.Moco.Adapter.Handler;
 

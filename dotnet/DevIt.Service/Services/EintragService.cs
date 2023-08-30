@@ -6,23 +6,6 @@ using MediatR;
 
 namespace com.b_velop.DevIt.Service.Services;
 
-public static class EintragMapperExtensions
-{
-    public static EintragDto ToProto(
-        this global::DevIt.Domain.Eintrag eintrag)
-    {
-        return new EintragDto
-        {
-            Id = eintrag.Id,
-            Abrechenbar = eintrag.Abrechenbar,
-            Datum = eintrag.Datum.ToProto(),
-            ExterneId = eintrag.ExterneId ?? string.Empty,
-            Stunden = eintrag.Stunden,
-            Text = eintrag.Text
-        };
-    }
-}
-
 public class EintragService : com.b_velop.Dude.Shared.EintragService.EintragServiceBase
 {
     private readonly IMediator _mediator;

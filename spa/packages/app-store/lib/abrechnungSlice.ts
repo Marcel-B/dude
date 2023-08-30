@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import "immer";
 import { apiClient } from "client";
 
 export interface AbrechnungState {

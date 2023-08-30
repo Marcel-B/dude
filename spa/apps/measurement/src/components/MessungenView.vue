@@ -68,7 +68,7 @@ const setChartData = async () => {
   const d = await apiClient.client.get<
     { id: string; timestamp: Date; value: number }[]
   >(
-    `/api/measurements/581f81e4-51ad-46d4-5a43-08dba423e6d8?${urlPara.toString()}`
+    `/api/v1/measurement/sensor/581f81e4-51ad-46d4-5a43-08dba423e6d8?${urlPara.toString()}`
   );
   return {
     labels: d.map((x) => format(new Date(x.timestamp), 'HH:mm')),

@@ -1,14 +1,15 @@
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect } from "react";
-import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
-import AltRouteIcon from "@mui/icons-material/AltRoute";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import {
   deletePbi,
   fetchPbis,
   fetchProjekte,
   pbiSelectors,
-  projekteSelectors, setCopyDialogType, setOpenCopyDialog, setPbi, useAppDispatch,
+  projekteSelectors,
+  setCopyDialogType,
+  setOpenCopyDialog,
+  setPbi,
+  useAppDispatch,
   useAppSelector
 } from "app-store";
 import { toBranch } from "werkzeug";
@@ -28,7 +29,7 @@ export const List = ({triggerSnackbar}: IProps) => {
     dispatch(fetchProjekte());
   }, []);
 
-  const cols: GridColumns = [
+  const cols: GridColDef[] = [
     {field: "id", headerName: "ID", width: 10},
     {field: "name", headerName: "P.B.I.", width: 430},
     {field: "beschreibung", headerName: "Beschreibung", editable: true, width: 300},
@@ -136,11 +137,10 @@ export const List = ({triggerSnackbar}: IProps) => {
       }}
       autoHeight
       columns={cols}
-      pageSize={10}
-      rowsPerPageOptions={[10, 50, 110]}
-      disableSelectionOnClick
-      experimentalFeatures={{newEditingApi: true}}
+      pageSizeOptions={[10]}
+      disableRowSelectionOnClick
     />
   );
 };
+
 export default List;

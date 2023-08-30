@@ -1,4 +1,4 @@
-namespace DevIt.Api;
+namespace DevIt.Application;
 
 public record MocoConfiguration
 {

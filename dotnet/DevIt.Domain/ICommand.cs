@@ -1,4 +1,4 @@
-namespace DevIt.Domain;
+namespace com.b_velop.DevIt.Domain;
 
 public interface ICommand<T>
 {

@@ -13,6 +13,8 @@ namespace Identity.Cat.Pages.Ciba;
 [SecurityHeaders]
 public class IndexModel : PageModel
 {
+    public BackchannelUserLoginRequest LoginRequest { get; set; }
+
     private readonly IBackchannelAuthenticationInteractionService _backchannelAuthenticationInteraction;
     private readonly ILogger<IndexModel> _logger;
 
@@ -23,8 +25,6 @@ public class IndexModel : PageModel
         _backchannelAuthenticationInteraction = backchannelAuthenticationInteractionService;
         _logger = logger;
     }
-
-    public BackchannelUserLoginRequest LoginRequest { get; set; }
 
     public async Task<IActionResult> OnGet(
         string id)

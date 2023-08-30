@@ -9,7 +9,7 @@ namespace com.b_velop.Dude.Bff.Controllers;
 public class MeasurementController : ControllerBase
 {
     [HttpGet]
-    [Route("/sensor/{sensorId:guid}")]
+    [Route("sensor/{sensorId:guid}")]
     public async Task<IActionResult> GetMeasurementBySensorId(
         [FromRoute] Guid sensorId,
         [FromQuery] DateTimeOffset? from,

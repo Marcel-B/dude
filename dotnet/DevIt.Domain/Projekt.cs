@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace DevIt.Domain;
+namespace com.b_velop.DevIt.Domain;
 
 public class CreateProjekt : ICommand<Projekt>
 {

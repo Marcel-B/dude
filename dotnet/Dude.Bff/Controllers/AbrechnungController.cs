@@ -41,4 +41,13 @@ public class AbrechnungController : ControllerBase
         var result = await abrechnungService.GetAbrechnungByKalenderwoche(kalenderwoche, jahr, text, cancellationToken);
         return Ok(new {Stunden = result});
     }
+
+    [HttpGet("projekte")]
+    public async Task<IActionResult> GetProjekteAsync(
+        [FromServices] IAbrechnungService abrechnungService,
+        CancellationToken cancellationToken)
+    {
+        var result = await abrechnungService.GetProjekte(cancellationToken);
+        return Ok(result);
+    }
 }

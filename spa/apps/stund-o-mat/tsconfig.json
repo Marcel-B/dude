@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "declarationDir": "dist"
   },
-  "files": ["src/b-velop-pbi-o-mat.tsx"],
+  "files": ["src/b-velop-stund-o-mat.tsx"],
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
 }

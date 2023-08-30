@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace DevIt.Projekt.Adapter.Command;
+namespace DevIt.Projekt.Adapter.Commands;
 
 public class DeleteProjektCommand : IRequest
 {

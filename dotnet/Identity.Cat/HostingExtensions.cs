@@ -63,6 +63,7 @@ internal static class HostingExtensions
         this WebApplication app)
     {
         app.UseSerilogRequestLogging();
+        app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict });
 
         if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 

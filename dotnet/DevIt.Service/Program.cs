@@ -1,6 +1,5 @@
 using com.b_velop.DevIt.Service;
 using com.b_velop.DevIt.Service.Services;
-using DevIt.Api;
 using DevIt.Application;
 using DevIt.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -55,6 +54,7 @@ app.UseCors(builder => builder
 // app.UseAuthorization();
 app.MapControllers();
 app.MapGrpcService<EintragService>();
+app.MapGrpcService<AbrechnungService>();
 await app.RunAsync();
 
 // Notwendig für die IntigrationTests

@@ -7,7 +7,7 @@
 <script setup>
 import {ref} from 'vue';
 import * as singleSpa from 'single-spa';
-import {login} from 'auth';
+import {getUser, hasUser, login} from 'auth';
 
 const items = ref([
   {
@@ -28,7 +28,13 @@ const items = ref([
   {
     label: 'Login',
     icon: 'pi pi-fw pi-user',
-    command: () => login()
+    command: async () => {
+      const user = await hasUser();
+      if (user) {
+        await getUser();
+      } else
+        await login()
+    }
   }
 ]);
 

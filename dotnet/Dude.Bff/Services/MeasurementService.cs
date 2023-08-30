@@ -16,10 +16,10 @@ public record Device(
 
 public class MeasurementService
 {
-    private readonly Dude.Shared.Measurement.MeasurementClient _measurementClient;
+    private readonly Shared.Measurement.MeasurementClient _measurementClient;
 
     public MeasurementService(
-        Dude.Shared.Measurement.MeasurementClient measurementClient)
+        Shared.Measurement.MeasurementClient measurementClient)
     {
         _measurementClient = measurementClient;
     }

@@ -8,8 +8,10 @@ namespace Identity.Cat.Pages.Home.Error;
 [SecurityHeaders]
 public class Index : PageModel
 {
-    private readonly IWebHostEnvironment _environment;
     private readonly IIdentityServerInteractionService _interaction;
+    private readonly IWebHostEnvironment _environment;
+
+    public ViewModel View { get; set; }
 
     public Index(
         IIdentityServerInteractionService interaction,
@@ -18,8 +20,6 @@ public class Index : PageModel
         _interaction = interaction;
         _environment = environment;
     }
-
-    public ViewModel View { get; set; }
 
     public async Task OnGet(
         string errorId)
@@ -33,8 +33,10 @@ public class Index : PageModel
             View.Error = message;
 
             if (!_environment.IsDevelopment())
+            {
                 // only show in development
                 message.ErrorDescription = null;
+            }
         }
     }
 }

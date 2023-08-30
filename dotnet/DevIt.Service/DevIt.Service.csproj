@@ -25,6 +25,7 @@
     <ItemGroup>
         <ProjectReference Include="..\DevIt.Application\DevIt.Application.csproj"/>
         <ProjectReference Include="..\DevIt.Persistence\DevIt.Persistence.csproj"/>
+        <ProjectReference Include="..\DevIt.Domain\DevIt.Domain.csproj"/>
         <ProjectReference Include="..\Dude.Shared\Dude.Shared.csproj"/>
     </ItemGroup>
 

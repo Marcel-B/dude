@@ -6,9 +6,7 @@ import {
   useAppSelector
 } from "app-store";
 import React, { useEffect } from "react";
-import { DataGrid, GridActionsCellItem, GridColumns, GridRowParams } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Projekt } from "domain/projekt";
+import { DataGrid, GridActionsCellItem, GridColDef, GridRowParams } from "@mui/x-data-grid";
 
 export const List = () => {
   const projekte = useAppSelector(projekteSelectors.selectAll);
@@ -18,9 +16,9 @@ export const List = () => {
     dispatch(fetchProjekte());
   }, []);
 
-  const cols: GridColumns = [
-    { field: "id", headerName: "Projekt ID" },
-    { field: "name", headerName: "Projekt" },
+  const cols: GridColDef[] = [
+    {field: "id", headerName: "Projekt ID"},
+    {field: "name", headerName: "Projekt"},
     // {
     //   field: "actions",
     //   type: "actions",
@@ -46,10 +44,8 @@ export const List = () => {
       }}
       autoHeight
       columns={cols}
-      pageSize={10}
-      rowsPerPageOptions={[10, 50, 110]}
-      disableSelectionOnClick
-      experimentalFeatures={{ newEditingApi: true }}
+      pageSizeOptions={[10]}
+      disableRowSelectionOnClick
     />
   );
 };

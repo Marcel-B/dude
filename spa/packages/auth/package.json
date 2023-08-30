@@ -13,6 +13,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@babel/runtime": "^7.22.11",
     "oidc-client": "^1.11.5"
   }
 }

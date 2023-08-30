@@ -1,7 +1,7 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DevIt.Domain;
+namespace com.b_velop.DevIt.Domain;
 
 public static class ServiceCollectionExtensions
 {

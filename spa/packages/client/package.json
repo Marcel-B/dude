@@ -13,10 +13,11 @@
     "access": "public"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.22.11",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "typescript": "^4.5.2"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "axios": "^1.4.0",

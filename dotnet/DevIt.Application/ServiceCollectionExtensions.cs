@@ -1,5 +1,5 @@
-﻿using DevIt.Abrechnung.Adapter;
-using DevIt.Domain;
+﻿using com.b_velop.DevIt.Domain;
+using DevIt.Abrechnung.Adapter;
 using DevIt.Eintrag.Adapter;
 using DevIt.Moco.Adapter;
 using DevIt.Moco.Service;

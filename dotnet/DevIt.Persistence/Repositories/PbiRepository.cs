@@ -1,8 +1,8 @@
-using DevIt.Domain;
-using DevIt.Persistence;
+using com.b_velop.DevIt.Domain;
+using DevIt.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevIt.Repository;
+namespace DevIt.Persistence.Repositories;
 
 public class PbiRepository : IPbiRepository
 {

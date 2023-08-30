@@ -5,9 +5,9 @@ import { store } from 'app-store';
 import { createTheme, ThemeProvider } from '@mui/material';
 
 const theme = createTheme({
-  typography: {
-    fontFamily: ['Ubuntu'].join(','),
-  },
+    typography: {
+        fontFamily: ['Ubuntu'].join(','),
+    },
 });
 theme.palette.primary.main = '#686de0';
 theme.palette.primary.dark = '#4834d4';
@@ -23,25 +23,25 @@ theme.palette.text.secondary = '#30336b';
 theme.palette.divider = '#be2edd';
 
 theme.typography.h1 = {
-  fontSize: '3rem',
-  color: '#eb4d4b',
-  fontFamily: 'Audiowide',
+    fontSize: '3rem',
+    color: '#eb4d4b',
+    fontFamily: 'Audiowide',
 };
 theme.typography.h2 = {
-  fontSize: '1.2rem',
-  color: '#be2edd',
-  fontFamily: 'Roboto Condensed',
-  // fontFamily: "Gloria Hallelujah"
+    fontSize: '1.2rem',
+    color: '#be2edd',
+    fontFamily: 'Roboto Condensed',
+    // fontFamily: "Gloria Hallelujah"
 };
 
 export default function Root(props) {
-  return (
-    <StrictMode>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </Provider>
-    </StrictMode>
-  );
+    return (
+        <StrictMode>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
+            </Provider>
+        </StrictMode>
+    );
 }

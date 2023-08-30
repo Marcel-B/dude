@@ -1,9 +1,4 @@
-﻿using System.Net;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
-
-namespace DevIt.IntegrationTests
+﻿namespace DevIt.IntegrationTests.Controllers
 {
   [Collection("ApiTestFixtureCollection")]
   public class AbrechnungControllerTests : IClassFixture<IntegrationTestsFixture>

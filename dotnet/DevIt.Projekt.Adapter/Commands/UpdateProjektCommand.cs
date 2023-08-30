@@ -1,8 +1,8 @@
 using MediatR;
 
-namespace DevIt.Projekt.Adapter.Command;
+namespace DevIt.Projekt.Adapter.Commands;
 
-public class UpdateProjektCommand : IRequest<Domain.Projekt>
+public class UpdateProjektCommand : IRequest<com.b_velop.DevIt.Domain.Projekt>
 {
   public UpdateProjektCommand(string id, string name)
   {

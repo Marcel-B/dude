@@ -2,6 +2,6 @@ using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Queries;
 
-public class GetEintraegeQuery : IRequest<IList<Domain.Eintrag>>
+public class GetEintraegeQuery : IRequest<IList<com.b_velop.DevIt.Domain.Eintrag>>
 {
 }

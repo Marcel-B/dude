@@ -1,8 +1,8 @@
 using System.Text.Json;
-using DevIt.Domain;
+using com.b_velop.DevIt.Domain;
 using DevIt.Moco.Adapter.Commands;
 using DevIt.Moco.Adapter.Queries;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

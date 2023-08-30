@@ -18,4 +18,7 @@ public interface IAbrechnungService
         int jahr,
         string text,
         CancellationToken cancellationToken = default);
+
+    public Task<IEnumerable<string>> GetProjekte(
+        CancellationToken cancellationToken = default);
 }

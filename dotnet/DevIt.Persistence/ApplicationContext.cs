@@ -1,5 +1,5 @@
 using System.Text.Json;
-using DevIt.Domain;
+using com.b_velop.DevIt.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 

@@ -1,4 +1,4 @@
-using DevIt.Domain;
+using com.b_velop.DevIt.Domain;
 
 namespace DevIt.Repository;
 

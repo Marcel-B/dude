@@ -41,6 +41,7 @@ public class SeedData
                     new(JwtClaimTypes.Name, "Alice Smith"),
                     new(JwtClaimTypes.GivenName, "Alice"),
                     new(JwtClaimTypes.FamilyName, "Smith"),
+                    new(JwtClaimTypes.Scope, "pbi_admin"),
                     new(JwtClaimTypes.WebSite, "http://alice.com")
                 })
                 .Result;

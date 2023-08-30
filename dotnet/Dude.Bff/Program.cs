@@ -23,6 +23,16 @@ builder
         options.UnsafeUseInsecureChannelCallCredentials = true;
         options.Credentials = ChannelCredentials.Insecure;
     })
+    .Services.AddGrpcClient<com.b_velop.Dude.Shared.AbrechnungService.AbrechnungServiceClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["devit"] ??
+                            throw new InvalidOperationException("No grpc address configured"));
+    })
+    .ConfigureChannel(options =>
+    {
+        options.UnsafeUseInsecureChannelCallCredentials = true;
+        options.Credentials = ChannelCredentials.Insecure;
+    })
     .Services.AddGrpcClient<com.b_velop.Dude.Shared.EintragService.EintragServiceClient>(o =>
     {
         o.Address = new Uri(builder.Configuration["devit"] ??
@@ -37,6 +47,7 @@ builder
 builder.Services.AddTransient<MeasurementService>();
 builder.Services.AddScoped<IEintragService, EintragService>();
 builder.Services.AddScoped<IAbrechnungService, AbrechnungService>();
+
 var app = builder.Build();
 
 app.UseCors(options =>

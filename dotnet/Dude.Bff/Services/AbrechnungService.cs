@@ -57,4 +57,12 @@ public class AbrechnungService : IAbrechnungService
         var result = await _client.GetByKalenderwocheAsync(request, cancellationToken: cancellationToken);
         return result?.Stunden;
     }
+
+    public async Task<IEnumerable<string>> GetProjekte(
+        CancellationToken cancellationToken = default)
+    {
+        var request = new GetProjekteRequest();
+        var reply = await _client.GetProjekteAsync(request, cancellationToken: cancellationToken);
+        return reply.Projekte;
+    }
 }

@@ -1,7 +1,7 @@
 using MediatR;
 
-namespace DevIt.Projekt.Adapter.Query;
+namespace DevIt.Projekt.Adapter.Queries;
 
-public class GetProjekteQuery : IRequest<IEnumerable<Domain.Projekt>>
+public class GetProjekteQuery : IRequest<IEnumerable<com.b_velop.DevIt.Domain.Projekt>>
 {
 }
