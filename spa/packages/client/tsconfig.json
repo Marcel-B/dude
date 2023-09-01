@@ -1,0 +1,14 @@
+{
+  "extends": "tsconfig/base.json",
+  "include": [
+    "."
+  ],
+  "compilerOptions": {
+    "lib": ["ES2021", "dom"]
+  },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
+}

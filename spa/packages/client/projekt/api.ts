@@ -3,12 +3,12 @@ import { Projekt } from "domain/projekt";
 
 export const projekte = {
   async getProjekte(): Promise<Projekt[]> {
-    return await get<Projekt[]>("/api/projekt");
+    return await get<Projekt[]>("/api/v1/projekt");
   },
   async addProjekt(projekt: Projekt): Promise<Projekt> {
-    return await post<Projekt, Projekt>("/api/projekt", projekt);
+    return await post<Projekt, Projekt>("/api/v1/projekt", projekt);
   },
-  async deleteProjekt(id: string): Promise<void> {
-    return await del(`/api/projekt/${id}`);
+  async deleteProjekt(id: number): Promise<void> {
+    return await del(`/api/v1/projekt/${id}`);
   }
 };

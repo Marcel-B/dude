@@ -19,7 +19,7 @@ export const addPbi = createAsyncThunk("pbi/addPbi", async (pbi: PbiDto) => {
   return response;
 });
 
-export const deletePbi = createAsyncThunk("pbi/deletePbi", async (id: string) => {
+export const deletePbi = createAsyncThunk("pbi/deletePbi", async (id: number) => {
   await apiClient.pbis.deletePbi(id);
   return id;
 });
@@ -49,7 +49,7 @@ export const pbiSlice = createSlice({
     builder.addCase(addPbi.fulfilled, (state, action: PayloadAction<Pbi>) => {
       pbiAdapter.addOne(state, action.payload);
     });
-    builder.addCase(deletePbi.fulfilled, (state, action: PayloadAction<string>) => {
+    builder.addCase(deletePbi.fulfilled, (state, action: PayloadAction<number>) => {
       pbiAdapter.removeOne(state, action.payload);
     });
   }

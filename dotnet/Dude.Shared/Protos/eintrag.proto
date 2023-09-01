@@ -20,7 +20,7 @@ message EintragDto {
     double stunden = 3;
     int64 datum = 4;
     bool abrechenbar = 5;
-    string externeId = 6;
+    string externe_id = 6;
 }
 
 message GetEintraegeRequest {}

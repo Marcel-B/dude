@@ -22,7 +22,7 @@ namespace DevIt.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DevIt.Domain.Eintrag", b =>
+            modelBuilder.Entity("com.b_velop.DevIt.Domain.Eintrag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace DevIt.Persistence.Migrations
                     b.ToTable("Eintraege");
                 });
 
-            modelBuilder.Entity("DevIt.Domain.Pbi", b =>
+            modelBuilder.Entity("com.b_velop.DevIt.Domain.Pbi", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,9 +70,8 @@ namespace DevIt.Persistence.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
-                    b.Property<string>("ProjektId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ProjektId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -81,10 +80,13 @@ namespace DevIt.Persistence.Migrations
                     b.ToTable("Pbis");
                 });
 
-            modelBuilder.Entity("DevIt.Domain.Projekt", b =>
+            modelBuilder.Entity("com.b_velop.DevIt.Domain.Projekt", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ExterneId")
                         .HasMaxLength(128)
@@ -104,16 +106,16 @@ namespace DevIt.Persistence.Migrations
                     b.ToTable("Projekte");
                 });
 
-            modelBuilder.Entity("DevIt.Domain.Pbi", b =>
+            modelBuilder.Entity("com.b_velop.DevIt.Domain.Pbi", b =>
                 {
-                    b.HasOne("DevIt.Domain.Projekt", null)
+                    b.HasOne("com.b_velop.DevIt.Domain.Projekt", null)
                         .WithMany("Pbis")
                         .HasForeignKey("ProjektId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DevIt.Domain.Projekt", b =>
+            modelBuilder.Entity("com.b_velop.DevIt.Domain.Projekt", b =>
                 {
                     b.Navigation("Pbis");
                 });

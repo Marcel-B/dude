@@ -61,8 +61,8 @@ public class AbrechnungService : IAbrechnungService
     public async Task<IEnumerable<string>> GetProjekte(
         CancellationToken cancellationToken = default)
     {
-        var request = new GetProjekteRequest();
-        var reply = await _client.GetProjekteAsync(request, cancellationToken: cancellationToken);
+        var request = new GetAbrechnungProjekteRequest();
+        var reply = await _client.GetAbrechnungProjekteAsync(request, cancellationToken: cancellationToken);
         return reply.Projekte;
     }
 }

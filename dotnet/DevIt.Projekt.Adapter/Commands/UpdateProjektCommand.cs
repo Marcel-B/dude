@@ -4,12 +4,17 @@ namespace DevIt.Projekt.Adapter.Commands;
 
 public class UpdateProjektCommand : IRequest<com.b_velop.DevIt.Domain.Projekt>
 {
-  public UpdateProjektCommand(string id, string name)
-  {
-    Id = id;
-    Name = name;
-  }
+    public UpdateProjektCommand(
+        int id,
+        string name,
+        string? externeId = null)
+    {
+        Id = id;
+        Name = name;
+        ExterneId = externeId;
+    }
 
-  public string Id { get; }
-  public string Name { get; }
+    public int Id { get; }
+    public string Name { get; }
+    public string? ExterneId { get; }
 }

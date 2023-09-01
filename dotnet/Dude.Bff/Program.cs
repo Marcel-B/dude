@@ -1,8 +1,9 @@
 using com.b_velop.Dude.Bff.Services;
-using com.b_velop.Dude.Shared;
 using Grpc.Core;
+using Microsoft.IdentityModel.Tokens;
 using AbrechnungService = com.b_velop.Dude.Bff.Services.AbrechnungService;
 using EintragService = com.b_velop.Dude.Bff.Services.EintragService;
+using Measurement = com.b_velop.Dude.Shared.Measurement;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -16,6 +17,16 @@ builder
     .Services.AddGrpcClient<Measurement.MeasurementClient>(o =>
     {
         o.Address = new Uri(builder.Configuration["grpc"] ??
+                            throw new InvalidOperationException("No grpc address configured"));
+    })
+    .ConfigureChannel(options =>
+    {
+        options.UnsafeUseInsecureChannelCallCredentials = true;
+        options.Credentials = ChannelCredentials.Insecure;
+    })
+    .Services.AddGrpcClient<com.b_velop.Dude.Shared.PbiService.PbiServiceClient>(o =>
+    {
+        o.Address = new Uri(builder.Configuration["devit"] ??
                             throw new InvalidOperationException("No grpc address configured"));
     })
     .ConfigureChannel(options =>
@@ -47,7 +58,20 @@ builder
 builder.Services.AddTransient<MeasurementService>();
 builder.Services.AddScoped<IEintragService, EintragService>();
 builder.Services.AddScoped<IAbrechnungService, AbrechnungService>();
+builder.Services.AddScoped<IPbiService, PbiService>();
+builder.Services.AddScoped<IProjektService, ProjektService>();
 
+builder
+    .Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://idsrv.marcelbenders.com";
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
 var app = builder.Build();
 
 app.UseCors(options =>
@@ -59,6 +83,8 @@ app.UseCors(options =>
         .Build();
 });
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 // Configure the HTTP request pipeline.

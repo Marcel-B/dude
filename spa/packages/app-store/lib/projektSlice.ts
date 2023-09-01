@@ -1,10 +1,10 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Projekt } from "../../domain";
+import { Projekt } from "domain";
 import { apiClient } from "client";
 import { RootState } from "./store";
 
 const projektAdapter = createEntityAdapter<Projekt>({
-  selectId: (projekt) => projekt.id,
+  selectId: (projekt) => projekt.id!,
   sortComparer: (a, b) => a.name.localeCompare(b.name)
 });
 
@@ -18,7 +18,7 @@ export const addProjekt = createAsyncThunk("projekt/addProjekt", async (projekt:
   return response;
 });
 
-export const deleteProjekt = createAsyncThunk("projekt/deleteProjekt", async (id: string) => {
+export const deleteProjekt = createAsyncThunk("projekt/deleteProjekt", async (id: number) => {
   await apiClient.projekte.deleteProjekt(id);
   return id;
 });
@@ -34,7 +34,7 @@ export const projektSlice = createSlice({
     builder.addCase(addProjekt.fulfilled, (state, action: PayloadAction<Projekt>) => {
       projektAdapter.addOne(state, action.payload);
     });
-    builder.addCase(deleteProjekt.fulfilled, (state, action: PayloadAction<string>) => {
+    builder.addCase(deleteProjekt.fulfilled, (state, action: PayloadAction<number>) => {
       projektAdapter.removeOne(state, action.payload);
     });
   }

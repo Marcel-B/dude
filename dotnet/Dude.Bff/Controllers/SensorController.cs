@@ -1,9 +1,11 @@
 using com.b_velop.Dude.Bff.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace com.b_velop.Dude.Bff.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/[controller]")]
 public class SensorController : ControllerBase
 {

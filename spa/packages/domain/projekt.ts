@@ -1,5 +1,5 @@
 export interface Projekt {
-  id: string;
+  id?: number;
   name: string;
+  externeId: string;
 }
-;

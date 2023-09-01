@@ -53,12 +53,12 @@ public class AbrechnungService : Dude.Shared.AbrechnungService.AbrechnungService
         };
     }
 
-    public override async Task<GetProjekteReply> GetProjekte(
-        GetProjekteRequest request,
+    public override async Task<GetAbrechnungProjekteReply> GetAbrechnungProjekte(
+        GetAbrechnungProjekteRequest request,
         ServerCallContext context)
     {
         var result = await _mediator.Send(new GetProjekteQuery(), context.CancellationToken);
-        return new GetProjekteReply
+        return new GetAbrechnungProjekteReply
         {
             Projekte = {result}
         };

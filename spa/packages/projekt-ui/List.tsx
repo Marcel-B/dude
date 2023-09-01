@@ -7,6 +7,8 @@ import {
 } from "app-store";
 import React, { useEffect } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowParams } from "@mui/x-data-grid";
+import { Projekt } from "domain/projekt";
+import { Delete } from "@mui/icons-material";
 
 export const List = () => {
   const projekte = useAppSelector(projekteSelectors.selectAll);
@@ -18,18 +20,21 @@ export const List = () => {
 
   const cols: GridColDef[] = [
     {field: "id", headerName: "Projekt ID"},
-    {field: "name", headerName: "Projekt"},
-    // {
-    //   field: "actions",
-    //   type: "actions",
-    //   width: 120,
-    //   getActions: (params: GridRowParams<Projekt>) => [
-    //     <GridActionsCellItem label="Löschen" showInMenu key={params.row.id} icon={<DeleteIcon color="warning" />} onClick={() => {
-    //       dispatch(deleteProjekt(params.row.id.toString()));
-    //     }}
-    //     />
-    //   ]
-    // }
+    {field: "name", headerName: "Projekt", flex: 1},
+    {field: "externeId", headerName: "ID (extern)"},
+    {
+      field: "actions",
+      type: "actions",
+      width: 120,
+      getActions: (params: GridRowParams<Projekt>) => [
+        <GridActionsCellItem
+          label="Löschen" showInMenu key={params.row.id} icon={<Delete color="warning"/>}
+          onClick={() => {
+            dispatch(deleteProjekt(params.row.id!));
+          }}
+        />
+      ]
+    }
   ];
 
   return (

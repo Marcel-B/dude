@@ -10,7 +10,7 @@ service AbrechnungService {
     rpc GetByMonat (GetByMonatRequest) returns (GetByMonatReply);
     rpc GetByJahr (GetByJahrRequest) returns (GetByJahrReply);
     rpc GetByKalenderwoche (GetByKalenderwocheRequest) returns (GetByKalenderwocheReply);
-    rpc GetProjekte (GetProjekteRequest) returns (GetProjekteReply);
+    rpc GetAbrechnungProjekte (GetAbrechnungProjekteRequest) returns (GetAbrechnungProjekteReply);
 }
 
 message GetByMonatRequest {
@@ -42,9 +42,9 @@ message GetByKalenderwocheReply {
     double stunden = 1;
 }
 
-message GetProjekteRequest {
+message GetAbrechnungProjekteRequest {
 }
 
-message GetProjekteReply {
+message GetAbrechnungProjekteReply {
     repeated string projekte = 1;
 }

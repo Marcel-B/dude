@@ -14,13 +14,14 @@
   },
   "devDependencies": {
     "@babel/runtime": "^7.22.11",
+    "auth": "workspace:*",
+    "axios": "^1.4.0",
+    "domain": "workspace:*",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "domain": "workspace:*"
   }
 }

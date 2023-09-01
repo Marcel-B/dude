@@ -1,4 +1,4 @@
 export interface PbiDto {
   name: string;
-  projektId: string;
+  projektId: number;
 }

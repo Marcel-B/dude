@@ -12,8 +12,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/runtime": "^7.22.11",
-    "oidc-client": "^1.11.5"
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "oidc-client": "^1.11.5",
+    "jwt-decode": "^3.1.2",
+    "single-spa": "^5.9.5",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.2.2"
   }
 }

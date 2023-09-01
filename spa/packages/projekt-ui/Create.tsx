@@ -10,7 +10,7 @@ export interface IProps {
 }
 
 export const Create = ({triggerSnackbar}: IProps) => {
-  const [projekt, setProjekt] = React.useState<Projekt>({name: "", id: ""});
+  const [projekt, setProjekt] = React.useState<Projekt>({name: "", id: 0, externeId: ""});
   const [loading, setLoading] = React.useState(false);
   const dispatch = useAppDispatch();
 
@@ -34,11 +34,11 @@ export const Create = ({triggerSnackbar}: IProps) => {
         </Grid>
         <Grid item xs={3}>
           <FormControl fullWidth>
-            <InputLabel htmlFor="project">Projekt ID</InputLabel>
+            <InputLabel htmlFor="project">Projekt ID (extern)</InputLabel>
             <OutlinedInput
-              label="Project ID"
-              onChange={(event) => setProjekt({...projekt, id: event.target.value})}
-              value={projekt.id}/>
+              label="Project ID (extern)"
+              onChange={(event) => setProjekt({...projekt, externeId: event.target.value})}
+              value={projekt.externeId}/>
           </FormControl>
         </Grid>
         <Grid item xs={2}>

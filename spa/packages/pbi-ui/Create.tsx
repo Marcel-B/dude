@@ -19,7 +19,7 @@ export const Create = () => {
   const projekte = useAppSelector(projekteSelectors.selectAll);
   const dispatch = useAppDispatch();
 
-  const [pbi, setPbi] = useState<PbiDto>({ name: "", projektId: "" });
+  const [pbi, setPbi] = useState<PbiDto>({name: "", projektId: 0});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,14 +27,14 @@ export const Create = () => {
     const re = new RegExp(/Product Backlog Item /);
     if (text.match(re)) {
       const newTest = text.trim().replace(re, "#").replace(/:/, "");
-      setPbi({ ...pbi, name: newTest });
+      setPbi({...pbi, name: newTest});
     } else {
-      setPbi({ ...pbi, name: text });
+      setPbi({...pbi, name: text});
     }
 
   };
   const handleSelectChange = (event: SelectChangeEvent) => {
-    setPbi({ ...pbi, projektId: event.target.value as string });
+    setPbi({...pbi, projektId: parseInt(event.target.value)});
   };
 
   const handleSave = () => {
@@ -51,7 +51,7 @@ export const Create = () => {
               label="Product Backlog Item hier einfügen"
               onChange={handleChange}
               value={pbi.name}
-              startAdornment={<InputAdornment position="start"><ContentCopyIcon color="action" /></InputAdornment>} />
+              startAdornment={<InputAdornment position="start"><ContentCopyIcon color="action"/></InputAdornment>}/>
           </FormControl>
         </Grid>
         <Grid item xs={3}>
@@ -60,7 +60,7 @@ export const Create = () => {
             <Select
               labelId="select-label"
               id="select"
-              value={pbi.projektId}
+              value={pbi.projektId.toString()}
               label="Projekte"
               onChange={handleSelectChange}>
               {projekte.map((projekt) => (
@@ -70,13 +70,13 @@ export const Create = () => {
         </Grid>
         <Grid item xs={2}>
           <LoadingButton
-            sx={{ height: "100%" }}
+            sx={{height: "100%"}}
             onClick={handleSave}
             loading={loading}
             loadingPosition={"start"}
             variant="contained"
             startIcon={
-              <SaveIcon fontSize="inherit" />
+              <SaveIcon fontSize="inherit"/>
             }
             size="large">
             Speichern

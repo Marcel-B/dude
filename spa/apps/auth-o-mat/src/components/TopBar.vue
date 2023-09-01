@@ -5,10 +5,11 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import * as singleSpa from 'single-spa';
-import {getUser, hasUser, login} from 'auth';
+import {getUsername, hasUser} from "auth";
 
+const userName = ref();
 const items = ref([
   {
     label: 'Nodes',
@@ -28,15 +29,19 @@ const items = ref([
   {
     label: 'Login',
     icon: 'pi pi-fw pi-user',
-    command: async () => {
-      const user = await hasUser();
-      if (user) {
-        await getUser();
-      } else
-        await login()
+    command: () => {
+      window.location = "/login";
     }
   }
 ]);
+
+onMounted(async () => {
+  const user = await hasUser();
+  if (user) {
+    userName.value = await getUsername();
+    items.value = [...items.value.filter(x => x.label !== 'Login'), {label: userName.value, icon: 'pi pi-fw- pi-user'}];
+  }
+})
 
 </script>
 

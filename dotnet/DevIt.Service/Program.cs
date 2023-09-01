@@ -55,6 +55,7 @@ app.UseCors(builder => builder
 app.MapControllers();
 app.MapGrpcService<EintragService>();
 app.MapGrpcService<AbrechnungService>();
+app.MapGrpcService<PbiService>();
 await app.RunAsync();
 
 // Notwendig für die IntigrationTests
