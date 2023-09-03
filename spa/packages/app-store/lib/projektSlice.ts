@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Projekt } from "domain";
+import { Projekt } from "domain/projekt";
 import { apiClient } from "client";
 import { RootState } from "./store";
 

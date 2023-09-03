@@ -4,7 +4,12 @@
     "."
   ],
   "compilerOptions": {
-    "lib": ["ES2021", "dom"]
+    "lib": [
+      "ES2021",
+      "dom"
+    ],
+    "target": "es5",
+    "module": "commonjs"
   },
   "exclude": [
     "dist",

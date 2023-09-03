@@ -1,67 +1,55 @@
-import { UserManager } from "oidc-client";
-import * as singleSpa from "single-spa";
+import { UserManager } from 'oidc-client-ts';
 
-const userManager = new UserManager({
-  authority: "https://idsrv.marcelbenders.com",
-  client_id: "pbi.admin",
-  redirect_uri: "http://localhost:9000/signin-oidc",
-  response_mode: "query",
-  response_type: "code",
-  checkSessionInterval: 30000, // Intervall in Millisekunden
-  stopCheckSessionOnError: true,
-  monitorSession: false,
-  scope: "openid profile pbi_admin",
-  post_logout_redirect_uri: "http://localhost:9000/signout-callback-oidc",
-});
+class Manager {
+  static um: UserManager;
+  static counter = 0;
+  static got = 0;
+
+  private constructor() {
+    Manager.counter++;
+  }
+
+  public static userManager(): UserManager {
+    this.got++;
+    if (!this.um) {
+      this.counter++;
+      this.um = new UserManager({
+        authority: 'https://localhost:5000',
+        // authority: "https://idsrv.marcelbenders.com",
+        client_id: 'pbi.admin',
+        redirect_uri: 'http://localhost:9000/signin-oidc',
+      });
+    }
+    console.info('==== Manager', Manager.counter, 'got', Manager.got);
+    return this.um;
+  }
+}
 
 export const hasUser = async () => {
-  console.info("==== hasUser");
+  console.info('==== hasUser');
+  const userManager = Manager.userManager();
   const user = await userManager.getUser();
   if (user)
-    if (user?.expired)
-      return false;
-    else
-      return true;
+    if (user?.expired) return false;
+    else return true;
   return false;
-}
+};
 
 export const getUser = async () => {
-  console.info("==== getUser");
+  console.info('==== getUser');
+  const userManager = Manager.userManager();
   const user = await userManager.getUser();
-  console.info("==== (User)", user);
+  console.info('==== (User)', user);
   return user;
-}
-
+};
 
 export const getUsername = async () => {
-  console.info("==== getUsername");
+  console.info('==== getUsername');
   const user = await getUser();
   return user?.profile?.name;
-}
-
-export const red = async () => {
-  console.info("==== red");
-  try {
-    const user = await userManager.signinRedirectCallback();
-    console.info("====User", user);
-    document.location.href = '/';
-  } catch (e) {
-    const j = JSON.stringify(e);
-    if (j.includes("login_required")) {
-      console.info(j);
-    }
-  }
-}
-export const login = async () => {
-  console.info("==== login");
-  try {
-    await userManager.signinRedirect();
-  } catch (e) {
-    console.error(e);
-  }
-}
+};
 
 export const getAccessToken = async () => {
   const user = await getUser();
   return user?.access_token;
-}
+};

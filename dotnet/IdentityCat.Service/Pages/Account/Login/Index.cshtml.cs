@@ -1,5 +1,6 @@
 using com.b_velop.IdentityCat.Service.Models;
 using Duende.IdentityServer.Events;
+using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace com.b_velop.IdentityCat.Service.Pages.Account.Login;
 
-[SecurityHeaders]
+//[SecurityHeaders]
 [AllowAnonymous]
 public class Index : PageModel
 {
@@ -19,6 +20,7 @@ public class Index : PageModel
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
+    private readonly IUserSession _userSession;
     private readonly IAuthenticationSchemeProvider _schemeProvider;
     private readonly IIdentityProviderStore _identityProviderStore;
 
@@ -32,6 +34,7 @@ public class Index : PageModel
         IAuthenticationSchemeProvider schemeProvider,
         IIdentityProviderStore identityProviderStore,
         IEventService events,
+        IUserSession userSession,
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager)
     {
@@ -41,19 +44,23 @@ public class Index : PageModel
         _schemeProvider = schemeProvider;
         _identityProviderStore = identityProviderStore;
         _events = events;
+        _userSession = userSession;
     }
 
     public async Task<IActionResult> OnGet(
         string returnUrl)
     {
         await BuildModelAsync(returnUrl);
-
         if (View.IsExternalLoginOnly)
         {
             // we only have one option for logging in and it's an external provider
             return RedirectToPage("/ExternalLogin/Challenge", new {scheme = View.ExternalLoginScheme, returnUrl});
         }
 
+        var name = HttpContext.User?.GetDisplayName();
+        var u = await _userSession.GetUserAsync();
+        var sid = await _userSession.GetSessionIdAsync();
+        var foo = _signInManager.IsSignedIn(HttpContext?.User);
         return Page();
     }
 

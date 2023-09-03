@@ -1,4 +1,5 @@
 using Duende.IdentityServer.Models;
+using IdentityModel;
 
 namespace com.b_velop.IdentityCat.Service;
 
@@ -10,7 +11,16 @@ public static class IdentityCatConfigExtensions
         return new IdentityResource[]
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile()
+            new IdentityResources.Profile(),
+            new()
+            {
+                Name = "verification",
+                UserClaims = new List<string>
+                {
+                    JwtClaimTypes.Email,
+                    JwtClaimTypes.EmailVerified
+                }
+            }
         };
     }
 

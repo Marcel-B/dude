@@ -16,7 +16,7 @@
     "@babel/runtime": "^7.22.11",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
-    "oidc-client": "^1.11.5",
+    "oidc-client-ts": "^2.2.5",
     "jwt-decode": "^3.1.2",
     "single-spa": "^5.9.5",
     "tsconfig": "workspace:*",

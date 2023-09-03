@@ -1,5 +1,6 @@
 <template>
-  <TopBar msg="Welcome to Your Vue.js App"/>
+  <TopBar :foo="authToken" msg="Welcome to Your Vue.js App"/>
+  <button @click="() => console.log('====', authToken)">Click</button>
 </template>
 
 <script>
@@ -7,10 +8,12 @@ import TopBar from "@/components/TopBar.vue";
 
 export default {
   name: 'App',
+  props: ['authToken'],
   components: {
     TopBar,
   }
 }
+
 </script>
 
 <style>
@@ -20,6 +23,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0;
 }
 </style>

@@ -1,7 +1,15 @@
+using System.IdentityModel.Tokens.Jwt;
 using com.b_velop.IdentityCat.Service.Data;
 using com.b_velop.IdentityCat.Service.Models;
-using Duende.IdentityServer;
+using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.Extensions;
+using Duende.IdentityServer.Models;
+using Duende.IdentityServer.ResponseHandling;
 using Duende.IdentityServer.Services;
+using Duende.IdentityServer.Validation;
+using IdentityCat.Persistence;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -15,15 +23,20 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(
         this WebApplicationBuilder builder)
     {
+        builder.Services.AddPersistence(builder.Configuration);
         builder.Services.AddRazorPages();
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerTitan")));
-        builder.Services.AddScoped<IEmailSender, EmailSender>();
-        builder
-            .Services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
 
+        builder
+            .Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.Cookie.Expiration = TimeSpan.FromHours(1);
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.Name = "idsrv.trude.gerd";
+            });
         var identityCatConfiguration = builder
             .Configuration.GetSection("IdentityCatConfiguration")
             .Get<IdentityCatConfiguration>();
@@ -32,44 +45,22 @@ internal static class HostingExtensions
             .Services
             .AddIdentityServer(options =>
             {
-                options.Authentication.CheckSessionCookieName = "idsrv.hans.gerd";
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
+
+                options.Authentication.CookieSameSiteMode = SameSiteMode.Strict;
                 options.Authentication.CookieLifetime = TimeSpan.FromHours(1);
                 options.Authentication.CookieSlidingExpiration = false;
-                options.Authentication.CookieSameSiteMode = SameSiteMode.Strict;
+                //options.Authentication.CheckSessionCookieName = "idsrv.hans.gerd";
+
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                 options.EmitStaticAudienceClaim = true;
             })
             .AddInMemoryIdentityResources(identityCatConfiguration.GetIdentityResources())
             .AddInMemoryApiScopes(identityCatConfiguration.GetApiScopes())
-            .AddInMemoryClients(identityCatConfiguration.GetClients())
-            .AddCorsPolicyService<InMemoryCorsPolicyService>() // Eigener CORS-Dienst
-            .AddAspNetIdentity<ApplicationUser>();
-        builder.Services.AddSingleton<ICorsPolicyService>(options =>
-        {
-            var logger = options.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
-
-            return new DefaultCorsPolicyService(logger)
-            {
-                AllowedOrigins = {"http://localhost:9000", "https://idsrv.marcelbenders.com"}
-            };
-        });
-
-        builder
-            .Services.AddAuthentication()
-            .AddGoogle(options =>
-            {
-                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-                // register your IdentityServer with Google at https://console.developers.google.com
-                // enable the Google+ API
-                // set the redirect URI to https://localhost:5001/signin-google
-                options.ClientId = "copy client ID from Google here";
-                options.ClientSecret = "copy client secret from Google here";
-            });
+            .AddInMemoryClients(identityCatConfiguration.GetClients());
 
         return builder.Build();
     }
@@ -78,6 +69,10 @@ internal static class HostingExtensions
         this WebApplication app)
     {
         app.UseSerilogRequestLogging();
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
         app.Use((
             context,
             next) =>
@@ -89,31 +84,35 @@ internal static class HostingExtensions
             context,
             next) =>
         {
+            if (context.Request.Path.HasValue && context.Request.Path.Value.StartsWith("/connect/authorize"))
+            {
+                var request = context.Request;
+                var referer = request
+                    .Headers["Referer"]
+                    .ToString();
+            }
+
             // Setzen Sie den CSP-Header
             context.Response.Headers.Add("Content-Security-Policy",
                 "frame-ancestors 'self' http://localhost:9000;");
             await next();
         });
         app.UseCookiePolicy(new CookiePolicyOptions {MinimumSameSitePolicy = SameSiteMode.Strict});
-
-        app.UseForwardedHeaders(new ForwardedHeadersOptions
-        {
-            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-        });
+        // app.MapControllerRoute(
+        //     name:
+        //     "default",
+        //     pattern:
+        //     "{controller=Home}/{action=Index}/{id?}");
+        // endpoints.MapControllerRoute(
+        //     name: "identity",
+        //     pattern: "Identity/{controller=Account}/{action=Login}/{id?}");
         if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 
         app.UseStaticFiles();
         app.UseRouting();
         app.UseIdentityServer();
-        app.UseAuthentication();
         app.UseAuthorization();
-
-        app.MapControllerRoute(
-            "default",
-            "{controller=Home}/{action=Index}/{id?}");
-
         app.MapRazorPages();
-
         return app;
     }
 }

@@ -1,15 +1,16 @@
 <template>
   <div class="card relative z-2">
     <V-Menubar :model="items"></V-Menubar>
+    <p>{{ la.foo }}</p>
   </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import {ref, defineProps} from 'vue';
 import * as singleSpa from 'single-spa';
-import {getUsername, hasUser} from "auth";
 
-const userName = ref();
+const la = defineProps(['foo']);
+
 const items = ref([
   {
     label: 'Nodes',
@@ -26,23 +27,24 @@ const items = ref([
     icon: 'pi pi-fw pi-calendar',
     command: () => singleSpa.navigateToUrl('/stunden'),
   },
-  {
+]);
+if (la.foo) {
+  items.value.push({
+    label: 'Logout',
+    icon: 'pi pi-fw pi-user',
+    command: () => {
+      window.location = "/logout";
+    }
+  });
+} else {
+  items.value.push({
     label: 'Login',
     icon: 'pi pi-fw pi-user',
     command: () => {
       window.location = "/login";
     }
-  }
-]);
-
-onMounted(async () => {
-  const user = await hasUser();
-  if (user) {
-    userName.value = await getUsername();
-    items.value = [...items.value.filter(x => x.label !== 'Login'), {label: userName.value, icon: 'pi pi-fw- pi-user'}];
-  }
-})
-
+  });
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

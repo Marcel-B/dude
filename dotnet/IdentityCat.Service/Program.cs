@@ -1,5 +1,5 @@
 using com.b_velop.IdentityCat.Service;
-using Identity.Cat;
+using IdentityCat.Domain;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()
@@ -21,6 +21,11 @@ try
         .Enrich.FromLogContext()
         .ReadFrom.Configuration(ctx.Configuration));
 
+    var cmd = new User.CreateUserCommand("Marcel", "Password123!");
+    var user = User.Create(cmd);
+    var res = "Passord123!".Verify(user.Salt, user.Password);
+    
+    
     var conString = builder.Configuration.GetConnectionString("SqlServerTitan");
     Log.Information("DataBase "+ conString);
 
