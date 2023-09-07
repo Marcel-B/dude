@@ -14,8 +14,8 @@ class Manager {
     if (!this.um) {
       this.counter++;
       this.um = new UserManager({
-        authority: 'https://localhost:5000',
-        // authority: "https://idsrv.marcelbenders.com",
+        // authority: 'https://localhost:5000',
+        authority: "https://idsrv.marcelbenders.com",
         client_id: 'pbi.admin',
         redirect_uri: 'http://localhost:9000/signin-oidc',
       });

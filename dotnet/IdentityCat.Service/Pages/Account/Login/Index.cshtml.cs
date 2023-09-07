@@ -1,28 +1,27 @@
-using com.b_velop.IdentityCat.Service.Models;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
-using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
+using IdentityCat.Application;
+using IdentityCat.UserAdapter;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace com.b_velop.IdentityCat.Service.Pages.Account.Login;
 
-//[SecurityHeaders]
+[SecurityHeaders]
 [AllowAnonymous]
 public class Index : PageModel
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IUserStore _users;
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
-    private readonly IUserSession _userSession;
     private readonly IAuthenticationSchemeProvider _schemeProvider;
     private readonly IIdentityProviderStore _identityProviderStore;
+    private readonly IUserAdapter _userAdapter;
 
     public ViewModel View { get; set; }
 
@@ -33,38 +32,38 @@ public class Index : PageModel
         IIdentityServerInteractionService interaction,
         IAuthenticationSchemeProvider schemeProvider,
         IIdentityProviderStore identityProviderStore,
+        IUserAdapter userAdapter,
         IEventService events,
-        IUserSession userSession,
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        IUserStore users)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
+        // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
+        _users = users ??
+                 throw new Exception(
+                     "Please call 'AddTestUsers(TestUsers.Users)' on the IIdentityServerBuilder in Startup or remove the TestUserStore from the AccountController.");
+
         _interaction = interaction;
         _schemeProvider = schemeProvider;
         _identityProviderStore = identityProviderStore;
+        _userAdapter = userAdapter;
         _events = events;
-        _userSession = userSession;
     }
 
     public async Task<IActionResult> OnGet(
         string returnUrl)
     {
         await BuildModelAsync(returnUrl);
+
         if (View.IsExternalLoginOnly)
         {
             // we only have one option for logging in and it's an external provider
             return RedirectToPage("/ExternalLogin/Challenge", new {scheme = View.ExternalLoginScheme, returnUrl});
         }
 
-        var name = HttpContext.User?.GetDisplayName();
-        var u = await _userSession.GetUserAsync();
-        var sid = await _userSession.GetSessionIdAsync();
-        var foo = _signInManager.IsSignedIn(HttpContext?.User);
         return Page();
     }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost(
+        CancellationToken cancellationToken)
     {
         // check if we are in the context of an authorization request
         var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
@@ -98,13 +97,32 @@ public class Index : PageModel
 
         if (ModelState.IsValid)
         {
-            var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberLogin,
-                lockoutOnFailure: true);
-            if (result.Succeeded)
+            // validate username/password against in-memory store
+            if (await _users.ValidateCredentials(Input.Username, Input.Password, cancellationToken))
             {
-                var user = await _userManager.FindByNameAsync(Input.Username);
-                await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName,
+                var user = await _users.FindByUsername(Input.Username, cancellationToken);
+                await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username,
                     clientId: context?.Client.ClientId));
+
+                // only set explicit expiration here if user chooses "remember me". 
+                // otherwise we rely upon expiration configured in cookie middleware.
+                AuthenticationProperties props = null;
+                if (LoginOptions.AllowRememberLogin && Input.RememberLogin)
+                {
+                    props = new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                        ExpiresUtc = DateTimeOffset.UtcNow.Add(LoginOptions.RememberMeLoginDuration)
+                    };
+                }
+
+                // issue authentication cookie with subject ID and username
+                var isuser = new IdentityServerUser(user.SubjectId)
+                {
+                    DisplayName = user.Username
+                };
+
+                await HttpContext.SignInAsync(isuser, props);
 
                 if (context != null)
                 {

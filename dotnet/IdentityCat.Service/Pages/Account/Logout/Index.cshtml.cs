@@ -1,11 +1,9 @@
-using com.b_velop.IdentityCat.Service.Models;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,7 +13,6 @@ namespace com.b_velop.IdentityCat.Service.Pages.Account.Logout;
 [AllowAnonymous]
 public class Index : PageModel
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
 
@@ -23,11 +20,9 @@ public class Index : PageModel
     public string LogoutId { get; set; }
 
     public Index(
-        SignInManager<ApplicationUser> signInManager,
         IIdentityServerInteractionService interaction,
         IEventService events)
     {
-        _signInManager = signInManager;
         _interaction = interaction;
         _events = events;
     }
@@ -74,7 +69,7 @@ public class Index : PageModel
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
 
             // delete local authentication cookie
-            await _signInManager.SignOutAsync();
+            await HttpContext.SignOutAsync();
 
             // raise the logout event
             await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
@@ -87,7 +82,7 @@ public class Index : PageModel
             if (idp != null && idp != Duende.IdentityServer.IdentityServerConstants.LocalIdentityProvider)
             {
                 // we need to see if the provider supports external logout
-                if (await HttpContextExtensions.GetSchemeSupportsSignOutAsync(HttpContext, idp))
+                if (await HttpContext.GetSchemeSupportsSignOutAsync(idp))
                 {
                     // build a return URL so the upstream provider will redirect back
                     // to us after the user has logged out. this allows us to then

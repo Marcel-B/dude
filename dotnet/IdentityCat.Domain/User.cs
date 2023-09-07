@@ -9,23 +9,12 @@ using System;
 
 public class AppUser
 {
-    public string SubjectId { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Salt { get; set; }
-    public string? Email { get; set; }
-    public string? ProviderName { get; set; }
-    public string? ProviderSubjectId { get; set; }
-    public bool IsActive { get; set; } = false;
-    public virtual ICollection<Claim> Claims { get; set; }
-
-    private AppUser()
-    {
-    }
-
-    public static AppUser Create(
+    public static void Filter(
         User user)
     {
+        if (user is null)
+            throw new ArgumentNullException(nameof(user));
+
         var filtered = new List<Claim>();
         foreach (var claim in user.Claims)
         {
@@ -45,22 +34,8 @@ public class AppUser
                 filtered.Add(new Claim(claim.Type, claim.Value));
             }
         }
-        
-        filtered.Add(new Claim(JwtClaimTypes.PreferredUserName, user.Username));
 
-        var au = new AppUser
-        {
-            SubjectId = user.SubjectId,
-            Username = user.Username,
-            Password = user.Password,
-            Salt = user.Salt,
-            Email = user.Email,
-            ProviderName = user.ProviderName,
-            ProviderSubjectId = user.ProviderSubjectId,
-            IsActive = user.IsActive,
-            Claims = filtered
-        };
-        return au;
+        filtered.Add(new Claim(JwtClaimTypes.PreferredUserName, user.Username));
     }
 }
 
@@ -72,16 +47,16 @@ public class User
         {
             RuleFor(x => x.Username)
                 .NotEmpty();
+
             RuleFor(x => x.Password)
                 .NotEmpty()
                 .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .When(x => !string.IsNullOrWhiteSpace(x.Email));
         }
     }
-
-    public Guid Id { get; set; }
 
     /// <summary>
     /// Gets or sets the subject identifier.
@@ -94,6 +69,11 @@ public class User
     public string Username { get; set; }
 
     /// <summary>
+    /// Uppercase Username
+    /// </summary>
+    public string UsernameNormalized { get; set; }
+
+    /// <summary>
     /// Gets or sets the password.
     /// </summary>
     public string Password { get; set; }
@@ -102,8 +82,9 @@ public class User
     /// Gets or sets the Salt.
     /// </summary>
     public string Salt { get; set; }
-
-    public string? Email { get; set; }
+    public string Email { get; set; }
+    public string? Name { get; set; }
+    public string? GivenName { get; set; }
 
     /// <summary>
     /// Gets or sets the provider name.
@@ -123,12 +104,11 @@ public class User
     /// <summary>
     /// Gets or sets the claims.
     /// </summary>
-    public virtual ICollection<UserClaim> Claims { get; set; }
-
+    public HashSet<Claim> Claims { get; set; }
 
     private User()
     {
-        Claims = new HashSet<UserClaim>();
+        Claims = new HashSet<Claim>();
     }
 
     public static User Create(
@@ -140,10 +120,15 @@ public class User
 
         var salt = PasswordExtensions.GenerateSalt(16);
         var hashedPassword = cmd.Password.Hash(salt);
+
         return new User
         {
             Username = cmd.Username,
+            UsernameNormalized = cmd.Username.ToUpper(),
             Password = hashedPassword,
+            Email = cmd.Email,
+            Name = cmd.Name,
+            GivenName = cmd.GivenName,
             SubjectId = CryptoRandom.CreateUniqueId(format: CryptoRandom.OutputFormat.Hex),
             Salt = Convert.ToBase64String(salt)
         };
@@ -152,5 +137,7 @@ public class User
     public record CreateUserCommand(
         string Username,
         string Password,
-        string? Email = default);
+        string Email,
+        string? Name = default,
+        string? GivenName = default);
 }

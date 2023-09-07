@@ -6,6 +6,13 @@ namespace IdentityCat.UserAdapter;
 
 public interface IUserAdapter
 {
+    Task<User> CreateUser(
+        string username,
+        string password,
+        string? email,
+        string? name,
+        string? givenName);
+
     Task<User?> FindByUsername(
         string username,
         CancellationToken cancellationToken = default);
@@ -25,14 +32,27 @@ public class UserAdapter : IUserAdapter
         _userDbContext = userDbContext;
     }
 
+    public async Task<User> CreateUser(
+        string username,
+        string password,
+        string? email,
+        string? name,
+        string? givenName)
+    {
+        var cmd = new User.CreateUserCommand(username, password, email, name, givenName);
+        var user = User.Create(cmd);
+        await _userDbContext.Users.AddAsync(user);
+        await _userDbContext.SaveChangesAsync();
+        return user;
+    }
+
     public async Task<User?> FindByUsername(
         string username,
         CancellationToken cancellationToken = default)
     {
         var user = await _userDbContext
             .Users
-            .Include(x => x.Claims)
-            .FirstOrDefaultAsync(x => x.Username.ToUpper() == username.ToUpper(),
+            .FirstOrDefaultAsync(x => x.UsernameNormalized == username.ToUpper(),
                 cancellationToken);
         return user;
     }
@@ -43,7 +63,6 @@ public class UserAdapter : IUserAdapter
     {
         return await _userDbContext
             .Users
-            .Include(x => x.Claims)
             .FirstOrDefaultAsync(x => x.SubjectId == subjectId, cancellationToken);
     }
 }
