@@ -96,12 +96,18 @@ importers:
       auth:
         specifier: workspace:*
         version: link:../../packages/auth
+      client:
+        specifier: workspace:*
+        version: link:../../packages/client
       jwt-decode:
         specifier: ^3.1.2
         version: 3.1.2
       oidc-client-ts:
         specifier: ^2.2.5
         version: 2.2.5
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       single-spa:
         specifier: ^5.9.3
         version: 5.9.5
@@ -148,9 +154,6 @@ importers:
       html-webpack-plugin:
         specifier: ^5.3.2
         version: 5.5.3(webpack@5.88.2)
-      husky:
-        specifier: ^7.0.2
-        version: 7.0.4
       jest:
         specifier: ^27.0.6
         version: 27.5.1
@@ -617,6 +620,9 @@ importers:
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -8232,12 +8238,6 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /husky@7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
-    engines: {node: '>=12'}
-    hasBin: true
-    dev: true
-
   /iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -11301,7 +11301,6 @@ packages:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
       tslib: 2.6.2
-    dev: true
 
   /safe-array-concat@1.0.0:
     resolution: {integrity: sha512-9dVEFruWIsnie89yym+xWTAYASdpw3CJV7Li/6zBewGf9z2i1j31rP6jnY0pHEO4QZh6N0K11bFjWmdR8UGdPQ==}
@@ -12351,7 +12350,6 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-    dev: true
 
   /tsutils@3.21.0(typescript@4.5.5):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

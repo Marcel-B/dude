@@ -3,12 +3,23 @@ import { eintraege } from "./eintraege";
 import { pbis } from "./pbi";
 import { projekte } from "./projekt";
 import { abrechnung } from "./abrechnung";
+import { Subject } from "rxjs";
 import { getAccessToken } from "auth";
+
+export const tokenSubject = new Subject<UserInfo>();
+tokenSubject.subscribe((value?: UserInfo) => {
+  console.log("==== Token? ", value);
+});
 
 const instance = axios.create({
   baseURL: "http://192.168.2.103:8067",
   timeout: 1000,
 });
+
+export type UserInfo = {
+  token: string;
+  name: string;
+}
 
 // Request-Interceptor
 instance.interceptors.request.use(

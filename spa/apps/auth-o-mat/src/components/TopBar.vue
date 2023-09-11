@@ -1,7 +1,6 @@
 <template>
   <div class="card relative z-2">
     <V-Menubar :model="items"></V-Menubar>
-    <p>{{ la.foo }}</p>
   </div>
 </template>
 

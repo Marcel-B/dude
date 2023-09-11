@@ -1,6 +1,5 @@
 <template>
   <TopBar :foo="authToken" msg="Welcome to Your Vue.js App"/>
-  <button @click="() => console.log('====', authToken)">Click</button>
 </template>
 
 <script>
@@ -13,7 +12,6 @@ export default {
     TopBar,
   }
 }
-
 </script>
 
 <style>
