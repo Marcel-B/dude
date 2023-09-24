@@ -41,20 +41,21 @@ public class MeasurementService
         return reply.Values;
     }
 
-    public async Task<IEnumerable<SelectItem>> GetSensors(
+    public async Task<IEnumerable<SensorReadModel>> GetSensors(
         CancellationToken cancellationToken = default)
     {
         var request = new GetSensorsRequest();
         var reply = await _measurementClient.GetSensorsAsync(request, cancellationToken: cancellationToken);
-        return reply.Sensors.Select(x => new SelectItem(x.Id.ToSystem(), x.Name));
+        return reply.Sensors.Select(x => new SensorReadModel(x.Id.ToSystem(), x.Name, x.Unit, x.DeviceId.ToSystem()));
     }
 
-    public async Task<IEnumerable<SelectItem>> GetDevices(
+    public async Task<IEnumerable<DeviceReadModel>> GetDevices(
         CancellationToken cancellationToken = default)
     {
         var request = new GetDevicesRequest();
         var reply = await _measurementClient.GetDevicesAsync(request, cancellationToken: cancellationToken);
-        return reply.Devices.Select(x => new SelectItem(x.Id.ToSystem(), x.Name));
+        return reply.Devices.Select(
+            x => new DeviceReadModel(x.Id.ToSystem(), x.Name, x.Sensors.Select(x => x.DeviceId.ToSystem())));
     }
 
     public async Task<Device> GetDeviceById(
@@ -66,6 +67,7 @@ public class MeasurementService
             DeviceId = id.ToProto()
         };
         var reply = await _measurementClient.GetDeviceSensorsAsync(request, cancellationToken: cancellationToken);
+        // TODO als ReadModel
         var device = new Device(
             reply.Id.ToSystem(),
             reply.Name,

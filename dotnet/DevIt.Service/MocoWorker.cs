@@ -5,12 +5,12 @@ using Quartz;
 
 namespace com.b_velop.DevIt.Service;
 
-public class GetFoo : IJob
+public class MocoWorker : IJob
 {
     private readonly IMediator _mediator;
     private readonly MocoConfiguration _mocoConfiguration;
 
-    public GetFoo(
+    public MocoWorker(
         IMediator mediator,
         MocoConfiguration mocoConfiguration)
     {
@@ -24,7 +24,8 @@ public class GetFoo : IJob
         var command = new CreateEintraegeByMocoCommand
         {
             ProjektIds = _mocoConfiguration.Projekte,
-            Monat = (Monat) DateTimeOffset.Now.Month
+            From = (Monat) _mocoConfiguration.From,
+            To = (Monat) _mocoConfiguration.To
         };
         _ = await _mediator.Send(command);
     }

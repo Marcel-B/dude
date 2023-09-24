@@ -27,7 +27,12 @@ public class SensorRepository : ISensorRepository
     public async Task<ICollection<Sensor>> GetSensorsAsync(
         CancellationToken cancellationToken = default)
     {
-        return await _context.Sensors.ToListAsync(cancellationToken);
+        var sensors = await _context
+            .Sensors
+            .Include(x => x.Unit)
+            .Include(x => x.Device)
+            .ToListAsync(cancellationToken);
+        return sensors;
     }
 
     public async Task<Sensor> InsertAsync(

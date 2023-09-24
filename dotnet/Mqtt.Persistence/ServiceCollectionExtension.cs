@@ -16,6 +16,7 @@ public static class ServiceCollectionExtension
             .AddScoped<ISensorRepository, SensorRepository>()
             .AddScoped<IUnitRepository, UnitRepository>()
             .AddScoped<ITimestampRepository, TimestampRepository>()
+            .AddScoped<ICoordinateRepository, CoordinateRepository>()
             .AddScoped<IMeasurementRepository, MeasurementRepository>()
             .AddDbContext<ApplicationContext>(options =>
             {

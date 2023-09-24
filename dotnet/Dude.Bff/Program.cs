@@ -73,25 +73,18 @@ builder
         };
     });
 var app = builder.Build();
-
 app.UseCors(options =>
 {
     options
-        .WithOrigins("http://localhost:9000")
+        .WithOrigins("http://localhost:9000", "http://localhost:8067")
         .AllowAnyHeader()
         .AllowAnyMethod()
         .Build();
 });
+app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-
-// Configure the HTTP request pipeline.
-app.MapGet("/",
-    () =>
-        "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-// var s = app.Services.GetRequiredService<MeasurementService>();
-// var r = await s.GetMeasurement(Guid.Parse("7E5099F9-7C6C-46A2-F47F-08DBA421818D"));
-// Console.WriteLine($"____DD {r}");
 app.Run();

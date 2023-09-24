@@ -22,7 +22,7 @@ const vueLifecycles = singleSpaVue({
         // https://single-spa.js.org/docs/building-applications#lifecycle-props
         // if you uncomment these, remember to add matching prop definitions for them in your App.vue file.
         name: this.name,
-        foo: 'Hallo',
+        foo: 'Hallo Welt',
       });
     },
   },
@@ -31,7 +31,7 @@ const vueLifecycles = singleSpaVue({
     app.use(PrimeVue);
     app.use(pinia);
     // eslint-disable-next-line vue/multi-word-component-names
-    app.component('wDropdown', Dropdown);
+    app.component('Dropdown', Dropdown);
     // eslint-disable-next-line vue/multi-word-component-names
     app.component('Card', Card);
     app.component('TabView', TabView);

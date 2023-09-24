@@ -16,6 +16,7 @@ public class ApplicationContext : DbContext
     public DbSet<Timestamp> Timestamps { get; set; }
     public DbSet<Unit> Units { get; set; }
     public DbSet<Measurement> Measurements { get; set; }
+    public DbSet<Coordinate> Coordinates { get; set; }
 
     protected override void OnModelCreating(
         ModelBuilder modelBuilder)
@@ -34,16 +35,25 @@ public class ApplicationContext : DbContext
             .Entity<Unit>()
             .Property(x => x.ShortName)
             .HasMaxLength(64);
-
+        
         modelBuilder
             .Entity<Device>()
             .Property(x => x.Name)
             .HasMaxLength(128);
-
+        
         modelBuilder
             .Entity<Sensor>()
             .Property(x => x.Name)
             .HasMaxLength(64);
+
+        modelBuilder
+            .Entity<Coordinate>()
+            .Property(x => x.Value)
+            .HasMaxLength(32);
+
+        modelBuilder
+            .Entity<Coordinate>()
+            .HasKey(p => p.Id);
 
         modelBuilder
             .Entity<Unit>()

@@ -31,6 +31,7 @@ message SensorDto {
   Common.Guid id = 1;
   string name = 2;
   string unit = 3;
+  Common.Guid device_id = 4;
 }
 
 message GetDevicesRequest {}
@@ -42,6 +43,7 @@ message GetDevicesReply {
 message DeviceDto {
   Common.Guid id = 1;
   string name = 2;
+  repeated SensorDto sensors = 3;
 }
 
 message GetDeviceSensoresRequest {

@@ -15,11 +15,22 @@
 import SensorView from '@/components/SensorView.vue';
 import MessungenView from '@/components/MessungenView.vue';
 import { onMounted } from 'vue';
-import { useSensorStore } from '@/stores/sensorStore';
+import { userLoggedIn } from 'auth';
+import * as singleSpa from 'single-spa';
+import { useAppStore } from '@/stores/appStore';
 
 onMounted(async () => {
-  const store = useSensorStore();
-  await store.fill();
+  const is = await userLoggedIn();
+  if (!is) {
+    singleSpa.navigateToUrl('/');
+  } else {
+    const store = useAppStore();
+    try {
+      await store.fill();
+    } catch (e) {
+      console.error(e);
+    }
+  }
 });
 </script>
 

@@ -1,101 +1,51 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { apiClient } from 'client';
-import format from 'date-fns/format';
-import startOfDay from 'date-fns/startOfDay';
-import endOfDay from 'date-fns/endOfDay';
+import ChartView from '@/components/ChartView.vue';
+import { ref, watch } from 'vue';
 
-onMounted(async () => {
-  chartData.value = await setChartData();
-  chartOptions.value = setChartOptions();
+import { useAppStore } from '@/stores/appStore';
+
+const deviceStore = useAppStore();
+
+const sensors = ref();
+const selectedDevice = ref();
+const selectedSensor = ref();
+
+watch(selectedDevice, async (newValue) => {
+  sensors.value = deviceStore.sensorsByDeviceId(newValue.id);
 });
-const chartData = ref();
-const chartOptions = ref();
-const setChartOptions = () => {
-  const documentStyle = getComputedStyle(document.documentElement);
-  const textColor = documentStyle.getPropertyValue('--text-color');
-  const textColorSecondary = documentStyle.getPropertyValue(
-    '--text-color-secondary'
-  );
-  const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-  return {
-    maintainAspectRatio: false,
-    aspectRatio: 0.6,
-    plugins: {
-      legend: {
-        labels: {
-          color: textColor,
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
-      y: {
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
-    },
-  };
-};
-
-const setChartData = async () => {
-  const documentStyle = getComputedStyle(document.documentElement);
-  const from = format(
-    startOfDay(new Date(2023, 7, 26)),
-    'yyyy-MM-dd HH:mm:ssxxx'
-  ).replace(' ', 'T');
-  const to = format(
-    endOfDay(new Date(2023, 7, 26)),
-    'yyyy-MM-dd HH:mm:ssxxx'
-  ).replace(' ', 'T');
-
-  const urlPara = new URLSearchParams();
-  urlPara.append('from', from);
-  urlPara.append('to', to);
-
-  const d = await apiClient.client.get<
-    { id: string; timestamp: Date; value: number }[]
-  >(
-    `/api/v1/measurement/sensor/581f81e4-51ad-46d4-5a43-08dba423e6d8?${urlPara.toString()}`
-  );
-  return {
-    labels: d.map((x) => format(new Date(x.timestamp), 'HH:mm')),
-    datasets: [
-      {
-        label: 'First Dataset',
-        data: d.map((x) => x.value),
-        fill: false,
-        borderColor: documentStyle.getPropertyValue('--blue-500'),
-        tension: 0.2,
-      },
-    ],
-  };
-};
+watch(selectedSensor, async (newValue) => {
+  deviceStore.setSelectedSensor(newValue.id);
+});
 </script>
 
 <template>
-  <div>
-    <Card>
-      <template #title>Messungen</template>
-      <template #content>
-        <div class="card">
-          <Chart type="line" :data="chartData" :options="chartOptions" />
+  <Card>
+    <template #title>
+      <div style="display: flex; justify-content: space-between">
+        <div>Messungen</div>
+        <div>
+          <Dropdown
+            v-model="selectedDevice"
+            option-label="name"
+            style="width: 20rem"
+            :options="deviceStore.deviceSelectItems"
+          />
+          <Dropdown
+            v-model="selectedSensor"
+            style="width: 20rem; margin-left: 1rem; margin-right: 1rem"
+            option-label="name"
+            :options="sensors"
+          />
         </div>
-      </template>
-    </Card>
-  </div>
+      </div>
+    </template>
+    <template #content>
+      <div class="card">
+        <ChartView />
+      </div>
+    </template>
+  </Card>
 </template>
 
 <style scoped></style>

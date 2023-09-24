@@ -1,5 +1,5 @@
 import { UserManager } from "oidc-client-ts";
-import { authority, userStore } from "./index";
+import { authority, host, userStore } from "./index";
 
 export class Manager {
   static um: UserManager;
@@ -15,10 +15,9 @@ export class Manager {
     if (!this.um) {
       this.counter++;
       this.um = new UserManager({
-        // authority: 'https://localhost:5000',
         authority: authority(),
         client_id: 'pbi.admin',
-        redirect_uri: 'http://localhost:9000/signin-oidc',
+        redirect_uri: `${host()}/signin-oidc`,
         userStore: userStore()
       });
     }

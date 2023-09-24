@@ -15,9 +15,10 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useSensorStore } from '@/stores/sensorStore';
 
-const { devices } = storeToRefs(useSensorStore());
+import { useAppStore } from '@/stores/appStore';
+
+const { devices } = storeToRefs(useAppStore());
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

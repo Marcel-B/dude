@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Mqtt.Gps.Service\Mqtt.Gps.Service.csproj" />
         <ProjectReference Include="..\Mqtt.Measurement.Adapter\Mqtt.Measurement.Adapter.csproj"/>
         <ProjectReference Include="..\Mqtt.Persistence\Mqtt.Persistence.csproj"/>
     </ItemGroup>

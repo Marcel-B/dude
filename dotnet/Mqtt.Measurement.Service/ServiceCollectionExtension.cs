@@ -30,6 +30,7 @@ public static class ServiceCollectionExtension
         {
             Id = device.Id.ToProto(),
             Name = device.Name,
+            Sensors = {device.Sensors.Select(x => x.ToProto())}
         };
     }
 
@@ -57,11 +58,13 @@ public static class ServiceCollectionExtension
     public static SensorDto ToProto(
         this Sensor sensor)
     {
-        return new SensorDto
+        var sensorDto = new SensorDto
         {
             Id = sensor.Id.ToProto(),
             Name = sensor.Name,
             Unit = sensor.Unit.Name,
+            DeviceId = sensor.DeviceId.ToProto(),
         };
+        return sensorDto;
     }
 }

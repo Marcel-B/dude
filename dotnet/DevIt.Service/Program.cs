@@ -21,7 +21,7 @@ builder.Services.AddQuartz(q =>
 {
     // Erstellen Sie einen Job
     var jobKey = new JobKey("MeinJob", "MeineGruppe");
-    q.AddJob<GetFoo>(opts => opts.WithIdentity(jobKey));
+    q.AddJob<MocoWorker>(opts => opts.WithIdentity(jobKey));
 
     // Erstellen Sie einen Trigger
     q.AddTrigger(opts => opts

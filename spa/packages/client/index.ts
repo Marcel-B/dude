@@ -3,16 +3,13 @@ import { eintraege } from "./eintraege";
 import { pbis } from "./pbi";
 import { projekte } from "./projekt";
 import { abrechnung } from "./abrechnung";
-import { Subject } from "rxjs";
 import { getAccessToken } from "auth";
+import * as singleSpa from "single-spa";
 
-export const tokenSubject = new Subject<UserInfo>();
-tokenSubject.subscribe((value?: UserInfo) => {
-  console.log("==== Token? ", value);
-});
 
 const instance = axios.create({
-  baseURL: "http://192.168.2.103:8067",
+  baseURL: "https://marcelbenders.com",
+  // baseURL: "http://192.168.2.103:8067",
   timeout: 1000,
 });
 
@@ -28,6 +25,8 @@ instance.interceptors.request.use(
     console.info('==== Client token', token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      singleSpa.navigateToUrl("/");
     }
     return config;
   },

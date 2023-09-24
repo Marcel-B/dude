@@ -14,5 +14,6 @@ public enum Monat
   September = 9,
   Oktober = 10,
   November = 11,
-  Dezember = 12
+  Dezember = 12,
+  All = 13
 }

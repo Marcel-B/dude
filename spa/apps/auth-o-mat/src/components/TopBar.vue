@@ -8,26 +8,27 @@
 import {ref, defineProps} from 'vue';
 import * as singleSpa from 'single-spa';
 
-const la = defineProps(['foo']);
+const customProps = defineProps(['foo']);
 
-const items = ref([
-  {
-    label: 'Nodes',
-    icon: 'pi pi-fw pi-chart-line',
-    command: () => singleSpa.navigateToUrl('/state'),
-  },
-  {
-    label: 'PBIs',
-    icon: 'pi pi-fw pi-list',
-    command: () => singleSpa.navigateToUrl('/content'),
-  },
-  {
-    label: 'Zeiten',
-    icon: 'pi pi-fw pi-calendar',
-    command: () => singleSpa.navigateToUrl('/stunden'),
-  },
-]);
-if (la.foo) {
+const items = ref([]);
+if (customProps.foo) {
+  items.value.push(
+      {
+        label: 'Nodes',
+        icon: 'pi pi-fw pi-chart-line',
+        command: () => singleSpa.navigateToUrl('/state'),
+      },
+      {
+        label: 'PBIs',
+        icon: 'pi pi-fw pi-list',
+        command: () => singleSpa.navigateToUrl('/content'),
+      },
+      {
+        label: 'Zeiten',
+        icon: 'pi pi-fw pi-calendar',
+        command: () => singleSpa.navigateToUrl('/stunden'),
+      },
+  );
   items.value.push({
     label: 'Logout',
     icon: 'pi pi-fw pi-user',
