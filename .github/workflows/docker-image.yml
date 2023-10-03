@@ -26,13 +26,13 @@ jobs:
         password: ${{secrets.DOCKER_HUB_PW}}
     - uses: actions/checkout@v3
     - name: Build DevIt Service
-      run: docker build ./dotnet --file ./dotnet/DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
+      run: docker build ./dotnet --file ./DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude BFF
-      run: docker build ./dotnet --file ./dotnet/Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
+      run: docker build ./dotnet --file ./Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
     - name: Build Identity Cat
-      run: docker build ./dotnet --file ./dotnet/IdentityCat.Service/Dockerfile --tag millegalb/identity-cat:0.0.$BUILD_NUMBER
+      run: docker build ./dotnet --file ./IdentityCat.Service/Dockerfile --tag millegalb/identity-cat:0.0.$BUILD_NUMBER
     - name: Build Mqtt Service
-      run: docker build ./dotnet --file ./dotnet/Mqtt.Service/Dockerfile --tag millegalb/mqtt-service:0.0.$BUILD_NUMBER
+      run: docker build ./dotnet --file ./Mqtt.Service/Dockerfile --tag millegalb/mqtt-service:0.0.$BUILD_NUMBER
     - name: Push the Docker image Idenetity
       run: docker push millegalb/identity-cat:0.0.$BUILD_NUMBER
     - name: Push the Docker image DevIt
