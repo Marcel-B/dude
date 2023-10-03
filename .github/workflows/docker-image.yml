@@ -44,7 +44,7 @@ jobs:
         version: 8
         run_install: true
     - name: Install dependencies
-      run: cd spa && pnpm build   
+      run: cd spa && pnpm i -D typescript && pnpm build   
     - name: Build DevIt
       run: docker build ./dotnet --file ./dotnet/DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude Bff
