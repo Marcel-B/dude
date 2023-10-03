@@ -1,0 +1,25 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.22.11",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "oidc-client-ts": "^2.2.5",
+    "jwt-decode": "^3.1.2",
+    "single-spa": "^5.9.5",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.2.2"
+  }
+}

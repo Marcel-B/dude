@@ -1,5 +1,5 @@
 using DevIt.Abrechnung.Adapter.Queries;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 
 namespace DevIt.Abrechnung.Adapter.Handler;

@@ -1,6 +1,4 @@
-using DevIt.Repository;
-
-namespace DevIt.Persistence;
+namespace DevIt.Repository;
 
 public interface IUnitOfWork : IDisposable, IAsyncDisposable
 {

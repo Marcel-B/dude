@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+import "Protos/common.proto";
+
+option csharp_namespace = "com.b_velop.Dude.Shared";
+
+package Pbi;
+
+service PbiService {
+    rpc GetPbis (GetPbisRequest) returns (GetPbisReply);
+    rpc GetPbiById (GetPbiByIdRequest) returns (GetPbiByIdReply);
+    rpc CreatePbi (CreatePbiRequest) returns (CreatePbiReply);
+    rpc UpdatePbi (UpdatePbiRequest) returns (UpdatePbiReply);
+    rpc DeletePbi (DeletePbiRequest) returns (DeletePbiReply);
+
+    rpc GetProjekte (GetProjekteRequest) returns (GetProjekteReply);
+    rpc GetProjektById (GetProjektByIdRequest) returns (GetProjektByIdReply);
+    rpc CreateProjekt (CreateProjektRequest) returns (CreateProjektReply);
+    rpc UpdateProjekt (UpdateProjektRequest) returns (UpdateProjektReply);
+    rpc DeleteProjekt (DeleteProjektRequest) returns (DeleteProjektReply);
+}
+
+message ProjektDto {
+    int32 id = 1;
+    string name = 2;
+    string externe_id = 3;
+}
+
+message PbiDto {
+    int32 id = 1;
+    string name = 2;
+    int32 projekt_id = 3;
+    ProjektDto projekt = 4;
+}
+
+message GetPbisRequest {}
+
+message GetPbisReply {
+    repeated PbiDto pbis = 1;
+}
+
+message GetPbiByIdRequest {
+    int32 id = 1;
+}
+
+message GetPbiByIdReply {
+    PbiDto pbi = 1;
+}
+
+message CreatePbiRequest {
+    string name = 1;
+    int32 projekt_id = 2;
+}
+
+message CreatePbiReply {
+    PbiDto pbi = 1;
+}
+
+message UpdatePbiRequest {
+    int32 id = 1;
+    string name = 2;
+    int32 projekt_id = 3;
+}
+
+message UpdatePbiReply {
+    PbiDto pbi = 1;
+}
+
+message DeletePbiRequest {
+    int32 id = 1;
+}
+
+message DeletePbiReply {
+}
+
+message GetProjekteRequest {}
+
+message GetProjekteReply {
+    repeated ProjektDto projekte = 1;
+}
+
+message GetProjektByIdRequest {
+    int32 id = 1;
+}
+
+message GetProjektByIdReply {
+    ProjektDto projekt = 1;
+}
+
+message CreateProjektRequest {
+    string name = 1;
+    string externe_id = 2;
+}
+
+message CreateProjektReply {
+    ProjektDto projekt = 1;
+}
+
+message UpdateProjektRequest {
+    int32 id = 1;
+    string name = 2;
+    string externe_id = 3;
+}
+
+message UpdateProjektReply {
+    ProjektDto projekt = 1;
+}
+
+message DeleteProjektRequest {
+    int32 id = 1;
+}
+
+message DeleteProjektReply {
+}

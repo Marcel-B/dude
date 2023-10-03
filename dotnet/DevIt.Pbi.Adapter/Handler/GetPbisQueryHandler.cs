@@ -1,11 +1,11 @@
 using DevIt.Pbi.Adapter.Queries;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Pbi.Adapter.Handler;
 
-public class GetPbisQueryHandler : IRequestHandler<GetPbisQuery, IList<Domain.Pbi>>
+public class GetPbisQueryHandler : IRequestHandler<GetPbisQuery, IList<com.b_velop.DevIt.Domain.Pbi>>
 {
   private readonly IUnitOfWork _unitOfWork;
 
@@ -15,7 +15,7 @@ public class GetPbisQueryHandler : IRequestHandler<GetPbisQuery, IList<Domain.Pb
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<IList<Domain.Pbi>> Handle(
+  public async Task<IList<com.b_velop.DevIt.Domain.Pbi>> Handle(
     GetPbisQuery request,
     CancellationToken cancellationToken)
   {

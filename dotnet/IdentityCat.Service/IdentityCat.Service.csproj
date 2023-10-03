@@ -1,0 +1,147 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>com.b_velop.IdentityCat.Service</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>6cd6d8c6-7df4-4e0a-a3f8-abdbe1b2ba9a</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.3.3"/>
+
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.10" />
+
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="7.0.0"/>
+
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.10"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.10"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="_Pages\**" />
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\IdentityCat.Application\IdentityCat.Application.csproj" />
+      <ProjectReference Include="..\IdentityCat.Domain\IdentityCat.Domain.csproj" />
+      <ProjectReference Include="..\IdentityCat.Persistence\IdentityCat.Persistence.csproj" />
+      <ProjectReference Include="..\IdentityCat.UserAdapter\IdentityCat.UserAdapter.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Lockout.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Logout.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\Email.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Account\AccessDenied.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Account\Login\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Account\Logout\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Account\Logout\LoggedOut.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Ciba\All.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Ciba\Consent.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Ciba\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Ciba\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Consent\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Consent\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Device\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Device\Success.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Device\_ScopeListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Diagnostics\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\ExternalLogin\Callback.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\ExternalLogin\Challenge.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Grants\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Home\Error\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Redirect\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Shared\_Nav.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\Shared\_ValidationSummary.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="_Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\Account\AccessDenied.cshtml" />
+      <AdditionalFiles Include="Pages\Account\Create\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Account\Login\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Account\Logout\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Account\Logout\LoggedOut.cshtml" />
+      <AdditionalFiles Include="Pages\Ciba\All.cshtml" />
+      <AdditionalFiles Include="Pages\Ciba\Consent.cshtml" />
+      <AdditionalFiles Include="Pages\Ciba\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Ciba\_ScopeListItem.cshtml" />
+      <AdditionalFiles Include="Pages\Consent\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Consent\_ScopeListItem.cshtml" />
+      <AdditionalFiles Include="Pages\Device\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Device\Success.cshtml" />
+      <AdditionalFiles Include="Pages\Device\_ScopeListItem.cshtml" />
+      <AdditionalFiles Include="Pages\Diagnostics\Index.cshtml" />
+      <AdditionalFiles Include="Pages\ExternalLogin\Callback.cshtml" />
+      <AdditionalFiles Include="Pages\ExternalLogin\Challenge.cshtml" />
+      <AdditionalFiles Include="Pages\Grants\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Home\Error\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Redirect\Index.cshtml" />
+      <AdditionalFiles Include="Pages\ServerSideSessions\Index.cshtml" />
+      <AdditionalFiles Include="Pages\Shared\_Layout.cshtml" />
+      <AdditionalFiles Include="Pages\Shared\_ValidationSummary.cshtml" />
+      <AdditionalFiles Include="Pages\_ViewImports.cshtml" />
+      <AdditionalFiles Include="Pages\_ViewStart.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="_Pages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="_Pages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="_Pages\**" />
+    </ItemGroup>
+</Project>

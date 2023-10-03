@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DevIt.Api\DevIt.Api.csproj" />
+      <ProjectReference Include="..\DevIt.Service\DevIt.Service.csproj" />
     </ItemGroup>
 
 </Project>

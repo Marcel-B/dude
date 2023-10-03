@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Queries;
 
-public class GetEintragByIdQuery : IRequest<Domain.Eintrag>
+public class GetEintragByIdQuery : IRequest<com.b_velop.DevIt.Domain.Eintrag>
 {
   public int Id { get; }
 

@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Commands;
 
-public class CreateEintragCommand : IRequest<Domain.Eintrag>
+public class CreateEintragCommand : IRequest<com.b_velop.DevIt.Domain.Eintrag>
 {
   public string Text { get; }
   public DateTimeOffset Datum { get; }

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "com.b_velop.Dude.Shared";
+
+package Gps;
+
+service Gps {
+    rpc GetAllCoordinates (GetAllCoordinatesRequest) returns (GetAllCoordinatesReply);
+}
+
+message Coordinate {
+    int64 timestamp = 1;
+    double latitude = 3;
+    double longitude = 4;
+}
+
+message GetAllCoordinatesRequest {
+}
+
+message GetAllCoordinatesReply {
+    repeated Coordinate coordinates = 1;
+}

@@ -1,12 +1,11 @@
-using DevIt.Persistence;
-using DevIt.Projekt.Adapter.Query;
+using DevIt.Projekt.Adapter.Queries;
 using DevIt.Repository;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevIt.Projekt.Adapter.Handler;
 
-public class GetProjektByIdQueryHandler : IRequestHandler<GetProjektByIdQuery, Domain.Projekt>
+public class GetProjektByIdQueryHandler : IRequestHandler<GetProjektByIdQuery, com.b_velop.DevIt.Domain.Projekt>
 {
   private readonly IServiceProvider _serviceProvider;
 
@@ -16,7 +15,7 @@ public class GetProjektByIdQueryHandler : IRequestHandler<GetProjektByIdQuery, D
     _serviceProvider = serviceProvider;
   }
 
-  public async Task<Domain.Projekt> Handle(
+  public async Task<com.b_velop.DevIt.Domain.Projekt> Handle(
     GetProjektByIdQuery request,
     CancellationToken cancellationToken)
   {

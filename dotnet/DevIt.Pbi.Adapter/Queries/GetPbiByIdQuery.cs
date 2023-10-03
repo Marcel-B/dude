@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DevIt.Pbi.Adapter.Queries;
 
-public class GetPbiByIdQuery : IRequest<Domain.Pbi>
+public class GetPbiByIdQuery : IRequest<com.b_velop.DevIt.Domain.Pbi>
 {
   public int Id { get; }
 

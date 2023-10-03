@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>com.b_velop.Dude.Shared</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.17.3"/>
+        <PackageReference Include="Grpc" Version="2.46.6" />
+        <PackageReference Include="Grpc.Tools" Version="2.58.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <Protobuf Include="Protos/common.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/measurement.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/eintrag.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/abrechnung.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/pbi.proto" GrpcService="Both"/>
+        <Protobuf Include="Protos/gps.proto" GrpcService="Both"/>
+    </ItemGroup>
+</Project>

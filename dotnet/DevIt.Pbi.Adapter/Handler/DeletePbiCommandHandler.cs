@@ -1,5 +1,5 @@
 using DevIt.Pbi.Adapter.Commands;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 
 namespace DevIt.Pbi.Adapter.Handler;

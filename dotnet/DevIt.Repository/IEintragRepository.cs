@@ -1,13 +1,22 @@
-using DevIt.Domain;
+using com.b_velop.DevIt.Domain;
 
 namespace DevIt.Repository;
 
-public interface IEintragRepository
+public interface IRepository<T>
+{
+  IQueryable<T> Query();
+}
+
+
+
+public interface IEintragRepository : IRepository<Eintrag>
 {
   Task<IList<Eintrag>> GetEintraegeAsync(CancellationToken cancellationToken);
   Task<Eintrag> GetEintragByIdAsync(int id, CancellationToken cancellationToken);
   Task<Eintrag> CreateEintragAsync(Eintrag eintrag, CancellationToken cancellationToken);
+  Task CreateEintraegeAsync(IEnumerable<Eintrag> eintraege, CancellationToken cancellationToken);
   Task<Eintrag> UpdateEintragAsync(Eintrag eintrag, CancellationToken cancellationToken);
+  Task UpdateEintraegeAsync(IList<Eintrag> eintraege, CancellationToken cancellationToken);
 
   Task<IList<Eintrag>> GetEintragByKalenderwocheAsync(
     int kalenderwoche,

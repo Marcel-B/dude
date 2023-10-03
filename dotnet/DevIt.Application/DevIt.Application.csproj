@@ -13,6 +13,8 @@
     <ItemGroup>
       <ProjectReference Include="..\DevIt.Abrechnung.Adapter\DevIt.Abrechnung.Adapter.csproj" />
       <ProjectReference Include="..\DevIt.Eintrag.Adapter\DevIt.Eintrag.Adapter.csproj" />
+      <ProjectReference Include="..\DevIt.Moco.Adapter\DevIt.Moco.Adapter.csproj" />
+      <ProjectReference Include="..\DevIt.Moco.Service\DevIt.Moco.Service.csproj" />
       <ProjectReference Include="..\DevIt.Pbi.Adapter\DevIt.Pbi.Adapter.csproj" />
       <ProjectReference Include="..\DevIt.Persistence\DevIt.Persistence.csproj" />
       <ProjectReference Include="..\DevIt.Projekt.Adapter\DevIt.Projekt.Adapter.csproj" />

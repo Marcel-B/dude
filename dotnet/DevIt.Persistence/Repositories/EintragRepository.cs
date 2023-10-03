@@ -1,13 +1,13 @@
 using System.Globalization;
-using DevIt.Domain;
-using DevIt.Persistence;
+using com.b_velop.DevIt.Domain;
+using DevIt.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevIt.Repository;
+namespace DevIt.Persistence.Repositories;
 
 internal static class EintragRepositoryExtensions
 {
-  static CultureInfo myCI = new CultureInfo("de-DE");
+  static CultureInfo myCI = new("de-DE");
   static Calendar myCal = myCI.Calendar;
   static CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
   static DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
@@ -30,11 +30,11 @@ internal static class EintragRepositoryExtensions
     => eintraege.Where(x => x.Datum.Year == jahr);
 }
 
-public class EintragRepository : IEintragRepository
+public class EintragRepository : RepositoryBase<Eintrag>, IEintragRepository
 {
   private readonly ApplicationContext _context;
 
-  public EintragRepository(ApplicationContext context)
+  public EintragRepository(ApplicationContext context) : base(context)
   {
     _context = context;
   }
@@ -56,11 +56,30 @@ public class EintragRepository : IEintragRepository
     return eintrag;
   }
 
+  public async Task CreateEintraegeAsync(IEnumerable<Eintrag> eintraege, CancellationToken cancellationToken)
+  {
+    await _context.Eintraege.AddRangeAsync(eintraege, cancellationToken);
+  }
+
   public async Task<Eintrag> UpdateEintragAsync(Eintrag eintrag, CancellationToken cancellationToken)
   {
     var eintragToUpdate = await _context.Eintraege.FirstAsync(x => x.Id == eintrag.Id, cancellationToken);
     _context.Entry(eintragToUpdate).CurrentValues.SetValues(eintrag);
     return eintrag;
+  }
+
+  public async Task UpdateEintraegeAsync(IList<Eintrag> eintraege, CancellationToken cancellationToken)
+  {
+
+    // _context.Eintraege.UpdateRange(eintraege);
+    // var eintraegeToUpdate = await _context.Eintraege.Where(x => eintraege.Select(y => y.Id).Contains(x.Id))
+    //   .ToListAsync(cancellationToken);
+    foreach (var eintrag in eintraege)
+    {
+      // var eintragToUpdate = eintraege.First(x => x.Id == eintrag.Id);
+      _context.Entry(eintrag).State = EntityState.Modified;
+        // .CurrentValues.SetValues(eintragToUpdate);
+    }
   }
 
   private IQueryable<Eintrag> ByText(string text)

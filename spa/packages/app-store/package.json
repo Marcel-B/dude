@@ -1,0 +1,30 @@
+{
+  "name": "app-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.22.11",
+    "@types/react-redux": "^7.1.24",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
+    "client": "workspace:*",
+    "domain": "workspace:*",
+    "immer": "^9.0.21",
+    "react-redux": "^8.0.5",
+    "werkzeug": "workspace:*"
+  }
+}

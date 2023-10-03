@@ -1,5 +1,5 @@
 using DevIt.Eintrag.Adapter.Commands;
-using DevIt.Persistence;
+using DevIt.Repository;
 using MediatR;
 
 namespace DevIt.Eintrag.Adapter.Handler;

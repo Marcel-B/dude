@@ -1,13 +1,13 @@
 using MediatR;
 
-namespace DevIt.Projekt.Adapter.Command;
+namespace DevIt.Projekt.Adapter.Commands;
 
 public class DeleteProjektCommand : IRequest
 {
-  public DeleteProjektCommand(string id)
+  public DeleteProjektCommand(int id)
   {
     Id = id;
   }
 
-  public string Id { get; }
+  public int Id { get; }
 }

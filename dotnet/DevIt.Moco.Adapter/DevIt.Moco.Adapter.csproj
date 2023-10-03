@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UserSecretsId>5c7acb26-48d4-4878-9a65-e205189d1e98</UserSecretsId>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\DevIt.Moco.Service\DevIt.Moco.Service.csproj" />
+      <ProjectReference Include="..\DevIt.Repository\DevIt.Repository.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="11.0.0" />
+      <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
+    </ItemGroup>
+
+
+
+
+
+</Project>

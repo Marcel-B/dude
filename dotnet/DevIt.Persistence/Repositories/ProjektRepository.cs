@@ -1,9 +1,9 @@
 ﻿using System.Collections.Immutable;
-using DevIt.Domain;
-using DevIt.Persistence;
+using com.b_velop.DevIt.Domain;
+using DevIt.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevIt.Repository;
+namespace DevIt.Persistence.Repositories;
 
 public class ProjektRepository : IProjektRepository
 {
@@ -16,7 +16,7 @@ public class ProjektRepository : IProjektRepository
 
   public async Task<Projekt> CreateProjektAsync(Projekt projekt, CancellationToken cancellationTokens)
   {
-    _context.Projekte.Add(projekt);
+    await _context.Projekte.AddAsync(projekt);
     return projekt;
   }
 
@@ -25,12 +25,12 @@ public class ProjektRepository : IProjektRepository
     return _context.Projekte.ToImmutableList();
   }
 
-  public async Task<Projekt> GetProjektByIdAsync(string id, CancellationToken cancellationToken)
+  public async Task<Projekt> GetProjektByIdAsync(int id, CancellationToken cancellationToken)
   {
     return await _context.Projekte.FirstAsync(projekt => projekt.Id == id, cancellationToken);
   }
 
-  public async Task DeleteProjektAsync(string id, CancellationToken cancellationToken)
+  public async Task DeleteProjektAsync(int id, CancellationToken cancellationToken)
   {
     var projekt = await _context.Projekte.FirstAsync(projekt => projekt.Id == id, cancellationToken);
     _context.Projekte.Remove(projekt);

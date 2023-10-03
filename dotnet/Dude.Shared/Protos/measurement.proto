@@ -1,0 +1,73 @@
+syntax = "proto3";
+import "Protos/common.proto";
+
+option csharp_namespace = "com.b_velop.Dude.Shared";
+
+package Measurement;
+
+service Measurement {
+  rpc GetMeasurement (GetMeasurementRequest) returns (GetMeasurementReply);
+  rpc GetSensors (GetSensorsRequest) returns (GetSensorsReply);
+  rpc GetDevices (GetDevicesRequest) returns (GetDevicesReply);
+  rpc GetDeviceSensors (GetDeviceSensoresRequest) returns (GetDeviceSensorsReply);
+  rpc GetMeasurements (GetMeasurementsRequest) returns (GetMeasurementsReply);
+}
+
+message GetMeasurementRequest {
+  Common.Guid sensor_id = 1;
+}
+
+message GetMeasurementReply {
+  double values = 1;
+}
+
+message GetSensorsRequest {}
+
+message GetSensorsReply {
+  repeated SensorDto sensors = 1;
+}
+
+message SensorDto {
+  Common.Guid id = 1;
+  string name = 2;
+  string unit = 3;
+  Common.Guid device_id = 4;
+}
+
+message GetDevicesRequest {}
+
+message GetDevicesReply {
+  repeated DeviceDto devices = 1;
+}
+
+message DeviceDto {
+  Common.Guid id = 1;
+  string name = 2;
+  repeated SensorDto sensors = 3;
+}
+
+message GetDeviceSensoresRequest {
+  Common.Guid device_id = 1;
+}
+
+message GetDeviceSensorsReply {
+  Common.Guid id = 1;
+  string name = 2;
+  repeated SensorDto sensors = 3;
+}
+
+message GetMeasurementsRequest {
+  Common.Guid sensor_id = 1;
+  int64 from = 2;
+  int64 to = 3;
+}
+
+message GetMeasurementsReply {
+  repeated MeasurementDto measurements = 1;
+}
+
+message MeasurementDto {
+  Common.Guid id = 1;
+  double value = 2;
+  int64 timestamp = 3;
+}

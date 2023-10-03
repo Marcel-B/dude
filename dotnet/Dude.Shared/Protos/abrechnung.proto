@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+import "Protos/common.proto";
+
+option csharp_namespace = "com.b_velop.Dude.Shared";
+
+package Abrechnung;
+
+service AbrechnungService {
+    rpc GetByMonat (GetByMonatRequest) returns (GetByMonatReply);
+    rpc GetByJahr (GetByJahrRequest) returns (GetByJahrReply);
+    rpc GetByKalenderwoche (GetByKalenderwocheRequest) returns (GetByKalenderwocheReply);
+    rpc GetAbrechnungProjekte (GetAbrechnungProjekteRequest) returns (GetAbrechnungProjekteReply);
+}
+
+message GetByMonatRequest {
+    int32 monat = 1;
+    int32 jahr = 2;
+    string text = 3;
+}
+
+message GetByMonatReply {
+    double stunden = 1;
+}
+
+message GetByJahrRequest {
+    int32 jahr = 1;
+    string text = 2;
+}
+
+message GetByJahrReply {
+    double stunden = 1;
+}
+
+message GetByKalenderwocheRequest {
+    int32 kalenderwoche = 1;
+    int32 jahr = 2;
+    string text = 3;
+}
+
+message GetByKalenderwocheReply {
+    double stunden = 1;
+}
+
+message GetAbrechnungProjekteRequest {
+}
+
+message GetAbrechnungProjekteReply {
+    repeated string projekte = 1;
+}
