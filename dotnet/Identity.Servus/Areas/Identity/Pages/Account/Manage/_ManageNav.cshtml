@@ -1,3 +1,5 @@
+@using Identity.Servus.Domain
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject SignInManager<AppUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

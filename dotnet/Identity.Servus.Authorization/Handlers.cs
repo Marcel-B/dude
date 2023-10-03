@@ -29,6 +29,7 @@ public static class Handlers
         context.Claims[Claims.Picture] = context.Principal.GetClaim(Claims.Picture);
         context.Claims[Claims.Locale] = context.Principal.GetClaim(Claims.Locale);
         context.Claims[Claims.Zoneinfo] = context.Principal.GetClaim(Claims.Zoneinfo);
+
         context.Claims[Claims.UpdatedAt] = long.Parse(
           context.Principal.GetClaim(Claims.UpdatedAt)!,
           NumberStyles.Number, CultureInfo.InvariantCulture);
@@ -48,7 +49,8 @@ public static class Handlers
 
       if (context.Principal.HasScope(Scopes.Address))
       {
-        context.Address = JsonSerializer.Deserialize<JsonElement>(context.Principal.GetClaim(Claims.Address)!);
+        context.Address = JsonSerializer
+          .Deserialize<JsonElement>(context.Principal.GetClaim(Claims.Address)!);
       }
 
       return default;

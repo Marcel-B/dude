@@ -16,10 +16,10 @@ namespace Identity.Servus.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<Domain.AppUser> _userManager;
+        private readonly SignInManager<Domain.AppUser> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Domain.AppUser> userManager, SignInManager<Domain.AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

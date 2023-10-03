@@ -70,7 +70,7 @@ export const changeWeek = (date: Date, change: number): Date => {
 };
 
 export const sameDate = (date1: Date, date2: Date): boolean => {
-  return format(date1, "yyyy-mm-dd") === format(date2, "yyyy-mm-dd");
+  return format(date1, "yyyy-MM-dd") === format(date2, "yyyy-MM-dd");
 };
 
 export const getTodayAsISO = (): string => {
