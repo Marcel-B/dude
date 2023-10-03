@@ -44,7 +44,7 @@ jobs:
         version: "7.21.0"
         run_install: true
     - name: Build DevIt
-      run: docker build ./dotnet --file ./DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
+      run: docker build ./dotnet --file ./dotnet/DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude Bff
       run: docker build ./dotnet --file ./dotnet/Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
     - name: Build Identity Cat
