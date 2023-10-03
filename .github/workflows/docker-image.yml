@@ -28,7 +28,7 @@ jobs:
     #- name: Build DevIt Service
     #  run: docker build ./dotnet --file ./DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude BFF
-      run: docker build ./dotnet --file ./dotnet/Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
+      run: docker build dotnet --file dotnet/Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
     - name: Build Identity Cat
       run: docker build ./dotnet --file ./dotnet/IdentityCat.Service/Dockerfile --tag millegalb/identity-cat:0.0.$BUILD_NUMBER
     - name: Build Mqtt Service
