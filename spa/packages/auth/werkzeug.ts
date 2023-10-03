@@ -3,7 +3,7 @@ import { Manager } from "./manager";
 
 export const userStore = () =>
   new WebStorageStateStore({
-    prefix: 'fuck-you:',
+    prefix: 'id-cat:',
     store: window.localStorage,
   });
 
@@ -13,10 +13,10 @@ export const getAccessToken = async () => {
 };
 
 export const authority = () => "https://idsrv.marcelbenders.com";
-// authority: 'https://localhost:5000',
+  //'http://localhost:7003';
 
-export const host = () => "https://marcelbenders.com"
-//"http://localhost:8067";
+export const host = () => //"https://marcelbenders.com";
+  "http://localhost:9000";
 
 export const userLoggedIn = async () => {
   const user = await getUser();

@@ -8,8 +8,9 @@ import * as singleSpa from "single-spa";
 
 
 const instance = axios.create({
-  baseURL: "https://marcelbenders.com",
+  //baseURL: "https://marcelbenders.com",
   // baseURL: "http://192.168.2.103:8067",
+  baseURL: "http://localhost:7001",
   timeout: 1000,
 });
 

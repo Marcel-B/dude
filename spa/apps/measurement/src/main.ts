@@ -12,6 +12,7 @@ import Card from 'primevue/card';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Chart from 'primevue/chart';
+import 'leaflet/dist/leaflet.css';
 
 const vueLifecycles = singleSpaVue({
   createApp,

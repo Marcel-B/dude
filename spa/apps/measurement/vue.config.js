@@ -9,7 +9,7 @@ module.exports = defineConfig({
   configureWebpack: {
     output: {
       libraryTarget: 'system',
-      filename: 'b-velop-measurement.js',
+      //   filename: 'b-velop-measurement.js',
     },
     plugins: [
       new webpack.optimize.LimitChunkCountPlugin({

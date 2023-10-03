@@ -1,5 +1,5 @@
 {
-  "name": "@b-belop/auth-o-mat",
+  "name": "@b-belop/header",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -31,6 +31,7 @@
     "ts-loader": "^9.2.6",
     "url-loader": "^4.1.1",
     "eslint-plugin-vue": "^8.0.3",
+    "systemjs-webpack-interop": "^2.3.7",
     "vue-cli-plugin-single-spa": "~3.3.0"
   },
   "eslintConfig": {

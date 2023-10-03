@@ -7,6 +7,9 @@
       <TabPanel header="Messungen">
         <MessungenView />
       </TabPanel>
+      <TabPanel header="Karte">
+        <MapView />
+      </TabPanel>
     </TabView>
   </div>
 </template>
@@ -14,6 +17,7 @@
 <script setup lang="ts">
 import SensorView from '@/components/SensorView.vue';
 import MessungenView from '@/components/MessungenView.vue';
+import MapView from '@/components/MapView.vue';
 import { onMounted } from 'vue';
 import { userLoggedIn } from 'auth';
 import * as singleSpa from 'single-spa';

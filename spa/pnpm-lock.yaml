@@ -24,7 +24,7 @@ importers:
         specifier: latest
         version: 1.10.14
 
-  apps/auth-o-mat:
+  apps/header:
     dependencies:
       auth:
         specifier: workspace:*
@@ -78,6 +78,9 @@ importers:
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.88.2)
+      systemjs-webpack-interop:
+        specifier: ^2.3.7
+        version: 2.3.7(webpack@5.88.2)
       ts-loader:
         specifier: ^9.2.6
         version: 9.4.4(typescript@4.5.5)(webpack@5.88.2)
@@ -193,6 +196,9 @@ importers:
 
   apps/measurement:
     dependencies:
+      '@vue-leaflet/vue-leaflet':
+        specifier: ^0.10.1
+        version: 0.10.1(@types/leaflet@1.9.6)(leaflet@1.9.4)
       auth:
         specifier: workspace:*
         version: link:../../packages/auth
@@ -208,6 +214,9 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      leaflet:
+        specifier: ^1.9.4
+        version: 1.9.4
       pinia:
         specifier: ^2.1.6
         version: 2.1.6(typescript@4.5.5)(vue@3.3.4)
@@ -229,7 +238,13 @@ importers:
       vue:
         specifier: ^3.2.13
         version: 3.3.4
+      vue-leaflet:
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
+      '@types/leaflet':
+        specifier: ^1.9.6
+        version: 1.9.6
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.4.0
         version: 5.62.0(@typescript-eslint/parser@5.62.0)(eslint@7.32.0)(typescript@4.5.5)
@@ -3498,6 +3513,9 @@ packages:
       '@types/serve-static': 1.15.2
     dev: true
 
+  /@types/geojson@7946.0.11:
+    resolution: {integrity: sha512-L7A0AINMXQpVwxHJ4jxD6/XjZ4NDufaRlUJHjNIFKYUFBH1SvOW+neaqb0VTRSLW5suSrSu19ObFEFnfNcr+qg==}
+
   /@types/glob@7.2.0:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
@@ -3561,6 +3579,11 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
+
+  /@types/leaflet@1.9.6:
+    resolution: {integrity: sha512-HakGTK5LBBWegNWsAmTlG55zN1zszYec7aG47/z6SzT90bW2vqjmbqk3YKAbrtveO+G7fSTKTYqVbIwAFnTrbg==}
+    dependencies:
+      '@types/geojson': 7946.0.11
 
   /@types/mime@1.3.2:
     resolution: {integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==}
@@ -3872,6 +3895,20 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
+
+  /@vue-leaflet/vue-leaflet@0.10.1(@types/leaflet@1.9.6)(leaflet@1.9.4):
+    resolution: {integrity: sha512-RNEDk8TbnwrJl8ujdbKgZRFygLCxd0aBcWLQ05q/pGv4+d0jamE3KXQgQBqGAteE1mbQsk3xoNcqqUgaIGfWVg==}
+    peerDependencies:
+      '@types/leaflet': ^1.5.7
+      leaflet: ^1.6.0
+    peerDependenciesMeta:
+      '@types/leaflet':
+        optional: true
+    dependencies:
+      '@types/leaflet': 1.9.6
+      leaflet: 1.9.4
+      vue: 3.3.4
+    dev: false
 
   /@vue/babel-helper-vue-jsx-merge-props@1.4.0:
     resolution: {integrity: sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA==}
@@ -9455,6 +9492,10 @@ packages:
       shell-quote: 1.8.1
     dev: true
 
+  /leaflet@1.9.4:
+    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
+    dev: false
+
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -12766,6 +12807,10 @@ packages:
   /vue-hot-reload-api@2.3.4:
     resolution: {integrity: sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==}
     dev: true
+
+  /vue-leaflet@0.1.0:
+    resolution: {integrity: sha512-J2QxmQSbmnpM/Ng+C8vxowXcWp/IEe99r87psHyWYpBz2nbxkQAeYXW7WFcgzV4O7d7Vm4a1GcqKzrU9DeDpBA==}
+    dev: false
 
   /vue-loader@15.10.2(css-loader@6.8.1)(prettier@2.8.8)(webpack@5.88.2):
     resolution: {integrity: sha512-ndeSe/8KQc/nlA7TJ+OBhv2qalmj1s+uBs7yHDRFaAXscFTApBzY9F1jES3bautmgWjDlDct0fw8rPuySDLwxw==}
