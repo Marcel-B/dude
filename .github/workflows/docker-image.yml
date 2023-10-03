@@ -49,6 +49,8 @@ jobs:
       run: docker build ./dotnet --file ./dotnet/Dude.Bff/Dockerfile --tag millegalb/dude-bff:0.0.$BUILD_NUMBER
     - name: Build Identity Cat
       run: docker build ./dotnet --file ./dotnet/IdentityCat.Service/Dockerfile --tag millegalb/identity-cat:0.0.$BUILD_NUMBER
+    - name: Build Mqtt Chief
+      run: docker build ./dotnet --file ./dotnet/Mqtt.Service/Dockerfile --tag millegalb/mqtt-chief:0.0.$BUILD_NUMBER
 
     - name: Push the Docker image Idenetity Cat
       run: docker push millegalb/identity-cat:0.0.$BUILD_NUMBER
@@ -56,6 +58,8 @@ jobs:
       run: docker push millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Push the Docker image Dude Bff
       run: docker push millegalb/dude-bff:0.0.$BUILD_NUMBER
+    - name: Push the Docker image Mqtt Chief
+      run: docker push millegalb/mqtt-chief:0.0.$BUILD_NUMBER
 
     #- name: S3 Sync Stunden
       # You may pin to the exact commit or the version.
