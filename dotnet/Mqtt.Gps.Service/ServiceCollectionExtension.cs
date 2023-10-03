@@ -1,4 +1,5 @@
-﻿using com.b_velop.Dude.Shared;
+﻿using System.Globalization;
+using com.b_velop.Dude.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace com.b_velop.Mqtt.Gps.Service;
@@ -18,8 +19,8 @@ public static class ServiceCollectionExtension
     {
         var split = coordinate.Split('?');
         return new ValueTuple<double, double>(
-            double.Parse(split[0]),
-            double.Parse(split[1]));
+            double.Parse(split[0], new CultureInfo("en-US")),
+            double.Parse(split[1], new CultureInfo("en-US")));
     }
 
     public static Coordinate ToProto(

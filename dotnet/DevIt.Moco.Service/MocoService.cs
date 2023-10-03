@@ -48,7 +48,7 @@ namespace DevIt.Moco.Service
       var fromString = from?.ToString("yyyy-MM-dd");
       var toString = to?.ToString("yyyy-MM-dd");
 
-      var url = $"/api/v1/activities?fproject_id={projectId}";
+      var url = $"/api/v1/activities?";//fproject_id={projectId}";
 
       if (!string.IsNullOrEmpty(fromString) && !string.IsNullOrEmpty(toString))
       {

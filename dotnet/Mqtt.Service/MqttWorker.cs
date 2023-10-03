@@ -1,5 +1,4 @@
 using System.Text;
-using System.Text.Json;
 using Mqtt.Measurement.Adapter.Command;
 using Mqtt.Shared;
 using MQTTnet;
@@ -7,23 +6,6 @@ using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 
 namespace com.b_velop.Mqtt.Service;
-
-internal static class ObjectExtensions
-{
-    public static TObject DumpToConsole<TObject>(
-        this TObject @object)
-    {
-        var output = "NULL";
-        if (@object != null)
-            output = JsonSerializer.Serialize(@object, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-
-        Console.WriteLine($"[{@object?.GetType().Name}]:\r\n{output}");
-        return @object;
-    }
-}
 
 public class MqttWorker : BackgroundService
 {
@@ -48,7 +30,7 @@ public class MqttWorker : BackgroundService
 
         await _client.StopAsync();
         _client.Dispose();
-        Console.WriteLine("Client stopped.");
+        _logger.LogInformation("Client stopped.");
         await base.StopAsync(stoppingToken);
     }
 
@@ -65,14 +47,13 @@ public class MqttWorker : BackgroundService
                 var scope = _serviceProvider.CreateScope();
                 var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<CreateMeasurementCommand>>();
                 var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-                var application = configuration
-                    .GetSection("Application")
-                    .Get<Application>();
+                var application = GetApplication(configuration);
                 _subscriptions = application?.Subscriptions ??
                                  throw new InvalidOperationException("No subscriptions found.");
-                Console.WriteLine(application.TestMode);
                 var mqttFactory = new MqttFactory();
                 _client = mqttFactory.CreateManagedMqttClient();
+                _logger.LogInformation($"MQTT Server: {application.Server}");
+                _logger.LogInformation($"MQTT Client ID: {application.ClientId}");
                 var clientOptions = new MqttClientOptions
                 {
                     ClientId = application.ClientId,
@@ -110,22 +91,39 @@ public class MqttWorker : BackgroundService
                     await handler.HandleAsync(command, stoppingToken);
                 };
 
-                Console.WriteLine("The managed MQTT client is connected.");
+                _logger.LogInformation("The managed MQTT client is connected.");
 
                 // Wait until the queue is fully processed.
-                SpinWait.SpinUntil(() => _client.PendingApplicationMessagesCount == 0, 10000);
-                Console.WriteLine(_client.IsConnected);
-                Console.WriteLine($"Pending messages = {_client.PendingApplicationMessagesCount}");
-                Console.WriteLine("Hello, World!");
+                SpinWait.SpinUntil(() => _client.PendingApplicationMessagesCount == 0, 10_000);
+                _logger.LogInformation("Client connected: {S}", _client.IsConnected.ToString());
+                _logger.LogInformation("Pending messages: {ClientPendingApplicationMessagesCount}",
+                    _client.PendingApplicationMessagesCount);
                 log = false;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError("Fehler beim Starten des Workers", e);
                 await Task.Delay(3_000, stoppingToken);
             }
 
             _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
         } while (log);
+    }
+
+    private Application? GetApplication(
+        IConfiguration configuration)
+    {
+        try
+        {
+            var application = configuration
+                .GetSection("Application")
+                .Get<Application>();
+            return application;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Error getting Application Settings", e.StackTrace);
+            throw;
+        }
     }
 }

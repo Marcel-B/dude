@@ -5,6 +5,7 @@ using DevIt.Moco.Adapter.Queries;
 using DevIt.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DevIt.Moco.Adapter.Handler;
 
@@ -12,13 +13,16 @@ public class CreateEintraegeByMocoCommandHandler : IRequestHandler<CreateEintrae
 {
     private readonly IMediator _mediator;
     private readonly IUnitOfWork _uow;
+    private readonly ILogger<CreateEintraegeByMocoCommandHandler> _logger;
 
     public CreateEintraegeByMocoCommandHandler(
         IMediator mediator,
-        IUnitOfWork uow)
+        IUnitOfWork uow,
+        ILogger<CreateEintraegeByMocoCommandHandler> logger)
     {
         _mediator = mediator;
         _uow = uow;
+        _logger = logger;
     }
 
     public async Task<Unit> Handle(
@@ -32,6 +36,7 @@ public class CreateEintraegeByMocoCommandHandler : IRequestHandler<CreateEintrae
             To = request.To.ToLastDayOfMonth(),
         };
 
+        _logger.LogInformation($"From {query.From} to {query.To}");
         var activities = await _mediator.Send(query, cancellationToken);
         var frischeEintraege = activities
             .Select(x => x.ToEintrag())
@@ -86,6 +91,9 @@ public class CreateEintraegeByMocoCommandHandler : IRequestHandler<CreateEintrae
             Eintrag.Update(cmd, eintrag);
         }
 
+        _logger.LogInformation($"Frische Einträge: {frischeEintraege.Count}");
+        _logger.LogInformation($"Neue Einträge: {neueEintraege.Count}");
+        _logger.LogInformation($"Alte Einträge: {alteEintraege.Count}");
         await _uow.Eintraege.CreateEintraegeAsync(neueEintraege, cancellationToken);
         await _uow.Eintraege.UpdateEintraegeAsync(alteEintraege, cancellationToken);
         await _uow.CompleteAsync(cancellationToken);

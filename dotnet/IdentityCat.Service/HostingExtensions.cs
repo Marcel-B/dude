@@ -20,11 +20,13 @@ internal static class HostingExtensions
         var identityCatConfiguration = builder
             .Configuration.GetSection("IdentityCatConfiguration")
             .Get<IdentityCatConfiguration>() ?? throw new NullReferenceException("IdentityCatConfiguration is null");
+        builder.Services.AddSingleton(identityCatConfiguration);
 
         _ = builder
             .Services.AddIdentityServer(options =>
             {
-                options.Authentication.CookieSameSiteMode = SameSiteMode.None;
+                options.Authentication.CookieSameSiteMode = SameSiteMode.Strict;
+                //options.Authentication.CookieSameSiteMode = SameSiteMode.None;
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
@@ -52,6 +54,7 @@ internal static class HostingExtensions
             .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var dbContext = scope.ServiceProvider.GetService<UserDbContext>();
+        var identityCatConfiguration = scope.ServiceProvider.GetRequiredService<IdentityCatConfiguration>();
         dbContext.Database.Migrate();
         dbContext.Dispose();
         scope.Dispose();
@@ -60,7 +63,9 @@ internal static class HostingExtensions
             ctx,
             next) =>
         {
-            ctx.SetIdentityServerOrigin("https://idsrv.marcelbenders.com");
+            ctx.SetIdentityServerOrigin(identityCatConfiguration?.IdentityServerHost ??
+                                        "https://idsrv.marcelbenders.com");
+            Console.WriteLine($"Url {identityCatConfiguration.IdentityServerHost}");
             await next();
         });
         app.UseSerilogRequestLogging();
@@ -69,7 +74,8 @@ internal static class HostingExtensions
             ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
         });
 
-        app.UseCookiePolicy(new CookiePolicyOptions {MinimumSameSitePolicy = SameSiteMode.None});
+        //app.UseCookiePolicy(new CookiePolicyOptions {MinimumSameSitePolicy = SameSiteMode.None});
+        app.UseCookiePolicy(new CookiePolicyOptions {MinimumSameSitePolicy = SameSiteMode.Strict});
         if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
 
         app.UseStaticFiles();
