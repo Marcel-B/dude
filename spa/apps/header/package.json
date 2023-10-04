@@ -29,6 +29,7 @@
     "file-loader": "^6.2.0",
     "tsconfig": "workspace:*",
     "ts-loader": "^9.2.6",
+    "typescript": "^5.2.2",
     "url-loader": "^4.1.1",
     "eslint-plugin-vue": "^8.0.3",
     "systemjs-webpack-interop": "^2.3.7",
