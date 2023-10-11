@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
 
     steps:
     - name: Generate build number
@@ -42,9 +42,9 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: 8
-        run_install: true
-    #- name: Run pnpm build
-    #  run: cd spa && pnpm run build   
+        run_install: false
+    - name: Run pnpm build
+      run: cd spa && pnpm ci && && pnpm run build   
     - name: Build DevIt
       run: docker build ./dotnet --file ./dotnet/DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude Bff
