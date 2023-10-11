@@ -44,7 +44,7 @@ jobs:
         version: 8
         run_install: false
     - name: Run pnpm build
-      run: cd spa && pnpm ci && && pnpm run build   
+      run: cd spa && pnpm ci && pnpm run build   
     - name: Build DevIt
       run: docker build ./dotnet --file ./dotnet/DevIt.Service/Dockerfile --tag millegalb/devit-service:0.0.$BUILD_NUMBER
     - name: Build Dude Bff
